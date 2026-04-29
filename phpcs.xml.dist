@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<ruleset name="Sermon Manager Ruleset">
-	<description>Sermon Manager Ruleset</description>
+<ruleset name="Sermon Works Ruleset">
+	<description>Sermon Works Ruleset</description>
 
     <!-- Include required rulesets. -->
-	<rule ref="WordPress-Core" />
+	<rule ref="WordPress-Extra" />
 	<rule ref="WordPress-Docs" />
     <rule ref="PHPCompatibility" />
 
@@ -23,19 +23,24 @@
     <!-- =============== -->
 	<rule ref="WordPress.WP.DeprecatedFunctions">
     	<properties>
-    		<property name="minimum_supported_version" value="4.5" />
+    		<property name="minimum_wp_version" value="4.5" />
     	</properties>
     </rule>
 
     <rule ref="WordPress.WP.I18n">
         <properties>
-            <property name="text_domain" type="array" value="sermon-manager-for-wordpress" />
+            <property name="text_domain" type="array">
+                <element value="sermon-works" />
+            </property>
         </properties>
     </rule>
 
     <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
         <properties>
-            <property name="prefixes" type="array" value="sm,wpfc" />
+            <property name="prefixes" type="array">
+                <element value="sm" />
+                <element value="wpfc" />
+            </property>
         </properties>
     </rule>
 
@@ -49,5 +54,5 @@
     <!-- =========================== -->
     <!-- Configure PHPCompatibility. -->
     <!-- =========================== -->
-    <config name="testVersion" value="5.3-"/>
+    <config name="testVersion" value="8.1-"/>
 </ruleset>

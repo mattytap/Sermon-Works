@@ -1,0 +1,179 @@
+
+FILE: ...itHub Coding Fun\Sermon-Works\includes\admin\class-sm-admin-post-types.php
+--------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 62 | WARNING | Processing form data without nonce verification.
+    |         | (WordPress.Security.NonceVerification.Recommended)
+ 62 | WARNING | Processing form data without nonce verification.
+    |         | (WordPress.Security.NonceVerification.Recommended)
+--------------------------------------------------------------------------------
+
+
+FILE: ...\GitHub Coding Fun\Sermon-Works\includes\admin\class-sm-admin-settings.php
+--------------------------------------------------------------------------------
+FOUND 2 ERRORS AND 8 WARNINGS AFFECTING 8 LINES
+--------------------------------------------------------------------------------
+  84 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+  84 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+  85 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+  85 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+  88 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+  93 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+  94 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+  97 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+  98 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+ 789 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+--------------------------------------------------------------------------------
+
+
+FILE: ...jects\GitHub Coding Fun\Sermon-Works\includes\admin\sm-admin-functions.php
+--------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 2 LINES
+--------------------------------------------------------------------------------
+ 40 | WARNING | Processing form data without nonce verification.
+    |         | (WordPress.Security.NonceVerification.Recommended)
+ 41 | WARNING | Processing form data without nonce verification.
+    |         | (WordPress.Security.NonceVerification.Recommended)
+--------------------------------------------------------------------------------
+
+
+FILE: ...ude\Projects\GitHub Coding Fun\Sermon-Works\includes\class-sm-dates-wp.php
+--------------------------------------------------------------------------------
+FOUND 7 ERRORS AFFECTING 5 LINES
+--------------------------------------------------------------------------------
+ 133 | ERROR | Processing form data without nonce verification.
+     |       | (WordPress.Security.NonceVerification.Missing)
+ 138 | ERROR | Processing form data without nonce verification.
+     |       | (WordPress.Security.NonceVerification.Missing)
+ 138 | ERROR | Processing form data without nonce verification.
+     |       | (WordPress.Security.NonceVerification.Missing)
+ 305 | ERROR | Processing form data without nonce verification.
+     |       | (WordPress.Security.NonceVerification.Missing)
+ 324 | ERROR | Processing form data without nonce verification.
+     |       | (WordPress.Security.NonceVerification.Missing)
+ 358 | ERROR | Processing form data without nonce verification.
+     |       | (WordPress.Security.NonceVerification.Missing)
+ 358 | ERROR | Processing form data without nonce verification.
+     |       | (WordPress.Security.NonceVerification.Missing)
+--------------------------------------------------------------------------------
+
+
+FILE: ...aude\Projects\GitHub Coding Fun\Sermon-Works\includes\class-sm-install.php
+--------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 97 | WARNING | Processing form data without nonce verification.
+    |         | (WordPress.Security.NonceVerification.Recommended)
+ 97 | WARNING | Processing form data without nonce verification.
+    |         | (WordPress.Security.NonceVerification.Recommended)
+--------------------------------------------------------------------------------
+
+
+FILE: ...e\Projects\GitHub Coding Fun\Sermon-Works\includes\class-sm-shortcodes.php
+--------------------------------------------------------------------------------
+FOUND 2 ERRORS AND 2 WARNINGS AFFECTING 4 LINES
+--------------------------------------------------------------------------------
+ 1055 | WARNING | Processing form data without nonce verification.
+      |         | (WordPress.Security.NonceVerification.Recommended)
+ 1063 | WARNING | Processing form data without nonce verification.
+      |         | (WordPress.Security.NonceVerification.Recommended)
+ 1069 | ERROR   | Processing form data without nonce verification.
+      |         | (WordPress.Security.NonceVerification.Missing)
+ 1077 | ERROR   | Processing form data without nonce verification.
+      |         | (WordPress.Security.NonceVerification.Missing)
+--------------------------------------------------------------------------------
+
+
+FILE: ...ude\Projects\GitHub Coding Fun\Sermon-Works\includes\sm-core-functions.php
+--------------------------------------------------------------------------------
+FOUND 6 ERRORS AND 4 WARNINGS AFFECTING 5 LINES
+--------------------------------------------------------------------------------
+ 857 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+ 858 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+ 869 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+ 869 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+ 869 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+ 870 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+ 870 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+ 870 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+ 873 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+ 873 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+--------------------------------------------------------------------------------
+
+
+FILE: ...Projects\GitHub Coding Fun\Sermon-Works\includes\sm-template-functions.php
+--------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 2 WARNINGS AFFECTING 1 LINE
+--------------------------------------------------------------------------------
+ 650 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+ 650 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+--------------------------------------------------------------------------------
+
+
+FILE: ...Drive\Documents\Claude\Projects\GitHub Coding Fun\Sermon-Works\sermons.php
+--------------------------------------------------------------------------------
+FOUND 7 ERRORS AND 4 WARNINGS AFFECTING 7 LINES
+--------------------------------------------------------------------------------
+ 612 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+ 612 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+ 613 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+ 616 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+ 777 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+ 777 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+ 781 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+ 782 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+ 874 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+ 874 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+ 874 | ERROR   | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Missing)
+--------------------------------------------------------------------------------
+
+
+FILE: ...Claude\Projects\GitHub Coding Fun\Sermon-Works\views\wpfc-podcast-feed.php
+--------------------------------------------------------------------------------
+FOUND 0 ERRORS AND 4 WARNINGS AFFECTING 3 LINES
+--------------------------------------------------------------------------------
+  83 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+  83 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+ 146 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+ 147 | WARNING | Processing form data without nonce verification.
+     |         | (WordPress.Security.NonceVerification.Recommended)
+--------------------------------------------------------------------------------
+
+

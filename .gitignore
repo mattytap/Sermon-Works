@@ -2,3 +2,6 @@
 **/*.scssc
 node_modules
 vendor/*
+.claude/
+CLAUDE.md
+.restoration/resumption-prompt.md

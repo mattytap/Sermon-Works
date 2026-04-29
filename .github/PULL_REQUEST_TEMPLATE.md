@@ -1,22 +1,32 @@
-## Types of changes:
-<!--- What types of changes does your code introduce? Put an `x` in all the boxes that apply (remove the space character first): -->
-- [ ] Bug fix (non-breaking change which fixes an issue)
-- [ ] New feature (non-breaking change which adds functionality)
-- [ ] Breaking change (fix or feature that would cause existing functionality to change)
-
-## Checklist:
-<!--- Go over all the following points, and put an `x` in all the boxes that apply. -->
-<!--- If you're unsure about any of these, don't hesitate to ask. We're here to help! -->
-- [ ] I have read the [**CONTRIBUTING**](CONTRIBUTING.md) document.
-- [ ] My code follows the code style of this project. ([WPCS](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards))
-- [ ] My change requires a change to the documentation.
-
-## Brief description of the proposed change:
-<!--- What does your change do? What does it fix or change? -->
+## What does this PR do?
 
 
 
-## Any other info:
-<!-- Such as: possible pitfalls, required changes on update, unfinished features, etc... -->
+## Related issue(s)
+
+<!-- Fixes #N, Refs #N, or "n/a" for trivial PRs (typo, comment, etc.).
+     For non-trivial changes, an issue should already exist — see CONTRIBUTING.md. -->
 
 
+
+## Type of change
+
+- [ ] Bug fix
+- [ ] Security fix
+- [ ] New feature
+- [ ] Documentation / non-code
+- [ ] Breaking change
+
+## How was this verified?
+
+<!-- PHPUnit, LocalWP smoke-test, manual repro of the bug and confirmation of the fix, etc.
+     For security fixes: include the repro that demonstrated the issue and the post-fix re-test. -->
+
+
+
+## Checklist
+
+- [ ] Commits follow Conventional Commits (`type(scope): subject`) and are appropriately granular
+- [ ] `vendor/bin/phpcs` passes against the project ruleset (no new violations)
+- [ ] If this PR builds substantially on someone else's prior work, a `Co-authored-by:` trailer is included
+- [ ] If drop-in compatibility is affected (`wpfc_sermon` CPT, `wpfc_preacher` / `wpfc_sermon_series` taxonomies, `wpfc_*` option keys), the change is explained in the PR body above

@@ -1,0 +1,7 @@
+contact_links:
+  - name: Security vulnerability
+    url: https://github.com/mattytap/Sermon-Works/security/advisories/new
+    about: Report a security vulnerability privately. Do NOT open a public issue.
+  - name: Question or discussion
+    url: https://github.com/mattytap/Sermon-Works/discussions
+    about: Open a Discussion for general questions, ideas, or "is this even a bug?" triage.

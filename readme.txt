@@ -1,246 +1,109 @@
-# Sermon Manager #  
-Contributors: wpforchurch, jasonmwestbrook  
-Donate link: http://wpforchurch.com/  
-Tags: church, sermon, sermons, preaching, podcasting, manage, managing, podcasts, itunes  
-Requires at least: 4.7.0  
-Tested up to: 5.1  
-Requires PHP: 5.3  
-Stable tag: 2.15.16  
-License: GPLv2  
+=== Sermon Works ===
+Contributors: mattytap
+Tags: church, sermon, podcast, preaching, audio
+Requires at least: 6.0
+Tested up to: 6.9
+Requires PHP: 8.1
+Stable tag: 2.16.0
+License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Add audio and video sermons, manage speakers, series, and more to your church website.
+Sola fide. Fully featured. A maintained restoration of Sermon Manager — publish, organise, and podcast sermons on a WordPress site.
 
-## Description ##
+== Description ==
 
-### Sermon Manager is the #1 WordPress Sermon Plugin ###
+Sermon Works lets a church publish sermons online with the structure they actually need: speakers, series, topics, books of the Bible, and service types — all as proper WordPress taxonomies, all searchable, all filterable. Add audio and video, attach handouts (PDF, DOC, PPT, anything), embed video from YouTube or Vimeo, and ship a fully-featured iTunes-compatible podcast feed for the whole library or for any individual series, speaker, topic, or book.
 
-Sermon Manager is designed to help churches easily publish sermons online. Some of the features include:
+Sermon Works is a maintained restoration of [Sermon Manager](https://wordpress.org/plugins/sermon-manager-for-wordpress/) by WP for Church, which has been unmaintained for over five years and has known unpatched security issues, including three publicly-disclosed CVEs. Existing Sermon Manager installs can switch to Sermon Works as a drop-in replacement: the database schema, custom post type (`wpfc_sermon`), taxonomies (`wpfc_preacher`, `wpfc_sermon_series`, etc.), and all `wpfc_*` option keys are unchanged.
 
-* Add Speakers, Series, Topics, Books, and Service Types
-* Attach images to sermons, series, speakers, and topics
-* Attach MP3 files as well as PDF, DOC, PPT (or any other type!)
-* Bible references integrated via Bib.ly for easy text viewing
-* Completely integrated with WordPress search
-* Embed video from popular providers such as Vimeo or YouTube
-* Full-featured API for developers (check it out at `/wp-json/wp/v2/wpfc_sermon`)
-* Full-featured iTunes podcasting support for all sermons, plus each sermon series, preachers, sermon topics, or book of the Bible!
-* Import sermons from other WordPress plugins
-* PHP 5.3+ - you can use Sermon Manager even with older websites!
-* PHP 7.2 ready - Sermon Manager is 100% compatible with latest PHP version
-* Super flexible shortcode system
-* Supports 3rd party plugins such as Yoast SEO, Jetpack, etc
-* Quick and professional *free* and paid support
-* Works with any theme and can be customized to display just the way you like. You’ll find the template files in the `/views` folder. You can copy these into the root of your theme folder and customize to suit your site’s design.
+= What Sermon Works preserves =
 
-### One-Click Importing ###
+* Same shortcodes (`[sermons]`, `[sermon_images]`, `[list_podcasts]`, `[list_sermons]`, `[latest_series]`, `[sermon_sort_fields]`)
+* Same custom post type and taxonomies — existing sermon data carries over without import
+* Same template files in `views/` — existing theme overrides continue to work
+* Same Bib.ly Bible-reference integration
+* Same iTunes-compatible podcast feeds
 
-Sermon Manager supports migration/importing from other popular sermon plugins, such as Sermon Browser and Series Engine.
+= What's new in Sermon Works =
 
-This is a one click process and currently only supports migration/importing within existing WordPress installations.
-Soon you will be able to migrate from those 3rd party plugins to Sermon Manager on a separate server. (for example: moving to completely new website & WordPress installation)
+* Active security maintenance, with [private vulnerability reporting](https://github.com/mattytap/Sermon-Works/security) for responsible disclosure
+* Modernised for PHP 8.1+ and WordPress 6.0+
+* Bundled outdated third-party dependencies removed or upgraded (CMB2, wp-background-processing, the entry-views polyfill, taxonomy-images)
+* Continuing development on [GitHub](https://github.com/mattytap/Sermon-Works)
 
-### Popular Shortcodes ###
+= Popular shortcodes =
 
-* `[sermons]` — This will list the 10 most recent sermons.
-* `[sermons per_page="20"]` — This will list the 20 most recent sermons.
-* `[sermon_images]` — This will list all sermon series and their associated image in a grid.
-* `[list_podcasts]` — This will list available podcast services with nice large buttons.
-* `[list_sermons]` — This will list all series or speakers in a simple unordered list.
-* `[latest_series]` — This will display information about the latest sermon series, including the image, title (optional), and description (optional).
-* `[sermon_sort_fields]` — Dropdown selections to quickly navigate to all sermons in a series or by a particular speaker.
+* `[sermons]` — list the 10 most recent sermons
+* `[sermons per_page="20"]` — list the 20 most recent sermons
+* `[sermon_images]` — list all sermon series with associated image in a grid
+* `[list_podcasts]` — list available podcast services with large buttons
+* `[list_sermons]` — list all series or speakers in a simple unordered list
+* `[latest_series]` — display information about the latest sermon series, including the image, title, and description
+* `[sermon_sort_fields]` — dropdown selections to navigate to sermons by series or speaker
 
-For more information on each of these shortcodes please visit [our knowledge base](https://wpforchurch.com/my/knowledgebase/12/Sermon-Manager).
+== Installation ==
 
-### Expert Support ###
+1. Use the "Add New" button in the Plugins section of your WordPress dashboard. Search for "Sermon Works".
+2. Activate the plugin.
+3. Add a sermon through the dashboard.
+4. Display sermons on the front end via shortcode (`[sermons]` in any page or post), or by visiting `https://yourdomain.example/sermons` (with pretty permalinks enabled) or `https://yourdomain.example/?post_type=wpfc_sermon` (without).
 
-The Sermon Manager is available as a FREE download however in order to maintain a free version we offer [premium support packages](https://wpforchurch.com/wordpress-plugins/sermon-manager/#pricing) for those who need any custom assistance. Paid support means you get exclusive access to the Sermon Manager forum as well as support tickets. This is also a way you can donate to the project to help us offer prompt support and a free version of the plugin.
+= Migrating from Sermon Manager =
 
-You can access the paid support options via [our website](http://wpforchurch.com/).
+If you have an existing Sermon Manager install, install and activate Sermon Works, then deactivate Sermon Manager. All your sermons, speakers, series, topics, and settings carry over without further action — the two plugins use the same database schema. Don't run both at once; the schema overlap will cause conflicts.
 
-Bug fixing and fixing unexpected behavior *is free* and *always will be free*. Just [make an issue on GitHub](https://github.com/WP-for-Church/Sermon-Manager/issues/new) or [create a support thread on WordPress](https://wordpress.org/support/plugin/sermon-manager-for-wordpress#new-post) and we will solve it ASAP.
+= Migrating from Sermon Browser or Series Engine =
 
-### Sermon Manager Pro Features ###
+Sermon Works inherits Sermon Manager's import functionality for these older sermon plugins. Once Sermon Works is activated, the importer is available under Tools → Import.
 
-* Change your look with Templates
-* Multiple Podcast Support
-* Divi Support & Custom Divi Builder Modules
-* Custom Elementor Elements
-* Custom Beaver Builder Modules
-* Custom WPBakery Page Builder Modules
-* Works with YOUR theme
-* Page Assignment for Archive & Taxonomy
-* Migration from other plugins is a breeze
-* SEO & Marketing Ready
-* Live Chat Support Inside the Plugin
-* PowerPress Compatibility
-* [Full List of Pro Features & Roadmap](https://sermonmanager.pro/)
+== Frequently Asked Questions ==
 
-When you upgrade to Pro you also get premium ticket and live chat support for the free version of Sermon Manager too!
-*Grab your copy of Sermon Manager Pro at early adopter pricing for life between Nov 9th and Nov 23!*
+= How do I display sermons on the front end? =
 
-### Developers ###
+Use the shortcode `[sermons]` in any page or post, or visit `https://yourdomain.example/sermons` (with pretty permalinks enabled) or `https://yourdomain.example/?post_type=wpfc_sermon` (without).
 
-Would you like to help improve Sermon Manager or report a bug you found? This project is open source on [GitHub](https://github.com/WP-for-Church/Sermon-Manager)!
+= How do I create a menu link to the sermons archive? =
 
-(Note: Please read [contributing instructions](https://github.com/WP-for-Church/Sermon-Manager/blob/dev/CONTRIBUTING.md) first.)
+Go to Appearance → Menus. In "Custom Links" add `https://yourdomain.example/?post_type=wpfc_sermon` as the URL and "Sermons" as the label. Click "Add to Menu".
 
-### WP for Church ###
+= I'm coming from Sermon Manager. Will my sermons survive? =
 
-* [WP for Church](https://wpforchurch.com/) provides plugins and responsive themes for churches using WordPress.
-* Keep up with the latest product news & tips, sign up to our [newsletter](https://www.wpforchurch.com/blog)!
+Yes. Sermon Works uses the same database schema, custom post type, taxonomies, and option keys as Sermon Manager. Activate Sermon Works, deactivate Sermon Manager, and existing sermons keep working. Don't run both at once — the overlapping schema will conflict.
 
-## Installation ##
+= How do I report a bug or request a feature? =
 
-Installation is simple:
+[GitHub Issues](https://github.com/mattytap/Sermon-Works/issues). For security issues, please use [private vulnerability reporting](https://github.com/mattytap/Sermon-Works/security/advisories/new) rather than public issues.
 
-1. Just use the “Add New” button in Plugin section of your WordPress blog’s Control panel. To find the plugin there, search for `Sermon Manager`
-2. Activate the plugin
-3. Add a sermon through the Dashboard
-4. To display the sermons on the frontend of your site, just visit the `http://yourdomain.com/sermons` if you have pretty permalinks enabled or `http://yourdomain.com/?post_type=wpfc_sermon` if not. Or you can use the shortcode `[sermons]` in any page.
+= Is there a paid version or commercial support? =
 
-## Frequently Asked Questions ##
+No. Sermon Works is GPLv2 free software with no paid tier, no premium add-ons, and no commercial support. Bug fixes, feature requests, and translation contributions are welcome through GitHub.
 
-### How do I display sermons on the frontend? ###
+== Screenshots ==
 
-Visit the `http://yourdomain.com/sermons` if you have pretty permalinks enabled or `http://yourdomain.com/?post_type=wpfc_sermon` if not. Or you can use the shortcode `[sermons]` in any page or post.
-
-### How do I create a menu link? ###
-
-Go to Appearance → Menus. In the “Custom Links” box add `http://yourdomain.com/?post_type=wpfc_sermon` as the URL and `Sermons` as the label and click “Add to Menu”.
-
-### I wish Sermon Manager could... ###
-
-We are open to suggestions to make this a great tool for churches! Submit your feedback at [WP for Church](https://feedback.userreport.com/05ff651b-670e-4eb7-a734-9a201cd22906/)
-
-### More Questions? ###
-
-Visit the [plugin homepage](https://wpforchurch.com/wordpress-plugins/sermon-manager/ "Sermon Manager homepage")
-
-## Screenshots ##
 1. Sermon Details
 2. Sermon Files
 
-## Changelog ##
-### 2.15.16 ###
-* Fix: "after" parameter not working in "[sermons]" shortcode
-* Fix: Improve [latest_series] shortcode
-* New: Add sidebar in dashboard compatibility for Pro version
+== Credits ==
 
-### 2.15.15 ###
-* Fix: RSS feed not working
+Sermon Works is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Sermon-Works/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
-### 2.15.14 ###
-* New: Add compatibility for "Pro" theme
-* New: Add a setting to change default sermon ordering (in "Display" tab)
-* Fix: Date filtering in shortcode
-* Fix: Improve [latest_series] shortcode
-* Fix: Service Type filter in backend not working when slug is different from default
-* Dev: Add conditional fields in settings
-* Dev: Add dynamic option retrieval in settings
-* Dev: Fix select field in settings returning error when only one option is defined for it
+== Changelog ==
 
-### 2.15.13 ###
-* New: Dutch translation (thanks @LeonCB!)
-* New: Add support for Dunamis theme
-* New: Add support for TwentyNineteen
-* New: Add support for ExodosWP
-* Change: Add WordPress author metabox
-* Fix: Service Type not saving in quick edit
+= 2.16.0 — Sermon Works restoration =
 
-### 2.15.12 ###
-* Fix: Fatal error when saving a sermon
-* Fix: Podcast buttons shortcode has unnecessary left margin (thanks @macbookandrew!)
+This release renames the plugin from Sermon Manager to Sermon Works (text domain `sermon-works`) and ships the in-place restoration completed across early 2026:
 
-### 2.15.11 ###
-* New: Add support for "The7" theme
-* Change: Add "sermon" order to [sermon_images] shortcode. It will order the series by newest sermon
-* Fix: Improve the speed of post saving on websites with many sermons
-* Dev: Fix terms not having sermon date set
+* Security: 25 issues resolved from a focused audit, including three CVEs filed against the upstream Sermon Manager codebase — CVE-2025-12368 (stored XSS in `[sermon-views]`), CVE-2025-63002 (unauthenticated missing authorisation), and CVE-2025-63000 (stored XSS in `[list_sermons]` / `[sermon_images]`). All three sinks have been removed or hardened in Sermon Works.
+* Modernised: PHP 8.1+ and WordPress 6.0+ floor; deprecated WordPress function calls replaced with current equivalents; dead PHP 5.3 compatibility paths and stale upstream marketing links removed.
+* Bundled vendor cleanup: CMB2 upgraded v2.2.3.1 → v2.11.0; wp-background-processing upgraded 1.0.1 → 1.4.0; bundled `entry-views.php` polyfill removed (replaced with a small WordPress-native counter); `taxonomy-images` library removed (migrated to core term_meta + a dedicated metabox).
+* Database, shortcodes, post types, taxonomies, and template files unchanged — existing Sermon Manager installs migrate as a drop-in replacement.
 
-### 2.15.10 ###
-* Change: Add "include" and "exclude" parameters to the shortcode
-* Change: Add an option to force loading plugin views
-* Fix: Edge case PHP bug in feed with taxonomy
-* Fix: Notice when using shortcode
+= Older releases =
 
-### 2.15.9 ###
-* New: Add support for Hueman and Hueman Pro themes
-* New: Add support for NativeChurch theme
-* New: Add support for Betheme theme
-* Change: Add NIV to verse Bible version
-* Change: Replace series subtitle with short description in the feed
-* Change: Add "action" parameter to filtering shortcode. Possible options: "none" (default), "home", "site".
-* Change: Update Plyr to 3.4.7
-* Fix: Notice in settings after saving a field
-* Fix: Filtering arguments not working in the sermons shortcode
-* Fix: Filtering not hiding
+For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Sermon-Works/blob/main/changelog.txt) in the plugin directory.
 
-### 2.15.8 ###
-* Dev: Add callable select options (pass function name as string)
-* Dev: Add a way to pass custom values to settings
+== Upgrade Notice ==
 
-### 2.15.7 ###
-* Fix: PHP warning when archive output is used wrongly
-* Fix: Podcast items may be sorted the wrong way
+= 2.16.0 =
 
-### 2.15.6 ###
-* Change: Disable autocomplete for date preached, since it obstructed the view on mobile
-* Fix: Comments not appearing on Divi
-* Fix: All podcast images are invalid
-
-### 2.15.5 ###
-* Change: Disable check for PHP output buffering
-
-### 2.15.4 ###
-* Fix: Output Buffering detected as disabled when set to 0
-
-### 2.15.3 ###
-* New: Add option to disable "views" count for editors and admins
-* New: Add option to enable sermon series image fallback in the feed
-* Fix: Podcast shortcode SVG icons not working in Firefox
-* Fix: Getting 404 on filtering
-* Fix: Sermon Manager errors out when output buffering is disabled
-
-### 2.15.2 ###
-* Change: Add Maranatha theme support
-* Change: Add Saved theme support
-* Change: Add Brandon theme support
-* Change: Remove default default image
-* Fix: Plyr not loading when Cloudflare is used
-* Fix: Sermon image not showing up
-* Fix: image_size argument not working in shortcode
-
-### 2.15.1 ###
-* Fix: Multi-term filter for feeds not working
-
-### 2.15.0 ###
-* New: Add ability to override Sermon Manager's CSS by putting "sermon.css" file in theme (thanks @zSeriesGuy)
-* New: Add default image during installation (thanks @zSeriesGuy)
-* New: Add setting for showing and hiding the filter (shortcode and archive, thanks @zSeriesGuy)
-* New: Add setting for default image (thanks @zSeriesGuy)
-* Change: Update Plyr to 3.4.3
-* Change: Re-organized the settings, with more descriptive options
-* Fix: Fix importing from Sermon Browser stopping after first sermon
-* Fix: Audio file length and size not being automatically filled
-* Fix: Taxonomy archive sermons ordered by date preached
-* Fix: "sermon" argument not working in shortcode
-* Fix: Database errors on Import/Export screen on some hosts
-* Fix: Pause button not showing up when file is being played
-* Fix: "Upload Image" button not working in Podcast settings
-* Fix: Audio file sometime not being correct
-* Fix: Add more theme support for pagination
-* Fix: Image selector in settings now showing up
-* Fix: Filter not working correctly in shortcode (thanks @zSeriesGuy)
-* Fix: Plyr not having border
-* Dev: Update function for getting sermon image to return fallback with any option
-
-### 2.14.0 ###
-* New: Finally add support for Sermon Browser bible verses
-* Change: Adjust width of Title column in admin
-* Change: Organize "Debug" (now "Advanced") settings
-* Change: Make filters' width shorter
-* Fix: Taxonomy feed URLs not picked up by Sermon Manager
-* Fix: Allow deleted imported sermons to be re-imported
-
-Note: The rest of the changelog is in changelog.txt
+Plugin renamed from Sermon Manager to Sermon Works; database and content unchanged. Migrate by activating Sermon Works and deactivating Sermon Manager. Includes fixes for three CVEs filed against the upstream Sermon Manager codebase.

@@ -1,12 +1,40 @@
 {
+  "name": "mattytap/sermon-works",
+  "description": "Sola fide. Fully featured. A caretaker restoration of WP-for-Church's Sermon Manager plugin for WordPress.",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "keywords": ["wordpress", "wordpress-plugin", "sermons", "church", "preacher", "podcast"],
+  "homepage": "https://github.com/mattytap/Sermon-Works",
+  "authors": [
+    {
+      "name": "Matt Fawcett",
+      "homepage": "https://github.com/mattytap",
+      "role": "Maintainer (restoration)"
+    },
+    {
+      "name": "WP for Church",
+      "homepage": "https://github.com/WP-for-Church",
+      "role": "Original author"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/mattytap/Sermon-Works/issues",
+    "source": "https://github.com/mattytap/Sermon-Works"
+  },
+  "require": {
+    "php": "^8.1",
+    "ext-calendar": "*"
+  },
   "require-dev": {
     "squizlabs/php_codesniffer": "3.*",
     "dealerdirect/phpcodesniffer-composer-installer": "*",
     "phpcompatibility/php-compatibility": "*",
     "wp-coding-standards/wpcs": "*",
-    "phpunit/phpunit": "^7"
+    "phpunit/phpunit": "^9"
   },
-  "require": {
-    "ext-calendar": "*"
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
   }
 }
