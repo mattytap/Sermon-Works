@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.1
-Stable tag: 2.16.0
+Stable tag: 3.0-rc1
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,7 +89,7 @@ Sermon Works is a restoration of [Sermon Manager for WordPress](https://wordpres
 
 == Changelog ==
 
-= 2.16.0 — Sermon Works restoration =
+= 3.0 — Sermon Works restoration =
 
 This release renames the plugin from Sermon Manager to Sermon Works (text domain `sermon-works`) and ships the in-place restoration completed across early 2026:
 
@@ -104,6 +104,6 @@ For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–201
 
 == Upgrade Notice ==
 
-= 2.16.0 =
+= 3.0 =
 
 Plugin renamed from Sermon Manager to Sermon Works; database and content unchanged. Migrate by activating Sermon Works and deactivating Sermon Manager. Includes fixes for three CVEs filed against the upstream Sermon Manager codebase.
