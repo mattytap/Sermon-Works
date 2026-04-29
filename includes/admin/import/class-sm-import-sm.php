@@ -1,6 +1,6 @@
 <?php
 /**
- * Imports data from Sermon Manager import file into Sermon Manager.
+ * Imports data from Sermon Manager import file into Sermon Works.
  *
  * @package SM/Core/Admin/Importing
  */
@@ -260,7 +260,7 @@ class SM_Import_SM {
 	 * Do the import
 	 */
 	public function import() {
-		$this->log( 'Init info:' . PHP_EOL . 'Sermon Manager ' . SM_VERSION . PHP_EOL . 'Release Date: ' . date( 'Y-m-d', filemtime( SM_PLUGIN_FILE ) ), 255 );
+		$this->log( 'Init info:' . PHP_EOL . 'Sermon Works ' . SM_VERSION . PHP_EOL . 'Release Date: ' . date( 'Y-m-d', filemtime( SM_PLUGIN_FILE ) ), 255 );
 		if ( ! doing_action( 'admin_init' ) ) {
 			$this->log( 'Scheduling for `admin_init` action.', 0 );
 			add_action( 'admin_init', array( $this, __FUNCTION__ ) );
@@ -695,18 +695,13 @@ class SM_Import_SM {
 			}
 
 			// Export gets meta straight from the DB so could have a serialized string.
-			$value = maybe_unserialize( $meta['value'] );
+			$value = is_serialized( $meta['value'] )
+				? @unserialize( $meta['value'], array( 'allowed_classes' => false ) )
+				: $meta['value'];
 			add_term_meta( $term_id, $key, $value );
 
 			if ( 'sm_term_image_id' == $key ) {
 				$this->log( 'Term has image id set.', 0 );
-				$assigned_term_images = get_option( 'sermon_image_plugin' );
-				if ( empty( $assigned_term_images ) ) {
-					$assigned_term_images = array();
-				}
-				$assigned_term_images[ $term_id ] = $value;
-				update_option( 'sermon_image_plugin', $assigned_term_images );
-
 				$this->taxonomy_featured_images[ $term_id ] = (int) $value;
 			}
 		}
@@ -886,7 +881,9 @@ class SM_Import_SM {
 						$inserted_comments[ $key ] = wp_insert_comment( $comment );
 
 						foreach ( $comment['commentmeta'] as $meta ) {
-							$value = maybe_unserialize( $meta['value'] );
+							$value = is_serialized( $meta['value'] )
+				? @unserialize( $meta['value'], array( 'allowed_classes' => false ) )
+				: $meta['value'];
 							add_comment_meta( $inserted_comments[ $key ], $meta['key'], $value );
 						}
 
@@ -917,7 +914,9 @@ class SM_Import_SM {
 					if ( $key ) {
 						// export gets meta straight from the DB so could have a serialized string.
 						if ( ! $value ) {
-							$value = maybe_unserialize( $meta['value'] );
+							$value = is_serialized( $meta['value'] )
+				? @unserialize( $meta['value'], array( 'allowed_classes' => false ) )
+				: $meta['value'];
 						}
 
 						add_post_meta( $post_id, $key, $value );
@@ -993,30 +992,64 @@ class SM_Import_SM {
 	 * @return array|WP_Error Local file location details on success, WP_Error otherwise
 	 */
 	function fetch_remote_file( $url, $post ) {
+		// SSRF guard: reject non-public / non-http(s) URLs before any fetch.
+		$valid = sm_validate_public_url( $url );
+		if ( is_wp_error( $valid ) ) {
+			return new WP_Error( 'import_file_error', sprintf( __( 'Remote URL rejected: %s', 'wordpress-importer' ), $valid->get_error_message() ) );
+		}
+
 		// extract the file name and extension from the url.
 		$file_name = basename( $url );
 
 		// get placeholder file in the upload dir with a unique, sanitized filename.
-		$upload = wp_upload_bits( $file_name, 0, '', $post['upload_date'] );
+		$upload = wp_upload_bits( $file_name, null, '', $post['upload_date'] );
 		if ( $upload['error'] ) {
 			return new WP_Error( 'upload_dir_error', $upload['error'] );
 		}
 
-		// fetch the remote url and write it to the placeholder file.
-		$headers = wp_get_http( $url, $upload['file'] );
+		// fetch via the WP HTTP API (passes through wp_safe_remote_get's
+		// http_request_args / pre_http_request filter chain so site admins
+		// can layer additional outbound policy on top).
+		$response = wp_safe_remote_get(
+			$url,
+			array(
+				'timeout'     => 30,
+				'redirection' => 5,
+			)
+		);
 
-		// request failed.
-		if ( ! $headers ) {
+		if ( is_wp_error( $response ) ) {
 			@unlink( $upload['file'] );
 
-			return new WP_Error( 'import_file_error', __( 'Remote server did not respond', 'wordpress-importer' ) );
+			return new WP_Error( 'import_file_error', $response->get_error_message() );
 		}
 
-		// make sure the fetch was successful.
-		if ( $headers['response'] != '200' ) {
+		$response_code = wp_remote_retrieve_response_code( $response );
+		if ( 200 !== (int) $response_code ) {
 			@unlink( $upload['file'] );
 
-			return new WP_Error( 'import_file_error', sprintf( __( 'Remote server returned error response %1$d %2$s', 'wordpress-importer' ), esc_html( $headers['response'] ), get_status_header_desc( $headers['response'] ) ) );
+			return new WP_Error( 'import_file_error', sprintf( __( 'Remote server returned error response %1$d %2$s', 'wordpress-importer' ), (int) $response_code, get_status_header_desc( $response_code ) ) );
+		}
+
+		$body = wp_remote_retrieve_body( $response );
+		if ( false === file_put_contents( $upload['file'], $body ) ) {
+			@unlink( $upload['file'] );
+
+			return new WP_Error( 'import_file_error', __( 'Could not write to upload file', 'wordpress-importer' ) );
+		}
+
+		// Build a $headers array that the rest of this function expects in
+		// the legacy wp_get_http() shape: response code under 'response',
+		// any content-length / x-final-location headers from the response.
+		$headers             = array();
+		$headers['response'] = (string) $response_code;
+		$content_length      = wp_remote_retrieve_header( $response, 'content-length' );
+		if ( '' !== $content_length ) {
+			$headers['content-length'] = $content_length;
+		}
+		$x_final_location = wp_remote_retrieve_header( $response, 'x-final-location' );
+		if ( '' !== $x_final_location ) {
+			$headers['x-final-location'] = $x_final_location;
 		}
 
 		$filesize = filesize( $upload['file'] );
@@ -1129,9 +1162,7 @@ class SM_Import_SM {
 				$new_id = $this->processed_posts[ $value ];
 				// only update if there's a difference.
 				if ( $new_id != $value ) {
-					$assigned_term_images             = get_option( 'sermon_image_plugin' );
-					$assigned_term_images[ $term_id ] = $new_id;
-					update_option( 'sermon_image_plugin', $assigned_term_images );
+					update_term_meta( (int) $term_id, 'sm_term_image_id', (int) $new_id );
 				}
 			}
 		}

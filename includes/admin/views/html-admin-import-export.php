@@ -9,18 +9,18 @@ defined( 'ABSPATH' ) or die;
 ?>
 <div class="sm wrap">
 	<div class="intro">
-		<h1 class="wp-heading-inline"><?php _e( 'Sermon Manager Import/Export', 'sermon-manager-for-wordpress' ); ?></h1>
+		<h1 class="wp-heading-inline"><?php esc_html_e( 'Sermon Works Import/Export', 'sermon-works' ); ?></h1>
 	</div>
 	<div class="wp-list-table widefat">
-		<p><?php _e( 'We have made it easy to backup, migrate or bring sermons from another plugin. Choose the relevant option below to get started.', 'sermon-manager-for-wordpress' ); ?></p>
+		<p><?php esc_html_e( 'We have made it easy to backup, migrate or bring sermons from another plugin. Choose the relevant option below to get started.', 'sermon-works' ); ?></p>
 		<div id="the-list">
 			<div class="plugin-card card-import-sm">
 				<div class="plugin-card-top">
 					<img src="<?php echo SM_URL; ?>assets/images/import-sm.jpg" class="plugin-icon"
-							alt="<?php esc_attr_e( 'Import from file', 'sermon-manager-for-wordpress' ); ?>">
+							alt="<?php esc_attr_e( 'Import from file', 'sermon-works' ); ?>">
 					<div class="name column-name">
 						<h3>
-							<?php _e( 'Import from file', 'sermon-manager-for-wordpress' ); ?>
+							<?php esc_html_e( 'Import from file', 'sermon-works' ); ?>
 						</h3>
 					</div>
 					<div class="action-links">
@@ -34,7 +34,7 @@ defined( 'ABSPATH' ) or die;
 									?>
 									<div class="error">
 										<p>
-											<?php esc_html_e( 'Before you can upload your import file, you will need to fix the following error:', 'sermon-manager-for-wordpress' ); ?>
+											<?php esc_html_e( 'Before you can upload your import file, you will need to fix the following error:', 'sermon-works' ); ?>
 										</p>
 										<p>
 											<strong>
@@ -45,18 +45,18 @@ defined( 'ABSPATH' ) or die;
 								<?php else : ?>
 									<form enctype="multipart/form-data" id="sm-import-upload-form" method="post"
 											class="wp-upload-form"
-											action="<?php echo esc_url( wp_nonce_url( $_SERVER['REQUEST_URI'] . '&doimport=sm', 'sm' ) ); ?>">
+											action="<?php echo esc_url( wp_nonce_url( $_SERVER['REQUEST_URI'] . '&doimport=sm', 'sm_import_export_sm' ) ); ?>">
 										<p>
 											<input type="file" id="upload" name="import" size="25"/>
 											<input type="hidden" name="action" value="save"/>
 											<input type="hidden" name="max_file_size" value="<?php echo $bytes; ?>"/>
 										</p>
 										<input class="button" id="submit" type="submit" name="submit"
-												value="<?php esc_attr_e( 'Import from file', 'sermon-manager-for-wordpress' ); ?>"/>
+												value="<?php esc_attr_e( 'Import from file', 'sermon-works' ); ?>"/>
 									</form>
 									<span class="button activate-now" id="sm-import-trigger">
 										<span>
-											<?php _e( 'Import', 'sermon-manager-for-wordpress' ); ?>
+											<?php esc_html_e( 'Import', 'sermon-works' ); ?>
 										</span>
 										<span class="import-sniper">
 											<img src="<?php echo admin_url( 'images/wpspin_light.gif' ); ?>">
@@ -65,72 +65,66 @@ defined( 'ABSPATH' ) or die;
 								<?php endif; ?>
 							</li>
 							<li><a href="" class=""
-										aria-label="<?php esc_attr_e( 'More Details', 'sermon-manager-for-wordpress' ); ?>">
-									<?php _e( 'More Details', 'sermon-manager-for-wordpress' ); ?>
+										aria-label="<?php esc_attr_e( 'More Details', 'sermon-works' ); ?>">
+									<?php esc_html_e( 'More Details', 'sermon-works' ); ?>
 								</a></li>
 						</ul>
 					</div>
 					<div class="desc column-description">
-						<p><?php _e( 'Import sermons from another Sermon Manager installation.', 'sermon-manager-for-wordpress' ); ?></p>
+						<p><?php esc_html_e( 'Import sermons from another Sermon Works (or Sermon Manager) installation.', 'sermon-works' ); ?></p>
 					</div>
 				</div>
 			</div>
 			<div class="plugin-card card-export-sm">
 				<div class="plugin-card-top">
 					<img src="<?php echo SM_URL; ?>assets/images/export-sm.jpg" class="plugin-icon"
-							alt="<?php esc_attr_e( 'Export to file', 'sermon-manager-for-wordpress' ); ?>">
+							alt="<?php esc_attr_e( 'Export to file', 'sermon-works' ); ?>">
 					<div class="name column-name">
 						<h3>
-							<?php _e( 'Export to file', 'sermon-manager-for-wordpress' ); ?>
+							<?php esc_html_e( 'Export to file', 'sermon-works' ); ?>
 						</h3>
 					</div>
 					<div class="action-links">
 						<ul class="plugin-action-buttons">
 							<li>
-								<a href="<?php echo $_SERVER['REQUEST_URI']; ?>&doimport=exsm"
+								<a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'doimport', 'exsm' ), 'sm_import_export_exsm' ) ); ?>"
 										class="button activate-now" id="sm-export-content"
-										aria-label="<?php esc_attr_e( 'Export to file', 'sermon-manager-for-wordpress' ); ?>">
-									<?php _e( 'Export', 'sermon-manager-for-wordpress' ); ?>
+										aria-label="<?php esc_attr_e( 'Export to file', 'sermon-works' ); ?>">
+									<?php esc_html_e( 'Export', 'sermon-works' ); ?>
 								</a>
 							</li>
 							<li><a href="" class=""
-										aria-label="<?php esc_attr_e( 'More Details', 'sermon-manager-for-wordpress' ); ?>">
-									<?php _e( 'More Details', 'sermon-manager-for-wordpress' ); ?></a></li>
+										aria-label="<?php esc_attr_e( 'More Details', 'sermon-works' ); ?>">
+									<?php esc_html_e( 'More Details', 'sermon-works' ); ?></a></li>
 						</ul>
 					</div>
 					<div class="desc column-description">
-						<p><?php _e( 'Create an export for the purpose of backup or migration to another website.', 'sermon-manager-for-wordpress' ); ?></p>
+						<p><?php esc_html_e( 'Create an export for the purpose of backup or migration to another website.', 'sermon-works' ); ?></p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="wp-list-table widefat">
-		<h2><?php _e( 'Import From 3rd Party Plugins', 'sermon-manager-for-wordpress' ); ?></h2>
-		<p><?php _e( 'You can import sermons from the following plugins into Sermon Manager', 'sermon-manager-for-wordpress' ); ?></p>
+		<h2><?php esc_html_e( 'Import From 3rd Party Plugins', 'sermon-works' ); ?></h2>
+		<p><?php esc_html_e( 'You can import sermons from the following plugins into Sermon Works', 'sermon-works' ); ?></p>
 		<div id="the-list">
 			<div class="plugin-card <?php echo SM_Import_SB::is_installed() ? '' : 'not-available'; ?>">
 				<h2>Plugin not installed</h2>
 				<div class="plugin-card-top">
 					<img src="<?php echo SM_URL; ?>assets/images/import-sb.jpg" class="plugin-icon"
-							alt="<?php esc_attr_e( 'Sermon Browser', 'sermon-manager-for-wordpress' ); ?>">
+							alt="<?php esc_attr_e( 'Sermon Browser', 'sermon-works' ); ?>">
 					<div class="name column-name">
 						<h3>
-							<?php _e( 'Sermon Browser', 'sermon-manager-for-wordpress' ); ?>
+							<?php esc_html_e( 'Sermon Browser', 'sermon-works' ); ?>
 						</h3>
 					</div>
 					<div class="action-links">
 						<ul class="plugin-action-buttons">
-							<li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>&doimport=sb"
+							<li><a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'doimport', 'sb' ), 'sm_import_export_sb' ) ); ?>"
 										class="button activate-now <?php echo SM_Import_SB::is_installed() ? '' : 'disabled'; ?>"
-										aria-label="<?php esc_attr_e( 'Import from Sermon Browser', 'sermon-manager-for-wordpress' ); ?>">
-									<?php _e( 'Import', 'sermon-manager-for-wordpress' ); ?></a>
-							</li>
-							<li>
-								<a href="https://wpforchurch.com/my/knowledgebase/96/Importing.html#sermon-browser?utm_source=sermon-manager&utm_medium=wordpress"
-										target="_blank"
-										aria-label="<?php esc_attr_e( 'More Details', 'sermon-manager-for-wordpress' ); ?>">
-									<?php _e( 'More Details', 'sermon-manager-for-wordpress' ); ?></a>
+										aria-label="<?php esc_attr_e( 'Import from Sermon Browser', 'sermon-works' ); ?>">
+									<?php esc_html_e( 'Import', 'sermon-works' ); ?></a>
 							</li>
 						</ul>
 					</div>
@@ -138,14 +132,11 @@ defined( 'ABSPATH' ) or die;
 						<p>
 							<?php
 							// translators: %s Plugin name.
-							echo wp_sprintf( __( 'Import your existing %s sermon library into Sermon Manager', 'sermon-manager-for-wordpress' ), 'Sermon Browser' );
+							echo wp_sprintf( __( 'Import your existing %s sermon library into Sermon Works', 'sermon-works' ), 'Sermon Browser' );
 							?>
 						</p>
 						<p class="import-note">
-							<?php
-							// translators: %s Documentation URL.
-							echo wp_sprintf( __( 'Note: Some restrictions apply. Click %s for more details.', 'sermon-manager-for-wordpress' ), ' <a href="https://wpforchurch.com/my/knowledgebase/96/Importing.html#sermon-browser?utm_source=sermon-manager&utm_medium=wordpress" target="_blank">here</a>' );
-							?>
+							<?php esc_html_e( 'Note: Some restrictions apply.', 'sermon-works' ); ?>
 						</p>
 					</div>
 				</div>
@@ -154,24 +145,18 @@ defined( 'ABSPATH' ) or die;
 				<h2>Plugin not installed</h2>
 				<div class="plugin-card-top">
 					<img src="<?php echo SM_URL; ?>assets/images/import-se.jpg" class="plugin-icon"
-							alt="<?php esc_attr_e( 'Series Engine', 'sermon-manager-for-wordpress' ); ?>">
+							alt="<?php esc_attr_e( 'Series Engine', 'sermon-works' ); ?>">
 					<div class="name column-name">
 						<h3>
-							<?php _e( 'Series Engine', 'sermon-manager-for-wordpress' ); ?>
+							<?php esc_html_e( 'Series Engine', 'sermon-works' ); ?>
 						</h3>
 					</div>
 					<div class="action-links">
 						<ul class="plugin-action-buttons">
-							<li><a href="<?php echo $_SERVER['REQUEST_URI']; ?>&doimport=se"
+							<li><a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'doimport', 'se' ), 'sm_import_export_se' ) ); ?>"
 										class="button activate-now <?php echo SM_Import_SE::is_installed() ? '' : 'disabled'; ?>"
-										aria-label="<?php esc_attr_e( 'Import from Series Engine', 'sermon-manager-for-wordpress' ); ?>">
-									<?php _e( 'Import', 'sermon-manager-for-wordpress' ); ?></a>
-							</li>
-							<li>
-								<a href="https://wpforchurch.com/my/knowledgebase/96/Importing.html#series-engine?utm_source=sermon-manager&utm_medium=wordpress"
-										target="_blank"
-										aria-label="<?php esc_attr_e( 'More Details', 'sermon-manager-for-wordpress' ); ?>">
-									<?php _e( 'More Details', 'sermon-manager-for-wordpress' ); ?></a>
+										aria-label="<?php esc_attr_e( 'Import from Series Engine', 'sermon-works' ); ?>">
+									<?php esc_html_e( 'Import', 'sermon-works' ); ?></a>
 							</li>
 						</ul>
 					</div>
@@ -179,14 +164,11 @@ defined( 'ABSPATH' ) or die;
 						<p>
 							<?php
 							// translators: %s Plugin name.
-							echo wp_sprintf( __( 'Import your existing %s sermon library into Sermon Manager', 'sermon-manager-for-wordpress' ), 'Series Engine' );
+							echo wp_sprintf( __( 'Import your existing %s sermon library into Sermon Works', 'sermon-works' ), 'Series Engine' );
 							?>
 						</p>
 						<p class="import-note">
-							<?php
-							// translators: %s Documentation URL.
-							echo wp_sprintf( __( 'Note: Some restrictions apply. Click %s for more details.', 'sermon-manager-for-wordpress' ), ' <a href="https://wpforchurch.com/my/knowledgebase/96/Importing.html#series-engine?utm_source=sermon-manager&utm_medium=wordpress" target="_blank">here</a>' );
-							?>
+							<?php esc_html_e( 'Note: Some restrictions apply.', 'sermon-works' ); ?>
 						</p>
 					</div>
 				</div>
@@ -194,6 +176,6 @@ defined( 'ABSPATH' ) or die;
 		</div>
 	</div>
 	<p class="description">
-		<?php _e( 'Note: We recommend you create a backup of your current database just in case.', 'sermon-manager-for-wordpress' ); ?>
+		<?php esc_html_e( 'Note: We recommend you create a backup of your current database just in case.', 'sermon-works' ); ?>
 	</p>
 </div>

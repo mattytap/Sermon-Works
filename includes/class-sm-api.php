@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) or die;
 
 /**
- * Sermon Manager API.
+ * Sermon Works API.
  *
  * Handles SM-API endpoint requests.
  *
@@ -33,7 +33,7 @@ class SM_API {
 	}
 
 	/**
-	 * Saves custom Sermon Manager data passed through REST API into database.
+	 * Saves custom Sermon Works data passed through REST API into database.
 	 *
 	 * @param WP_Post         $post    Post object.
 	 * @param WP_REST_Request $request The request.
@@ -65,6 +65,25 @@ class SM_API {
 					update_post_meta( $post->ID, 'sermon_date_auto', 1 );
 				} else {
 					continue;
+				}
+			} else {
+				switch ( $key ) {
+					case 'sermon_audio':
+					case 'sermon_video_url':
+					case 'sermon_bulletin':
+						$data = esc_url_raw( $data );
+						break;
+					case 'sermon_audio_duration':
+					case 'bible_passage':
+						$data = sanitize_text_field( $data );
+						break;
+					case 'sermon_description':
+					case 'sermon_video_embed':
+						$data = current_user_can( 'unfiltered_html' ) ? $data : wp_kses_post( $data );
+						break;
+					case 'sermon_date':
+						$data = absint( $data );
+						break;
 				}
 			}
 

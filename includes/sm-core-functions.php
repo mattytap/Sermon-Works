@@ -88,7 +88,7 @@ function sm_the_date( $d = '', $before = '', $after = '', $post = null ) {
 }
 
 /**
- * Get permalink settings for Sermon Manager independent of the user locale.
+ * Get permalink settings for Sermon Works independent of the user locale.
  *
  * @return array
  * @since 2.12.3 added filter to easily modify slugs.
@@ -111,12 +111,12 @@ function sm_get_permalink_structure() {
 	) );
 
 	// Ensure rewrite slugs are set.
-	$permalinks['wpfc_preacher']      = untrailingslashit( empty( $permalinks['wpfc_preacher'] ) ? _x( 'preacher', 'slug', 'sermon-manager-for-wordpress' ) : $permalinks['wpfc_preacher'] );
-	$permalinks['wpfc_sermon_series'] = untrailingslashit( empty( $permalinks['wpfc_sermon_series'] ) ? _x( 'series', 'slug', 'sermon-manager-for-wordpress' ) : $permalinks['wpfc_sermon_series'] );
-	$permalinks['wpfc_sermon_topics'] = untrailingslashit( empty( $permalinks['wpfc_sermon_topics'] ) ? _x( 'topics', 'slug', 'sermon-manager-for-wordpress' ) : $permalinks['wpfc_sermon_topics'] );
-	$permalinks['wpfc_bible_book']    = untrailingslashit( empty( $permalinks['wpfc_bible_book'] ) ? _x( 'book', 'slug', 'sermon-manager-for-wordpress' ) : $permalinks['wpfc_bible_book'] );
-	$permalinks['wpfc_service_type']  = untrailingslashit( empty( $permalinks['wpfc_service_type'] ) ? _x( 'service-type', 'slug', 'sermon-manager-for-wordpress' ) : $permalinks['wpfc_service_type'] );
-	$permalinks['wpfc_sermon']        = untrailingslashit( empty( $permalinks['wpfc_sermon'] ) ? _x( 'sermons', 'slug', 'sermon-manager-for-wordpress' ) : $permalinks['wpfc_sermon'] );
+	$permalinks['wpfc_preacher']      = untrailingslashit( empty( $permalinks['wpfc_preacher'] ) ? _x( 'preacher', 'slug', 'sermon-works' ) : $permalinks['wpfc_preacher'] );
+	$permalinks['wpfc_sermon_series'] = untrailingslashit( empty( $permalinks['wpfc_sermon_series'] ) ? _x( 'series', 'slug', 'sermon-works' ) : $permalinks['wpfc_sermon_series'] );
+	$permalinks['wpfc_sermon_topics'] = untrailingslashit( empty( $permalinks['wpfc_sermon_topics'] ) ? _x( 'topics', 'slug', 'sermon-works' ) : $permalinks['wpfc_sermon_topics'] );
+	$permalinks['wpfc_bible_book']    = untrailingslashit( empty( $permalinks['wpfc_bible_book'] ) ? _x( 'book', 'slug', 'sermon-works' ) : $permalinks['wpfc_bible_book'] );
+	$permalinks['wpfc_service_type']  = untrailingslashit( empty( $permalinks['wpfc_service_type'] ) ? _x( 'service-type', 'slug', 'sermon-works' ) : $permalinks['wpfc_service_type'] );
+	$permalinks['wpfc_sermon']        = untrailingslashit( empty( $permalinks['wpfc_sermon'] ) ? _x( 'sermons', 'slug', 'sermon-works' ) : $permalinks['wpfc_sermon'] );
 
 	if ( \SermonManager::getOption( 'common_base_slug' ) ) {
 		foreach ( $permalinks as $name => &$permalink ) {
@@ -143,7 +143,7 @@ function sm_get_permalink_structure() {
 }
 
 /**
- * Switch Sermon Manager to site language.
+ * Switch Sermon Works to site language.
  *
  * @since 2.7
  */
@@ -154,13 +154,13 @@ function sm_switch_to_site_locale() {
 		// Filter on plugin_locale so load_plugin_textdomain loads the correct locale.
 		add_filter( 'plugin_locale', 'get_locale' );
 
-		// Init Sermon Manager locale.
+		// Init Sermon Works locale.
 		SermonManager::load_translations();
 	}
 }
 
 /**
- * Switch Sermon Manager language to original.
+ * Switch Sermon Works language to original.
  *
  * @since 2.7
  */
@@ -171,13 +171,13 @@ function sm_restore_locale() {
 		// Remove filter.
 		remove_filter( 'plugin_locale', 'get_locale' );
 
-		// Init Sermon Manager locale.
+		// Init Sermon Works locale.
 		SermonManager::load_translations();
 	}
 }
 
 /**
- * Display a Sermon Manager help tip.
+ * Display a Sermon Works help tip.
  *
  * @param string $tip        Help tip text.
  * @param bool   $allow_html Allow sanitized HTML if true or escape.
@@ -577,13 +577,13 @@ function get_sermon_series_image_url( $series_id = 0, $image_size = 'thumbnail' 
 		return null;
 	}
 
-	$associations = sermon_image_plugin_get_associations();
+	$attachment_id = (int) get_term_meta( $series_id, 'sm_term_image_id', true );
 
-	return ! empty( $associations[ $series_id ] ) ? wp_get_attachment_image_url( $associations[ $series_id ], $image_size ) : null;
+	return $attachment_id ? wp_get_attachment_image_url( $attachment_id, $image_size ) : null;
 }
 
 /**
- * Gets dropdown options for a setting in "Debug" tab of Sermon Manager Settings.
+ * Gets dropdown options for a setting in "Debug" tab of Sermon Works Settings.
  *
  * @return array
  *
@@ -847,6 +847,113 @@ function sm_get_next_sermon( $post = null ) {
 }
 
 /**
+ * Verifies a save_post-style request is from a legitimate WordPress save flow.
+ *
+ * REST writes are pre-authenticated by core and short-circuit through. Admin
+ * form POSTs require a valid post-edit nonce plus edit_post capability.
+ * Autosaves and revisions are filtered out.
+ *
+ * @param int $post_ID The post being saved.
+ *
+ * @return bool true if the save should proceed.
+ */
+function sm_is_legitimate_save( $post_ID ) {
+	if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+		return true;
+	}
+
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+		return false;
+	}
+
+	if ( wp_is_post_autosave( $post_ID ) || wp_is_post_revision( $post_ID ) ) {
+		return false;
+	}
+
+	if ( ! isset( $_POST['_wpnonce'] ) || ! wp_verify_nonce(
+		sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ),
+		'update-post_' . $post_ID
+	) ) {
+		return false;
+	}
+
+	if ( ! current_user_can( 'edit_post', $post_ID ) ) {
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * Validates a URL is safe to fetch server-side. Blocks SSRF.
+ *
+ * Rejects non-http(s) schemes, malformed URLs, known cloud-metadata
+ * hostnames, and any host that resolves to a private / link-local /
+ * loopback / multicast / reserved IP range (IPv4 and IPv6). DNS lookup
+ * is performed synchronously, so call only on attacker-influenced URLs
+ * not on every request.
+ *
+ * @param string $url The URL to validate.
+ *
+ * @return true|WP_Error true if safe to fetch, WP_Error with detail otherwise.
+ */
+function sm_validate_public_url( $url ) {
+	if ( ! is_string( $url ) || '' === trim( $url ) ) {
+		return new WP_Error( 'sm_invalid_url', __( 'URL is empty or not a string.', 'sermon-works' ) );
+	}
+
+	$parts = wp_parse_url( $url );
+	if ( ! $parts || empty( $parts['scheme'] ) || empty( $parts['host'] ) ) {
+		return new WP_Error( 'sm_invalid_url', __( 'URL is malformed.', 'sermon-works' ) );
+	}
+
+	if ( ! in_array( strtolower( $parts['scheme'] ), array( 'http', 'https' ), true ) ) {
+		return new WP_Error( 'sm_invalid_scheme', __( 'Only http and https URLs are allowed.', 'sermon-works' ) );
+	}
+
+	$host = strtolower( $parts['host'] );
+
+	$blocked_hosts = array(
+		'metadata.google.internal',
+		'metadata.azure.com',
+		'metadata.aws.amazon.com',
+	);
+	if ( in_array( $host, $blocked_hosts, true ) ) {
+		return new WP_Error( 'sm_blocked_host', __( 'Cloud metadata hostnames are blocked.', 'sermon-works' ) );
+	}
+
+	$ips = array();
+	if ( filter_var( $host, FILTER_VALIDATE_IP ) ) {
+		$ips[] = $host;
+	} else {
+		$records = @dns_get_record( $host, DNS_A | DNS_AAAA );
+		if ( ! $records ) {
+			return new WP_Error( 'sm_dns_failed', __( 'Could not resolve host.', 'sermon-works' ) );
+		}
+		foreach ( $records as $record ) {
+			if ( ! empty( $record['ip'] ) ) {
+				$ips[] = $record['ip'];
+			}
+			if ( ! empty( $record['ipv6'] ) ) {
+				$ips[] = $record['ipv6'];
+			}
+		}
+	}
+
+	foreach ( $ips as $ip ) {
+		if ( ! filter_var(
+			$ip,
+			FILTER_VALIDATE_IP,
+			FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
+		) ) {
+			return new WP_Error( 'sm_blocked_ip', __( 'Address resolves to a private or reserved IP range.', 'sermon-works' ) );
+		}
+	}
+
+	return true;
+}
+
+/**
  * Saves service type.
  *
  * Will be obsolete when we add new meta boxes code.
@@ -854,8 +961,17 @@ function sm_get_next_sermon( $post = null ) {
  * @param int $post_ID The sermon ID.
  */
 function sm_set_service_type( $post_ID ) {
+	if ( ! sm_is_legitimate_save( $post_ID ) ) {
+		return;
+	}
+
+	if ( 'wpfc_sermon' !== get_post_type( $post_ID ) ) {
+		return;
+	}
+
 	if ( isset( $_POST['wpfc_service_type'] ) ) {
-		$term = get_term_by( 'id', $_POST['wpfc_service_type'], 'wpfc_service_type' );
+		$service_type_id = absint( wp_unslash( $_POST['wpfc_service_type'] ) );
+		$term            = get_term_by( 'id', $service_type_id, 'wpfc_service_type' );
 
 		if ( $term ) {
 			$service_type = $term->slug;
@@ -866,12 +982,9 @@ function sm_set_service_type( $post_ID ) {
 		return;
 	}
 
-	$get  = isset( $_GET['tax_input'] ) && isset( $_GET['tax_input']['wpfc_service_type'] ) && $_GET['tax_input']['wpfc_service_type'];
-	$post = isset( $_POST['tax_input'] ) && isset( $_POST['tax_input']['wpfc_service_type'] ) && $_POST['tax_input']['wpfc_service_type'];
-
-	if ( $get || $post ) {
-		$field = $get ? $_GET['tax_input']['wpfc_service_type'] : $_POST['tax_input']['wpfc_service_type'];
-		$terms = explode( ',', $field );
+	if ( isset( $_POST['tax_input']['wpfc_service_type'] ) && $_POST['tax_input']['wpfc_service_type'] ) {
+		$field = sanitize_text_field( wp_unslash( $_POST['tax_input']['wpfc_service_type'] ) );
+		$terms = array_map( 'trim', explode( ',', $field ) );
 
 		if ( $terms ) {
 			$term = get_term_by( 'name', $terms[0], 'wpfc_service_type' );
@@ -883,10 +996,10 @@ function sm_set_service_type( $post_ID ) {
 	}
 }
 
-add_action( 'save_post', 'sm_set_service_type' );
+add_action( 'save_post_wpfc_sermon', 'sm_set_service_type' );
 
 /**
- * Returns registered Sermon Manager's taxonomies.
+ * Returns registered Sermon Works taxonomies.
  *
  * @return array Array of taxonomy names.
  *

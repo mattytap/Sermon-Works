@@ -1,20 +1,18 @@
 <?php
-defined( 'ABSPATH' ) or die; // exit if accessed directly
-
 /**
  * Handles hooking CMB2 objects/fields into the WordPres REST API
  * which can allow fields to be read and/or updated.
  *
- * @since     2.2.3
+ * @since  2.2.3
  *
  * @category  WordPress_Plugin
  * @package   CMB2
- * @author    WebDevStudios
+ * @author    CMB2 team
  * @license   GPL-2.0+
- * @link      http://webdevstudios.com
+ * @link      https://cmb2.io
  *
- * @property-read read_fields Array   of readable field objects.
- * @property-read edit_fields Array   of editable field objects.
+ * @property-read read_fields Array of readable field objects.
+ * @property-read edit_fields Array of editable field objects.
  * @property-read rest_read   Whether CMB2 object is readable via the rest api.
  * @property-read rest_edit   Whether CMB2 object is editable via the rest api.
  */
@@ -35,26 +33,30 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	 * @since 2.2.3
 	 */
 	const NAME_SPACE = 'cmb2/v1';
-	/**
-	 * @var   CMB2_REST[] objects
-	 * @since 2.2.3
-	 */
-	protected static $boxes = array();
-	/**
-	 * @var   array Array of cmb ids for each type.
-	 * @since 2.2.3
-	 */
-	protected static $type_boxes = array(
-		'post'    => array(),
-		'user'    => array(),
-		'comment' => array(),
-		'term'    => array(),
-	);
+
 	/**
 	 * @var   CMB2 object
 	 * @since 2.2.3
 	 */
 	public $cmb;
+
+	/**
+	 * @var   CMB2_REST[] objects
+	 * @since 2.2.3
+	 */
+	protected static $boxes = array();
+
+	/**
+	 * @var   array Array of cmb ids for each type.
+	 * @since 2.2.3
+	 */
+	protected static $type_boxes = array(
+		'post' => array(),
+		'user' => array(),
+		'comment' => array(),
+		'term' => array(),
+	);
+
 	/**
 	 * Array of readable field objects.
 	 *
@@ -86,6 +88,26 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	protected $rest_edit = false;
 
 	/**
+	 * A functionalized constructor, used for the hookup action callbacks.
+	 *
+	 * @since  2.2.6
+	 *
+	 * @param  CMB2 $cmb The CMB2 object to hookup
+	 *
+	 * @return CMB2_Hookup_Base $hookup The hookup object.
+	 */
+	public static function maybe_init_and_hookup( CMB2 $cmb ) {
+		if ( $cmb->prop( 'show_in_rest' ) && function_exists( 'rest_get_server' ) ) {
+
+			$hookup = new self( $cmb );
+
+			return $hookup->universal_hooks();
+		}
+
+		return false;
+	}
+
+	/**
 	 * Constructor
 	 *
 	 * @since 2.2.3
@@ -93,7 +115,7 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	 * @param CMB2 $cmb The CMB2 object to be registered for the API.
 	 */
 	public function __construct( CMB2 $cmb ) {
-		$this->cmb                   = $cmb;
+		$this->cmb = $cmb;
 		self::$boxes[ $cmb->cmb_id ] = $this;
 
 		$show_value = $this->cmb->prop( 'show_in_rest' );
@@ -103,40 +125,25 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	}
 
 	/**
-	 * Checks if given value is readable.
-	 *
-	 * Value is considered readable if it is not empty and if it does not match the editable blacklist.
+	 * Hooks to register on frontend and backend.
 	 *
 	 * @since  2.2.3
 	 *
-	 * @param  mixed $value Value to check.
-	 *
-	 * @return boolean       Whether value is considered readable.
+	 * @return void
 	 */
-	public static function is_readable( $value ) {
-		return ! empty( $value ) && ! in_array( $value, array(
-				WP_REST_Server::CREATABLE,
-				WP_REST_Server::EDITABLE,
-				WP_REST_Server::DELETABLE,
-			), true );
-	}
+	public function universal_hooks() {
+		// hook up the CMB rest endpoint classes
+		$this->once( 'rest_api_init', array( __CLASS__, 'init_routes' ), 0 );
 
-	/**
-	 * Checks if given value is editable.
-	 *
-	 * Value is considered editable if matches the editable whitelist.
-	 *
-	 * @since  2.2.3
-	 *
-	 * @param  mixed $value Value to check.
-	 *
-	 * @return boolean       Whether value is considered editable.
-	 */
-	public static function is_editable( $value ) {
-		return in_array( $value, array(
-			WP_REST_Server::EDITABLE,
-			WP_REST_Server::ALLMETHODS,
-		), true );
+		if ( function_exists( 'register_rest_field' ) ) {
+			$this->once( 'rest_api_init', array( __CLASS__, 'register_cmb2_fields' ), 50 );
+		}
+
+		$this->declare_read_edit_fields();
+
+		add_filter( 'is_protected_meta', array( $this, 'is_protected_meta' ), 10, 3 );
+
+		return $this;
 	}
 
 	/**
@@ -167,7 +174,15 @@ class CMB2_REST extends CMB2_Hookup_Base {
 		$alltypes = $taxonomies = array();
 
 		foreach ( self::$boxes as $cmb_id => $rest_box ) {
-			$types = array_flip( $rest_box->cmb->box_types() );
+
+			// Hook box specific filter callbacks.
+			$callback = $rest_box->cmb->prop( 'register_rest_field_cb' );
+			if ( is_callable( $callback ) ) {
+				call_user_func( $callback, $rest_box );
+				continue;
+			}
+
+			$types = array_flip( $rest_box->cmb->box_types( array( 'post' ) ) );
 
 			if ( isset( $types['user'] ) ) {
 				unset( $types['user'] );
@@ -191,7 +206,7 @@ class CMB2_REST extends CMB2_Hookup_Base {
 			}
 
 			if ( ! empty( $types ) ) {
-				$alltypes                            = array_merge( $alltypes, array_flip( $types ) );
+				$alltypes = array_merge( $alltypes, array_flip( $types ) );
 				self::$type_boxes['post'][ $cmb_id ] = $cmb_id;
 			}
 		}
@@ -222,7 +237,7 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	 *
 	 * @param string|array $object_types Object(s) the field is being registered
 	 *                                   to, "post"|"term"|"comment" etc.
-	 * @param string       $object_types Canonical object type for callbacks.
+	 * @param string       $object_types       Canonical object type for callbacks.
 	 *
 	 * @return void
 	 */
@@ -232,6 +247,71 @@ class CMB2_REST extends CMB2_Hookup_Base {
 			'update_callback' => array( __CLASS__, "update_{$object_type}_rest_values" ),
 			'schema'          => null, // @todo add schema
 		) );
+	}
+
+	/**
+	 * Setup readable and editable fields.
+	 *
+	 * @since  2.2.3
+	 *
+	 * @return void
+	 */
+	protected function declare_read_edit_fields() {
+		foreach ( $this->cmb->prop( 'fields' ) as $field ) {
+			$show_in_rest = isset( $field['show_in_rest'] ) ? $field['show_in_rest'] : null;
+
+			if ( false === $show_in_rest ) {
+				continue;
+			}
+
+			if ( $this->can_read( $show_in_rest ) ) {
+				$this->read_fields[] = $field['id'];
+			}
+
+			if ( $this->can_edit( $show_in_rest ) ) {
+				$this->edit_fields[] = $field['id'];
+			}
+		}
+	}
+
+	/**
+	 * Determines if a field is readable based on it's show_in_rest value
+	 * and the box's show_in_rest value.
+	 *
+	 * @since  2.2.3
+	 *
+	 * @param  bool $show_in_rest Field's show_in_rest value. Default null.
+	 *
+	 * @return bool               Whether field is readable.
+	 */
+	protected function can_read( $show_in_rest ) {
+		// if 'null', then use default box value.
+		if ( null === $show_in_rest ) {
+			return $this->rest_read;
+		}
+
+		// Else check if the value represents readable.
+		return self::is_readable( $show_in_rest );
+	}
+
+	/**
+	 * Determines if a field is editable based on it's show_in_rest value
+	 * and the box's show_in_rest value.
+	 *
+	 * @since  2.2.3
+	 *
+	 * @param  bool $show_in_rest Field's show_in_rest value. Default null.
+	 *
+	 * @return bool               Whether field is editable.
+	 */
+	protected function can_edit( $show_in_rest ) {
+		// if 'null', then use default box value.
+		if ( null === $show_in_rest ) {
+			return $this->rest_edit;
+		}
+
+		// Else check if the value represents editable.
+		return self::is_editable( $show_in_rest );
 	}
 
 	/**
@@ -250,46 +330,6 @@ class CMB2_REST extends CMB2_Hookup_Base {
 		if ( 'cmb2' === $field_name ) {
 			return self::get_rest_values( $object, $request, $object_type, 'post' );
 		}
-	}
-
-	/**
-	 * Handler for getting custom field data.
-	 *
-	 * @since  2.2.3
-	 *
-	 * @param  array           $object           The object data from the response
-	 * @param  WP_REST_Request $request          Current request
-	 * @param  string          $object_type      The request object type
-	 * @param  string          $main_object_type The cmb main object type
-	 *
-	 * @return mixed
-	 */
-	protected static function get_rest_values( $object, $request, $object_type, $main_object_type = 'post' ) {
-		if ( ! isset( $object['id'] ) ) {
-			return;
-		}
-
-		$values = array();
-
-		if ( ! empty( self::$type_boxes[ $main_object_type ] ) ) {
-			foreach ( self::$type_boxes[ $main_object_type ] as $cmb_id ) {
-				$rest_box = self::$boxes[ $cmb_id ];
-
-				foreach ( $rest_box->read_fields as $field_id ) {
-					$rest_box->cmb->object_id( $object['id'] );
-					$rest_box->cmb->object_type( $main_object_type );
-
-					$field = $rest_box->cmb->get_field( $field_id );
-
-					$field->object_id( $object['id'] );
-					$field->object_type( $main_object_type );
-
-					$values[ $cmb_id ][ $field->id( true ) ] = $field->get_data();
-				}
-			}
-		}
-
-		return $values;
 	}
 
 	/**
@@ -347,6 +387,81 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	}
 
 	/**
+	 * Handler for getting custom field data.
+	 *
+	 * @since  2.2.3
+	 *
+	 * @param  array           $object           The object data from the response
+	 * @param  WP_REST_Request $request          Current request
+	 * @param  string          $object_type      The request object type
+	 * @param  string          $main_object_type The cmb main object type
+	 *
+	 * @return mixed
+	 */
+	protected static function get_rest_values( $object, $request, $object_type, $main_object_type = 'post' ) {
+		if ( ! isset( $object['id'] ) ) {
+			return;
+		}
+
+		$values = array();
+
+		if ( ! empty( self::$type_boxes[ $main_object_type ] ) ) {
+			foreach ( self::$type_boxes[ $main_object_type ] as $cmb_id ) {
+				$rest_box = self::$boxes[ $cmb_id ];
+
+				if ( ! $rest_box->cmb->is_box_type( $object_type ) ) {
+					continue;
+				}
+
+				$result = self::get_box_rest_values( $rest_box, $object['id'], $main_object_type );
+				if ( ! empty( $result ) ) {
+					if ( empty( $values[ $cmb_id ] ) ) {
+						$values[ $cmb_id ] = $result;
+					} else {
+						$values[ $cmb_id ] = array_merge( $values[ $cmb_id ], $result );
+					}
+				}
+			}
+		}
+
+		return $values;
+	}
+
+	/**
+	 * Get box rest values.
+	 *
+	 * @since  2.7.0
+	 *
+	 * @param  CMB2_REST $rest_box         The CMB2_REST object.
+	 * @param  integer   $object_id        The object ID.
+	 * @param  string    $main_object_type The object type (post, user, term, etc)
+	 *
+	 * @return array                       Array of box rest values.
+	 */
+	public static function get_box_rest_values( $rest_box, $object_id = 0, $main_object_type = 'post' ) {
+
+		$rest_box->cmb->object_id( $object_id );
+		$rest_box->cmb->object_type( $main_object_type );
+
+		$values = array();
+
+		foreach ( $rest_box->read_fields as $field_id ) {
+			$field = $rest_box->cmb->get_field( $field_id );
+			$field->object_id( $object_id );
+			$field->object_type( $main_object_type );
+
+			$values[ $field->id( true ) ] = $field->get_rest_value();
+
+			if ( $field->args( 'has_supporting_data' ) ) {
+				$field = $field->get_supporting_field();
+				$values[ $field->id( true ) ] = $field->get_rest_value();
+			}
+		}
+
+		return $values;
+	}
+
+	/**
 	 * Handler for updating post custom field data.
 	 *
 	 * @since  2.2.3
@@ -362,6 +477,63 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	public static function update_post_rest_values( $values, $object, $field_name, $request, $object_type ) {
 		if ( 'cmb2' === $field_name ) {
 			return self::update_rest_values( $values, $object, $request, $object_type, 'post' );
+		}
+	}
+
+	/**
+	 * Handler for updating user custom field data.
+	 *
+	 * @since  2.2.3
+	 *
+	 * @param  mixed           $values      The value of the field
+	 * @param  object          $object      The object from the response
+	 * @param  string          $field_name  Name of field
+	 * @param  WP_REST_Request $request     Current request
+	 * @param  string          $object_type The request object type
+	 *
+	 * @return bool|int
+	 */
+	public static function update_user_rest_values( $values, $object, $field_name, $request, $object_type ) {
+		if ( 'cmb2' === $field_name ) {
+			return self::update_rest_values( $values, $object, $request, $object_type, 'user' );
+		}
+	}
+
+	/**
+	 * Handler for updating comment custom field data.
+	 *
+	 * @since  2.2.3
+	 *
+	 * @param  mixed           $values      The value of the field
+	 * @param  object          $object      The object from the response
+	 * @param  string          $field_name  Name of field
+	 * @param  WP_REST_Request $request     Current request
+	 * @param  string          $object_type The request object type
+	 *
+	 * @return bool|int
+	 */
+	public static function update_comment_rest_values( $values, $object, $field_name, $request, $object_type ) {
+		if ( 'cmb2' === $field_name ) {
+			return self::update_rest_values( $values, $object, $request, $object_type, 'comment' );
+		}
+	}
+
+	/**
+	 * Handler for updating term custom field data.
+	 *
+	 * @since  2.2.3
+	 *
+	 * @param  mixed           $values      The value of the field
+	 * @param  object          $object      The object from the response
+	 * @param  string          $field_name  Name of field
+	 * @param  WP_REST_Request $request     Current request
+	 * @param  string          $object_type The request object type
+	 *
+	 * @return bool|int
+	 */
+	public static function update_term_rest_values( $values, $object, $field_name, $request, $object_type ) {
+		if ( 'cmb2' === $field_name ) {
+			return self::update_rest_values( $values, $object, $request, $object_type, 'term' );
 		}
 	}
 
@@ -393,42 +565,38 @@ class CMB2_REST extends CMB2_Hookup_Base {
 
 		if ( ! empty( self::$type_boxes[ $main_object_type ] ) ) {
 			foreach ( self::$type_boxes[ $main_object_type ] as $cmb_id ) {
-				$rest_box = self::$boxes[ $cmb_id ];
-
-				if ( ! array_key_exists( $cmb_id, $values ) ) {
-					continue;
+				$result = self::santize_box_rest_values( $values, self::$boxes[ $cmb_id ], $object_id, $main_object_type );
+				if ( ! empty( $result ) ) {
+					$updated[ $cmb_id ] = $result;
 				}
-
-				$rest_box->cmb->object_id( $object_id );
-				$rest_box->cmb->object_type( $main_object_type );
-
-				$updated[ $cmb_id ] = $rest_box->sanitize_box_values( $values );
 			}
 		}
 
 		return $updated;
 	}
 
-	protected static function get_object_id( $object, $object_type = 'post' ) {
-		switch ( $object_type ) {
-			case 'user':
-			case 'post':
-				if ( isset( $object->ID ) ) {
-					return intval( $object->ID );
-				}
-			case 'comment':
-				if ( isset( $object->comment_ID ) ) {
-					return intval( $object->comment_ID );
-				}
-			case 'term':
-				if ( is_array( $object ) && isset( $object['term_id'] ) ) {
-					return intval( $object['term_id'] );
-				} elseif ( isset( $object->term_id ) ) {
-					return intval( $object->term_id );
-				}
+	/**
+	 * Updates box rest values.
+	 *
+	 * @since  2.7.0
+	 *
+	 * @param  array     $values           Array of values.
+	 * @param  CMB2_REST $rest_box         The CMB2_REST object.
+	 * @param  integer   $object_id        The object ID.
+	 * @param  string    $main_object_type The object type (post, user, term, etc)
+	 *
+	 * @return mixed|bool                  Array of updated statuses if successful.
+	 */
+	public static function santize_box_rest_values( $values, $rest_box, $object_id = 0, $main_object_type = 'post' ) {
+
+		if ( ! array_key_exists( $rest_box->cmb->cmb_id, $values ) ) {
+			return false;
 		}
 
-		return 0;
+		$rest_box->cmb->object_id( $object_id );
+		$rest_box->cmb->object_type( $main_object_type );
+
+		return $rest_box->sanitize_box_values( $values );
 	}
 
 	/**
@@ -437,7 +605,6 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	 * @since  2.2.o
 	 *
 	 * @param  array $values Array of values being provided.
-	 *
 	 * @return array           Array of updated/sanitized values.
 	 */
 	public function sanitize_box_values( array $values ) {
@@ -501,66 +668,105 @@ class CMB2_REST extends CMB2_Hookup_Base {
 			return;
 		}
 
-		$this->cmb->data_to_save[ $field->_id() ] = $values[ $this->cmb->cmb_id ][ $field->_id() ];
+		$this->cmb->data_to_save[ $field->_id( '', false ) ] = $values[ $this->cmb->cmb_id ][ $field->_id( '', false ) ];
 
 		return $this->cmb->save_group_field( $field );
 	}
 
 	/**
-	 * Handler for updating user custom field data.
+	 * Filter whether a meta key is protected.
 	 *
-	 * @since  2.2.3
+	 * @since 2.2.3
 	 *
-	 * @param  mixed           $values      The value of the field
-	 * @param  object          $object      The object from the response
-	 * @param  string          $field_name  Name of field
-	 * @param  WP_REST_Request $request     Current request
-	 * @param  string          $object_type The request object type
-	 *
-	 * @return bool|int
+	 * @param bool   $protected Whether the key is protected. Default false.
+	 * @param string $meta_key  Meta key.
+	 * @param string $meta_type Meta type.
 	 */
-	public static function update_user_rest_values( $values, $object, $field_name, $request, $object_type ) {
-		if ( 'cmb2' === $field_name ) {
-			return self::update_rest_values( $values, $object, $request, $object_type, 'user' );
+	public function is_protected_meta( $protected, $meta_key, $meta_type ) {
+		if ( $this->field_can_edit( $meta_key ) ) {
+			return false;
 		}
+
+		return $protected;
 	}
 
 	/**
-	 * Handler for updating comment custom field data.
+	 * Get the object ID for the given object/type.
 	 *
 	 * @since  2.2.3
 	 *
-	 * @param  mixed           $values      The value of the field
-	 * @param  object          $object      The object from the response
-	 * @param  string          $field_name  Name of field
-	 * @param  WP_REST_Request $request     Current request
-	 * @param  string          $object_type The request object type
+	 * @param  mixed  $object      The object to get the ID for.
+	 * @param  string $object_type The object type we are looking for.
 	 *
-	 * @return bool|int
+	 * @return int                 The object ID if found.
 	 */
-	public static function update_comment_rest_values( $values, $object, $field_name, $request, $object_type ) {
-		if ( 'cmb2' === $field_name ) {
-			return self::update_rest_values( $values, $object, $request, $object_type, 'comment' );
+	public static function get_object_id( $object, $object_type = 'post' ) {
+		switch ( $object_type ) {
+			case 'user':
+			case 'post':
+				if ( isset( $object->ID ) ) {
+					return intval( $object->ID );
+				}
+			case 'comment':
+				if ( isset( $object->comment_ID ) ) {
+					return intval( $object->comment_ID );
+				}
+			case 'term':
+				if ( is_array( $object ) && isset( $object['term_id'] ) ) {
+					return intval( $object['term_id'] );
+				} elseif ( isset( $object->term_id ) ) {
+					return intval( $object->term_id );
+				}
 		}
+
+		return 0;
 	}
 
 	/**
-	 * Handler for updating term custom field data.
+	 * Checks if a given field can be read.
 	 *
 	 * @since  2.2.3
 	 *
-	 * @param  mixed           $values      The value of the field
-	 * @param  object          $object      The object from the response
-	 * @param  string          $field_name  Name of field
-	 * @param  WP_REST_Request $request     Current request
-	 * @param  string          $object_type The request object type
+	 * @param  string|CMB2_Field $field_id      Field ID or CMB2_Field object.
+	 * @param  boolean           $return_object Whether to return the Field object.
 	 *
-	 * @return bool|int
+	 * @return mixed                            False if field can't be read or true|CMB2_Field object.
 	 */
-	public static function update_term_rest_values( $values, $object, $field_name, $request, $object_type ) {
-		if ( 'cmb2' === $field_name ) {
-			return self::update_rest_values( $values, $object, $request, $object_type, 'term' );
+	public function field_can_read( $field_id, $return_object = false ) {
+		return $this->field_can( 'read_fields', $field_id, $return_object );
+	}
+
+	/**
+	 * Checks if a given field can be edited.
+	 *
+	 * @since  2.2.3
+	 *
+	 * @param  string|CMB2_Field $field_id      Field ID or CMB2_Field object.
+	 * @param  boolean           $return_object Whether to return the Field object.
+	 *
+	 * @return mixed                            False if field can't be edited or true|CMB2_Field object.
+	 */
+	public function field_can_edit( $field_id, $return_object = false ) {
+		return $this->field_can( 'edit_fields', $field_id, $return_object );
+	}
+
+	/**
+	 * Checks if a given field can be read or edited.
+	 *
+	 * @since  2.2.3
+	 *
+	 * @param  string            $type          Whether we are checking for read or edit fields.
+	 * @param  string|CMB2_Field $field_id      Field ID or CMB2_Field object.
+	 * @param  boolean           $return_object Whether to return the Field object.
+	 *
+	 * @return mixed                            False if field can't be read or edited or true|CMB2_Field object.
+	 */
+	protected function field_can( $type, $field_id, $return_object = false ) {
+		if ( ! in_array( $field_id instanceof CMB2_Field ? $field_id->id() : $field_id, $this->{$type}, true ) ) {
+			return false;
 		}
+
+		return $return_object ? $this->cmb->get_field( $field_id ) : true;
 	}
 
 	/**
@@ -600,160 +806,46 @@ class CMB2_REST extends CMB2_Hookup_Base {
 	}
 
 	/**
-	 * Hooks to register on frontend and backend.
+	 * Checks if given value is readable.
+	 *
+	 * Value is considered readable if it is not empty and if it does not match the editable blacklist.
 	 *
 	 * @since  2.2.3
 	 *
-	 * @return void
+	 * @param  mixed $value Value to check.
+	 *
+	 * @return boolean       Whether value is considered readable.
 	 */
-	public function universal_hooks() {
-		// hook up the CMB rest endpoint classes
-		$this->once( 'rest_api_init', array( __CLASS__, 'init_routes' ), 0 );
-
-		if ( function_exists( 'register_rest_field' ) ) {
-			$this->once( 'rest_api_init', array( __CLASS__, 'register_cmb2_fields' ), 50 );
-		}
-
-		$this->declare_read_edit_fields();
-
-		add_filter( 'is_protected_meta', array( $this, 'is_protected_meta' ), 10, 3 );
+	public static function is_readable( $value ) {
+		return ! empty( $value ) && ! in_array( $value, array(
+			WP_REST_Server::CREATABLE,
+			WP_REST_Server::EDITABLE,
+			WP_REST_Server::DELETABLE,
+		), true );
 	}
 
 	/**
-	 * Setup readable and editable fields.
+	 * Checks if given value is editable.
+	 *
+	 * Value is considered editable if matches the editable whitelist.
 	 *
 	 * @since  2.2.3
 	 *
-	 * @return void
+	 * @param  mixed $value Value to check.
+	 *
+	 * @return boolean       Whether value is considered editable.
 	 */
-	protected function declare_read_edit_fields() {
-		foreach ( $this->cmb->prop( 'fields' ) as $field ) {
-			$show_in_rest = isset( $field['show_in_rest'] ) ? $field['show_in_rest'] : null;
-
-			if ( false === $show_in_rest ) {
-				continue;
-			}
-
-			if ( $this->can_read( $show_in_rest ) ) {
-				$this->read_fields[] = $field['id'];
-			}
-
-			if ( $this->can_edit( $show_in_rest ) ) {
-				$this->edit_fields[] = $field['id'];
-			}
-
-		}
-	}
-
-	/**
-	 * Determines if a field is readable based on it's show_in_rest value
-	 * and the box's show_in_rest value.
-	 *
-	 * @since  2.2.3
-	 *
-	 * @param  bool $show_in_rest Field's show_in_rest value. Default null.
-	 *
-	 * @return bool               Whether field is readable.
-	 */
-	protected function can_read( $show_in_rest ) {
-		// if 'null', then use default box value.
-		if ( null === $show_in_rest ) {
-			return $this->rest_read;
-		}
-
-		// Else check if the value represents readable.
-		return self::is_readable( $show_in_rest );
-	}
-
-	/**
-	 * Determines if a field is editable based on it's show_in_rest value
-	 * and the box's show_in_rest value.
-	 *
-	 * @since  2.2.3
-	 *
-	 * @param  bool $show_in_rest Field's show_in_rest value. Default null.
-	 *
-	 * @return bool               Whether field is editable.
-	 */
-	protected function can_edit( $show_in_rest ) {
-		// if 'null', then use default box value.
-		if ( null === $show_in_rest ) {
-			return $this->rest_edit;
-		}
-
-		// Else check if the value represents editable.
-		return self::is_editable( $show_in_rest );
-	}
-
-	/**
-	 * Filter whether a meta key is protected.
-	 *
-	 * @since 2.2.3
-	 *
-	 * @param bool   $protected Whether the key is protected. Default false.
-	 * @param string $meta_key  Meta key.
-	 * @param string $meta_type Meta type.
-	 */
-	public function is_protected_meta( $protected, $meta_key, $meta_type ) {
-		if ( $this->field_can_edit( $meta_key ) ) {
-			return false;
-		}
-
-		return $protected;
-	}
-
-	/**
-	 * Checks if a given field can be edited.
-	 *
-	 * @since  2.2.3
-	 *
-	 * @param  string|CMB2_Field $field_id      Field ID or CMB2_Field object.
-	 * @param  boolean           $return_object Whether to return the Field object.
-	 *
-	 * @return mixed                            False if field can't be edited or true|CMB2_Field object.
-	 */
-	public function field_can_edit( $field_id, $return_object = false ) {
-		return $this->field_can( 'edit_fields', $field_id, $return_object );
-	}
-
-	/**
-	 * Checks if a given field can be read or edited.
-	 *
-	 * @since  2.2.3
-	 *
-	 * @param  string            $type          Whether we are checking for read or edit fields.
-	 * @param  string|CMB2_Field $field_id      Field ID or CMB2_Field object.
-	 * @param  boolean           $return_object Whether to return the Field object.
-	 *
-	 * @return mixed                            False if field can't be read or edited or true|CMB2_Field object.
-	 */
-	protected function field_can( $type = 'read_fields', $field_id, $return_object = false ) {
-		if ( ! in_array( $field_id instanceof CMB2_Field ? $field_id->id() : $field_id, $this->{$type}, true ) ) {
-			return false;
-		}
-
-		return $return_object ? $this->cmb->get_field( $field_id ) : true;
-	}
-
-	/**
-	 * Checks if a given field can be read.
-	 *
-	 * @since  2.2.3
-	 *
-	 * @param  string|CMB2_Field $field_id      Field ID or CMB2_Field object.
-	 * @param  boolean           $return_object Whether to return the Field object.
-	 *
-	 * @return mixed                            False if field can't be read or true|CMB2_Field object.
-	 */
-	public function field_can_read( $field_id, $return_object = false ) {
-		return $this->field_can( 'read_fields', $field_id, $return_object );
+	public static function is_editable( $value ) {
+		return in_array( $value, array(
+			WP_REST_Server::EDITABLE,
+			WP_REST_Server::ALLMETHODS,
+		), true );
 	}
 
 	/**
 	 * Magic getter for our object.
 	 *
 	 * @param string $field
-	 *
 	 * @throws Exception Throws an exception if the field is invalid.
 	 *
 	 * @return mixed

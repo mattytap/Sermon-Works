@@ -162,7 +162,7 @@ foreach (
 		$args['tax_query'][] = array(
 			'taxonomy' => $taxonomy,
 			'field'    => is_numeric( $terms ) ? 'term_id' : 'slug',
-			'terms'    => is_numeric( $terms ) ? intval( $terms ) : false !== strpos( $terms, ',' ) ? array_map( 'sanitize_title', explode( ',', $terms ) ) : sanitize_title( $terms ),
+			'terms'    => is_numeric( $terms ) ? intval( $terms ) : ( false !== strpos( $terms, ',' ) ? array_map( 'sanitize_title', explode( ',', $terms ) ) : sanitize_title( $terms ) ),
 		);
 
 		if ( count( $args['tax_query'] ) > 1 ) {
@@ -318,6 +318,10 @@ $cover_image_url  = $settings['itunes_cover_image'];
 				$description       = str_replace( '&nbsp;', '', $settings['enable_podcast_html_description'] ? stripslashes( wpautop( wp_filter_kses( $description ) ) ) : stripslashes( wp_filter_nohtml_kses( $description ) ) );
 				$description_short = substr( wp_strip_all_tags( $description, true ), 0, 255 );
 				$description_short = strlen( $description_short ) === 255 ? $description_short . '...' : $description_short;
+
+				// Escape any `]]>` so an attacker-supplied description can't break out of the CDATA blocks below.
+				$description       = str_replace( ']]>', ']]]]><![CDATA[>', $description );
+
 				$date_preached     = SM_Dates::get( 'D, d M Y H:i:s +0000', null, false, false );
 				$date_published    = get_the_date( 'D, d M Y H:i:s +0000', $post->ID );
 				$custom_enclosure  = apply_filters( 'wpfc-podcast-feed-custom-enclosure', '', $post->ID, $settings );

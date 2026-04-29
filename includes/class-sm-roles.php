@@ -1,6 +1,6 @@
 <?php
 /**
- * Adds custom roles to Sermon Manager.
+ * Adds custom roles to Sermon Works.
  *
  * @since   2.13.0
  *
@@ -41,7 +41,7 @@ class SM_Roles {
 			$role->add_cap( 'manage_wpfc_categories' );
 			// Add additional roles for administrator.
 			if ( 'administrator' === $role_name ) {
-				// Access to Sermon Manager Settings.
+				// Access to Sermon Works Settings.
 				$role->add_cap( 'manage_wpfc_sm_settings' );
 			}
 			// Add additional roles for administrator and editor.

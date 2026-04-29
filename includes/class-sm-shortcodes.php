@@ -196,7 +196,7 @@ class SM_Shortcodes {
 		if ( $this->convert_taxonomy_name( $args['display'], true ) ) {
 			$args['display'] = $this->convert_taxonomy_name( $args['display'], false );
 		} elseif ( ! $this->convert_taxonomy_name( $args['display'], false ) ) {
-			return '<strong>Error: Invalid "list" parameter.</strong><br> Possible values are: "series", "preachers", "topics" and "books".<br> You entered: "<em>' . $args['display'] . '</em>"';
+			return '<strong>' . esc_html__( 'Error: Invalid "list" parameter.', 'sermon-works' ) . '</strong><br>' . esc_html__( 'Possible values are: "series", "preachers", "topics" and "books".', 'sermon-works' );
 		}
 
 		$query_args = array(
@@ -456,7 +456,7 @@ class SM_Shortcodes {
 		if ( $this->convert_taxonomy_name( $args['display'], true ) ) {
 			$args['display'] = $this->convert_taxonomy_name( $args['display'], false );
 		} elseif ( ! $this->convert_taxonomy_name( $args['display'], false ) ) {
-			return '<strong>Error: Invalid "list" parameter.</strong><br> Possible values are: "series", "preachers", "topics" and "books".<br> You entered: "<em>' . $args['display'] . '</em>"';
+			return '<strong>' . esc_html__( 'Error: Invalid "list" parameter.', 'sermon-works' ) . '</strong><br>' . esc_html__( 'Possible values are: "series", "preachers", "topics" and "books".', 'sermon-works' );
 		}
 
 		// Format args.
@@ -582,8 +582,9 @@ class SM_Shortcodes {
 		// Image CSS class.
 		$image_class = sanitize_html_class( $args['image_class'] );
 		// Title wrapper tag name.
-		$wrapper_options = array( 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div' );
-		if ( ! in_array( sanitize_text_field( $args['title_wrapper'] ), $wrapper_options ) ) {
+		$wrapper_options       = array( 'p', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div' );
+		$args['title_wrapper'] = sanitize_text_field( $args['title_wrapper'] );
+		if ( ! in_array( $args['title_wrapper'], $wrapper_options, true ) ) {
 			$args['title_wrapper'] = 'h3';
 		}
 		// Title CSS class.
@@ -733,16 +734,10 @@ class SM_Shortcodes {
 			return null;
 		}
 
-		$associations = sermon_image_plugin_get_associations();
-		$tt_id        = absint( $series );
+		$tt_id = absint( $series );
+		$id    = absint( get_term_meta( $tt_id, 'sm_term_image_id', true ) );
 
-		if ( array_key_exists( $tt_id, $associations ) ) {
-			$id = absint( $associations[ $tt_id ] );
-
-			return $id;
-		}
-
-		return null;
+		return $id ? $id : null;
 	}
 
 	/**

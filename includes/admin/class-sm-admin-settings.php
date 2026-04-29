@@ -1,6 +1,6 @@
 <?php
 /**
- * Most of Sermon Manager Settings related functions.
+ * Most of Sermon Works Settings related functions.
  *
  * @package SM/Core/Admin/Settings
  */
@@ -54,7 +54,7 @@ class SM_Admin_Settings {
 	/**
 	 * Settings page.
 	 *
-	 * Handles the display of the main Sermon Manager settings page in admin.
+	 * Handles the display of the main Sermon Works settings page in admin.
 	 */
 	public static function output() {
 		global $current_section, $current_tab;
@@ -72,8 +72,8 @@ class SM_Admin_Settings {
 		wp_register_script( 'sm_settings_verse', SM_URL . 'assets/js/admin/settings/verse' . ( ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) ? '' : '.min' ) . '.js', 'sm_settings', SM_VERSION, true );
 
 		wp_localize_script( 'sm_settings', 'sm_settings_params', array(
-			'i18n_nav_warning'        => __( 'The changes you made will be lost if you navigate away from this page.', 'sermon-manager-for-wordpress' ),
-			'i18n_bible_spanish_note' => __( 'Note: WordPress is not set to any Spanish variant. Reverted to ESV.', 'sermon-manager-for-wordpress' ),
+			'i18n_nav_warning'        => __( 'The changes you made will be lost if you navigate away from this page.', 'sermon-works' ),
+			'i18n_bible_spanish_note' => __( 'Note: WordPress is not set to any Spanish variant. Reverted to ESV.', 'sermon-works' ),
 			'is_wp_spanish'           => strpos( get_locale(), 'es_' ) !== false,
 		) );
 
@@ -87,15 +87,6 @@ class SM_Admin_Settings {
 		// Save settings if data has been posted.
 		if ( ! empty( $_POST ) ) {
 			self::save();
-		}
-
-		// Add any posted messages.
-		if ( ! empty( $_GET['sm_error'] ) ) {
-			self::add_error( stripslashes( $_GET['sm_error'] ) );
-		}
-
-		if ( ! empty( $_GET['sm_message'] ) ) {
-			self::add_message( stripslashes( $_GET['sm_message'] ) );
 		}
 
 		switch ( $current_tab ) {
@@ -143,7 +134,7 @@ class SM_Admin_Settings {
 		global $current_tab, $wpdb;
 
 		if ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'sm-settings' ) ) {
-			die( __( 'Action failed. Please refresh the page and retry.', 'sermon-manager-for-wordpress' ) );
+			die( __( 'Action failed. Please refresh the page and retry.', 'sermon-works' ) );
 		}
 
 		/**
@@ -158,7 +149,7 @@ class SM_Admin_Settings {
 		do_action( 'sn_update_options_' . $current_tab );
 		do_action( 'sm_update_options' );
 
-		self::add_message( __( 'Your settings have been saved.', 'sermon-manager-for-wordpress' ) );
+		self::add_message( __( 'Your settings have been saved.', 'sermon-works' ) );
 
 		// Clear any unwanted data and flush rules.
 		wp_schedule_single_event( time(), 'sm_flush_rewrite_rules' );
@@ -197,7 +188,7 @@ class SM_Admin_Settings {
 	/**
 	 * Output admin fields.
 	 *
-	 * Loops though the Sermon Manager options array and outputs each field.
+	 * Loops though the Sermon Works options array and outputs each field.
 	 *
 	 * @param array[] $options Opens array to output.
 	 * @param array   $values  The array of custom values. Optional.
@@ -632,6 +623,7 @@ class SM_Admin_Settings {
 		// Load conditionals script.
 		wp_register_script( 'sm_settings_conditionals', SM_URL . 'assets/js/admin/settings/conditionals' . ( ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) ? '' : '.min' ) . '.js', 'sm_settings', SM_VERSION, true );
 		wp_localize_script( 'sm_settings_conditionals', 'sm_conditionals', $display_conditions );
+		wp_localize_script( 'sm_settings_conditionals', 'sm_settings_ajax', array( 'nonce' => wp_create_nonce( 'sm_settings_nonce' ) ) );
 		wp_enqueue_script( 'sm_settings_conditionals' );
 	}
 
@@ -721,7 +713,7 @@ class SM_Admin_Settings {
 			}
 		} else {
 			$options = array(
-				0 => __( 'Error in populating field options.', 'sermon-manager-for-wordpress' ),
+				0 => __( 'Error in populating field options.', 'sermon-works' ),
 			);
 		}
 
@@ -777,7 +769,7 @@ class SM_Admin_Settings {
 	/**
 	 * Save admin fields.
 	 *
-	 * Loops though the Sermon Manager options array and outputs each field.
+	 * Loops though the Sermon Works options array and outputs each field.
 	 *
 	 * @param array $options Options array to output.
 	 * @param array $data    Optional. Data to use for saving. Defaults to $_POST.

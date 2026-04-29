@@ -1,31 +1,34 @@
 <?php
-defined( 'ABSPATH' ) or die; // exit if accessed directly
-
 /**
  * CMB text_datetime_timestamp field type
  *
- * @since     2.2.2
+ * @since  2.2.2
  *
  * @category  WordPress_Plugin
  * @package   CMB2
- * @author    WebDevStudios
+ * @author    CMB2 team
  * @license   GPL-2.0+
- * @link      http://webdevstudios.com
+ * @link      https://cmb2.io
  */
 class CMB2_Type_Text_Datetime_Timestamp extends CMB2_Type_Picker_Base {
 
 	public function render( $args = array() ) {
 		$field = $this->field;
 
+		$value = $field->escaped_value();
+		if ( empty( $value ) ) {
+			$value = $field->get_default();
+		}
+
 		$args = wp_parse_args( $this->args, array(
-			'value'      => $field->escaped_value(),
+			'value'      => $value,
 			'desc'       => $this->_desc(),
 			'datepicker' => array(),
 			'timepicker' => array(),
 		) );
 
 		if ( empty( $args['value'] ) ) {
-			$args['value'] = $field->escaped_value();
+			$args['value'] = $value;
 			// This will be used if there is a select_timezone set for this field
 			$tz_offset = $field->field_timezone_offset();
 			if ( ! empty( $tz_offset ) ) {
@@ -58,11 +61,11 @@ class CMB2_Type_Text_Datetime_Timestamp extends CMB2_Type_Picker_Base {
 
 	public function time_args( $args, $has_good_value ) {
 		$time_args = wp_parse_args( $args['timepicker'], array(
-			'class'           => 'cmb2-timepicker text-time',
-			'name'            => $this->_name( '[time]' ),
-			'id'              => $this->_id( '_time' ),
-			'value'           => $has_good_value ? $this->field->get_timestamp_format( 'time_format', $args['value'] ) : '',
-			'desc'            => $args['desc'],
+			'class' => 'cmb2-timepicker text-time',
+			'name'  => $this->_name( '[time]' ),
+			'id'    => $this->_id( '_time' ),
+			'value' => $has_good_value ? $this->field->get_timestamp_format( 'time_format', $args['value'] ) : '',
+			'desc'  => $args['desc'],
 			'js_dependencies' => array( 'jquery-ui-core', 'jquery-ui-datepicker', 'jquery-ui-datetimepicker' ),
 		) );
 

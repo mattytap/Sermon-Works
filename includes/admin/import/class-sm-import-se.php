@@ -1,6 +1,6 @@
 <?php
 /**
- * Imports data from Series Engine into Sermon Manager.
+ * Imports data from Series Engine into Sermon Works.
  *
  * @package SM/Core/Admin/Importing
  */
@@ -182,9 +182,7 @@ class SM_Import_SE {
 				// Set image.
 				$attachment_id = sm_import_and_set_post_thumbnail( $item->thumbnail_url, 0 );
 				if ( is_int( $attachment_id ) ) {
-					$assigned_images                          = get_option( 'sermon_image_plugin' );
-					$assigned_images[ $term_data['term_id'] ] = $attachment_id;
-					update_option( 'sermon_image_plugin', $assigned_images );
+					update_term_meta( (int) $term_data['term_id'], 'sm_term_image_id', (int) $attachment_id );
 				}
 
 				$this->_imported_series[ $item->series_id ] = array(

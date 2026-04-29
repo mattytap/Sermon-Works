@@ -373,7 +373,7 @@ switch ( $template ) {
 				/** Override page width **/
 				if ( $page_content_full === 'limit' ) {
 					$limit_content_width = ' limit-width';
-					$page_custom_width   = ( isset( $metabox_data['_uncode_specific_layout_width_custom'][0] ) ) ? unserialize( $metabox_data['_uncode_specific_layout_width_custom'][0] ) : '';
+					$page_custom_width   = ( isset( $metabox_data['_uncode_specific_layout_width_custom'][0] ) ) ? unserialize( $metabox_data['_uncode_specific_layout_width_custom'][0], array( 'allowed_classes' => false ) ) : '';
 					if ( is_array( $page_custom_width ) && ! empty( $page_custom_width ) && $page_custom_width[0] !== '' ) {
 						if ( $page_custom_width[1] === 'px' ) {
 							$page_custom_width[0] = 12 * round( ( $page_custom_width[0] ) / 12 );

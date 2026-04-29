@@ -74,17 +74,17 @@ function render_wpfc_sorting( $args = array() ) {
 			array(
 				'className' => 'sortSeries',
 				'taxonomy'  => 'wpfc_sermon_series',
-				'title'     => __( 'Series', 'sermon-manager-for-wordpress' ),
+				'title'     => __( 'Series', 'sermon-works' ),
 			),
 			array(
 				'className' => 'sortTopics',
 				'taxonomy'  => 'wpfc_sermon_topics',
-				'title'     => __( 'Topic', 'sermon-manager-for-wordpress' ),
+				'title'     => __( 'Topic', 'sermon-works' ),
 			),
 			array(
 				'className' => 'sortBooks',
 				'taxonomy'  => 'wpfc_bible_book',
-				'title'     => __( 'Book', 'sermon-manager-for-wordpress' ),
+				'title'     => __( 'Book', 'sermon-works' ),
 			),
 			array(
 				'className' => 'sortServiceTypes',
@@ -215,7 +215,7 @@ function render_wpfc_sorting( $args = array() ) {
  * @param string $after    Content after key value.
  */
 function wpfc_sermon_meta( $meta_key = '', $before = '', $after = '' ) {
-	echo $before . get_wpfc_sermon_meta( $meta_key ) . $after;
+	echo $before . esc_html( get_wpfc_sermon_meta( $meta_key ) ) . $after;
 }
 
 /**
@@ -302,7 +302,7 @@ function wpfc_render_video( $url = '', $seek = true ) {
 
 		parse_str( parse_url( $url, PHP_URL_QUERY ), $query );
 
-		return '<div class="fb-video" data-href="' . $url . '" data-width="' . ( isset( $query['width'] ) ? ( is_numeric( $query['width'] ) ? $query['width'] : '600' ) : '600' ) . '" data-allowfullscreen="' . ( isset( $query['fullscreen'] ) ? ( 'yes' === $query['width'] ? 'true' : 'false' ) : 'true' ) . '"></div>';
+		return '<div class="fb-video" data-href="' . esc_url( $url ) . '" data-width="' . ( isset( $query['width'] ) ? ( is_numeric( $query['width'] ) ? $query['width'] : '600' ) : '600' ) . '" data-allowfullscreen="' . ( isset( $query['fullscreen'] ) ? ( 'yes' === $query['width'] ? 'true' : 'false' ) : 'true' ) . '"></div>';
 	}
 
 	$player = strtolower( SermonManager::getOption( 'player' ) ?: 'plyr' );
@@ -337,10 +337,10 @@ function wpfc_render_video( $url = '', $seek = true ) {
 		$url = preg_replace( '/(\?|#|&)t.*$/', '', $url );
 
 		if ( 'plyr' === $player && ( $is_youtube || $is_vimeo ) ) {
-			$output .= '<div data-plyr-provider="' . ( $is_youtube ? 'youtube' : 'vimeo' ) . '" data-plyr-embed-id="' . $url . '" class="plyr__video-embed wpfc-sermon-video-player video-' . ( $is_youtube ? 'youtube' : 'vimeo' ) . ( 'mediaelement' === $player ? 'mejs__player' : '' ) . '" ' . $extra_settings . '></div>';
+			$output .= '<div data-plyr-provider="' . ( $is_youtube ? 'youtube' : 'vimeo' ) . '" data-plyr-embed-id="' . esc_url( $url ) . '" class="plyr__video-embed wpfc-sermon-video-player video-' . ( $is_youtube ? 'youtube' : 'vimeo' ) . ( 'mediaelement' === $player ? 'mejs__player' : '' ) . '" ' . $extra_settings . '></div>';
 		} else {
 			$output .= '<video controls preload="metadata" class="wpfc-sermon-video-player ' . ( 'mediaelement' === $player ? 'mejs__player' : '' ) . '" ' . $extra_settings . '>';
-			$output .= '<source src="' . $url . '">';
+			$output .= '<source src="' . esc_url( $url ) . '">';
 			$output .= '</video>';
 		}
 	}
@@ -419,7 +419,7 @@ function wpfc_render_audio( $source = '', $seek = null ) {
 			$output = '';
 
 			$output .= '<audio controls preload="metadata" class="wpfc-sermon-player ' . ( 'mediaelement' === $player ? 'mejs__player' : '' ) . '" ' . $extra_settings . '>';
-			$output .= '<source src="' . $source . '" type="audio/mp3">';
+			$output .= '<source src="' . esc_url( $source ) . '" type="audio/mp3">';
 			$output .= '</audio>';
 
 			break;
@@ -713,8 +713,8 @@ function wpfc_get_partial( $name = '', $args = array() ) {
 			} else {
 				if ( file_exists( SM_PATH . 'views/partials/' . $name ) ) {
 					load_template( SM_PATH . 'views/partials/' . $name, false );
-				} else {
-					echo '<p><b>Sermon Manager</b>: Failed loading partial "<i>' . str_replace( '.php', '', $name ) . '</i>", file does not exist.</p>';
+				} elseif ( current_user_can( 'manage_options' ) || ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ) {
+					echo '<p><b>Sermon Works</b>: Failed loading partial "<i>' . esc_html( str_replace( '.php', '', $name ) ) . '</i>", file does not exist.</p>';
 				}
 			}
 

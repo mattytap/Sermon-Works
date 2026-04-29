@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) or die;
 
 /**
- * Sermon Manager Autoloader
+ * Sermon Works Autoloader
  *
  * @since 2.9
  */

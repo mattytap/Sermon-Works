@@ -75,20 +75,20 @@ if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_archi
 					<div class="wpfc-sermon-header-aside">
 						<?php if ( get_wpfc_sermon_meta( 'sermon_audio' ) ) : ?>
 							<a class="wpfc-sermon-att-audio dashicons dashicons-media-audio"
-									href="<?php echo get_wpfc_sermon_meta( 'sermon_audio' ); ?>"
-									download="<?php echo basename( get_wpfc_sermon_meta( 'sermon_audio' ) ); ?>"
+									href="<?php echo esc_url( get_wpfc_sermon_meta( 'sermon_audio' ) ); ?>"
+									download="<?php echo esc_attr( basename( get_wpfc_sermon_meta( 'sermon_audio' ) ) ); ?>"
 									title="Audio"></a>
 						<?php endif; ?>
 						<?php if ( get_wpfc_sermon_meta( 'sermon_notes' ) ) : ?>
 							<a class="wpfc-sermon-att-notes dashicons dashicons-media-document"
-									href="<?php echo get_wpfc_sermon_meta( 'sermon_notes' ); ?>"
-									download="<?php echo basename( get_wpfc_sermon_meta( 'sermon_notes' ) ); ?>"
+									href="<?php echo esc_url( get_wpfc_sermon_meta( 'sermon_notes' ) ); ?>"
+									download="<?php echo esc_attr( basename( get_wpfc_sermon_meta( 'sermon_notes' ) ) ); ?>"
 									title="Notes"></a>
 						<?php endif; ?>
 						<?php if ( get_wpfc_sermon_meta( 'sermon_bulletin' ) ) : ?>
 							<a class="wpfc-sermon-att-bulletin dashicons dashicons-media-text"
-									href="<?php echo get_wpfc_sermon_meta( 'sermon_bulletin' ); ?>"
-									download="<?php echo basename( get_wpfc_sermon_meta( 'sermon_bulletin' ) ); ?>"
+									href="<?php echo esc_url( get_wpfc_sermon_meta( 'sermon_bulletin' ) ); ?>"
+									download="<?php echo esc_attr( basename( get_wpfc_sermon_meta( 'sermon_bulletin' ) ) ); ?>"
 									title="Bulletin"></a>
 						<?php endif; ?>
 					</div>
@@ -101,13 +101,13 @@ if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_archi
 						<?php if ( has_excerpt( $post ) ) : ?>
 							<?php echo get_the_excerpt( $post ); ?>
 						<?php else : ?>
-							<?php echo wp_trim_words( get_post_meta( $post->ID, 'sermon_description', true ), 30 ); ?>
+							<?php echo wp_trim_words( wp_kses_post( get_post_meta( $post->ID, 'sermon_description', true ) ), 30 ); ?>
 						<?php endif; ?>
 						<br/>
 					</div>
 					<?php if ( SermonManager::getOption( 'hide_read_more_when_not_needed' ) && str_word_count( get_post_meta( $post->ID, 'sermon_description', true ) ) > 30 ) : ?>
 						<div class="wpfc-sermon-description-read-more">
-							<a href="<?php echo get_permalink(); ?>"><?php echo __( 'Continue reading...', 'sermon-manager-for-wordpress' ); ?></a>
+							<a href="<?php echo get_permalink(); ?>"><?php echo __( 'Continue reading...', 'sermon-works' ); ?></a>
 						</div>
 					<?php endif; ?>
 				</div>
@@ -144,7 +144,7 @@ if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_archi
 				<?php if ( get_post_meta( $post->ID, 'bible_passage', true ) ) : ?>
 					<div class="wpfc-sermon-meta-item wpfc-sermon-meta-passage">
 						<span class="wpfc-sermon-meta-prefix">
-							<?php echo __( 'Passage', 'sermon-manager-for-wordpress' ); ?>:</span>
+							<?php echo __( 'Passage', 'sermon-works' ); ?>:</span>
 						<span class="wpfc-sermon-meta-text"><?php wpfc_sermon_meta( 'bible_passage' ); ?></span>
 					</div>
 				<?php endif; ?>

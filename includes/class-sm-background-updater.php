@@ -8,33 +8,12 @@
 
 defined( 'ABSPATH' ) or die;
 
-/*
- * Compatibility, if parent already exists
- */
-if ( \SermonManager::getOption( 'in_house_background_update' ) ) {
-	if ( ! class_exists( 'SM_WP_Async_Request', false ) ) {
-		include_once 'vendor/wp-async-request.php';
-	}
+if ( ! class_exists( 'SM_WP_Async_Request', false ) ) {
+	include_once 'vendor/wp-async-request.php';
+}
 
-	if ( ! class_exists( 'SM_WP_Background_Process', false ) ) {
-		include_once 'vendor/wp-background-process.php';
-	}
-} else {
-	if ( ! class_exists( 'WP_Async_Request', false ) ) {
-		include_once 'vendor/wp-async-request.php';
-		class_alias( 'SM_WP_Async_Request', 'WP_Async_Request' );
-	} else {
-		/* @noinspection PhpIgnoredClassAliasDeclaration */
-		class_alias( 'WP_Async_Request', 'SM_WP_Async_Request' );
-	}
-
-	if ( ! class_exists( 'WP_Background_Process', false ) ) {
-		include_once 'vendor/wp-background-process.php';
-		class_alias( 'SM_WP_Background_Process', 'WP_Background_Process' );
-	} else {
-		/* @noinspection PhpIgnoredClassAliasDeclaration */
-		class_alias( 'WP_Background_Process', 'SM_WP_Background_Process' );
-	}
+if ( ! class_exists( 'SM_WP_Background_Process', false ) ) {
+	include_once 'vendor/wp-background-process.php';
 }
 
 /**
@@ -43,6 +22,17 @@ if ( \SermonManager::getOption( 'in_house_background_update' ) ) {
  * @since 2.8
  */
 class SM_Background_Updater extends SM_WP_Background_Process {
+
+	/**
+	 * Restrict object instantiation when unserialising queue batches.
+	 * Upstream default is `true` (any class) for BC; we set false because
+	 * the queue only ever carries string callable names — no legitimate
+	 * object payloads exist, so disallowing them closes the deserialise-to-
+	 * arbitrary-callable path entirely.
+	 *
+	 * @var bool|array
+	 */
+	protected $allowed_batch_data_classes = false;
 
 	/**
 	 * Action name.
@@ -79,7 +69,14 @@ class SM_Background_Updater extends SM_WP_Background_Process {
 
 		include_once 'sm-update-functions.php';
 
-		if ( is_callable( $callback ) ) {
+		// Only invoke string callables that match the sm_update_* prefix.
+		// Defence-in-depth on top of the unserialize allowed_classes=>false
+		// guard in vendor/wp-background-process.php — closes the
+		// "deserialised array maps to a Closure / arbitrary callable"
+		// path even if a future regression weakens that guard.
+		if ( is_string( $callback )
+			&& 0 === strpos( $callback, 'sm_update_' )
+			&& function_exists( $callback ) ) {
 			call_user_func( $callback );
 		}
 

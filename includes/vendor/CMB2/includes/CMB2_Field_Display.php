@@ -1,16 +1,14 @@
 <?php
-defined( 'ABSPATH' ) or die; // exit if accessed directly
-
 /**
  * CMB2 field display base.
  *
- * @since     2.2.2
+ * @since 2.2.2
  *
  * @category  WordPress_Plugin
  * @package   CMB2
- * @author    WebDevStudios
+ * @author    CMB2 team
  * @license   GPL-2.0+
- * @link      http://webdevstudios.com
+ * @link      https://cmb2.io
  */
 class CMB2_Field_Display {
 
@@ -31,91 +29,111 @@ class CMB2_Field_Display {
 	public $value;
 
 	/**
+	 * Get the corresponding display class for the field type.
+	 *
+	 * @since  2.2.2
+	 * @param  CMB2_Field $field Requested field type.
+	 * @return CMB2_Field_Display
+	 */
+	public static function get( CMB2_Field $field ) {
+		$fieldtype          = $field->type();
+		$display_class_name = $field->args( 'display_class' );
+
+		if ( empty( $display_class_name ) ) {
+			switch ( $fieldtype ) {
+				case 'text_url':
+					$display_class_name = 'CMB2_Display_Text_Url';
+					break;
+				case 'text_money':
+					$display_class_name = 'CMB2_Display_Text_Money';
+					break;
+				case 'colorpicker':
+					$display_class_name = 'CMB2_Display_Colorpicker';
+					break;
+				case 'checkbox':
+					$display_class_name = 'CMB2_Display_Checkbox';
+					break;
+				case 'wysiwyg':
+				case 'textarea_small':
+					$display_class_name = 'CMB2_Display_Textarea';
+					break;
+				case 'textarea_code':
+					$display_class_name = 'CMB2_Display_Textarea_Code';
+					break;
+				case 'text_time':
+					$display_class_name = 'CMB2_Display_Text_Time';
+					break;
+				case 'text_date':
+				case 'text_date_timestamp':
+				case 'text_datetime_timestamp':
+					$display_class_name = 'CMB2_Display_Text_Date';
+					break;
+				case 'text_datetime_timestamp_timezone':
+					$display_class_name = 'CMB2_Display_Text_Date_Timezone';
+					break;
+				case 'select':
+				case 'radio':
+				case 'radio_inline':
+					$display_class_name = 'CMB2_Display_Select';
+					break;
+				case 'multicheck':
+				case 'multicheck_inline':
+					$display_class_name = 'CMB2_Display_Multicheck';
+					break;
+				case 'taxonomy_radio':
+				case 'taxonomy_radio_inline':
+				case 'taxonomy_select':
+				case 'taxonomy_select_hierarchical':
+				case 'taxonomy_radio_hierarchical':
+					$display_class_name = 'CMB2_Display_Taxonomy_Radio';
+					break;
+				case 'taxonomy_multicheck':
+				case 'taxonomy_multicheck_inline':
+				case 'taxonomy_multicheck_hierarchical':
+					$display_class_name = 'CMB2_Display_Taxonomy_Multicheck';
+					break;
+				case 'file':
+					$display_class_name = 'CMB2_Display_File';
+					break;
+				case 'file_list':
+					$display_class_name = 'CMB2_Display_File_List';
+					break;
+				case 'oembed':
+					$display_class_name = 'CMB2_Display_oEmbed';
+					break;
+				default:
+					$display_class_name = __CLASS__;
+					break;
+			}// End switch.
+		}
+
+		if ( has_action( "cmb2_display_class_{$fieldtype}" ) ) {
+
+			/**
+			 * Filters the custom field display class used for displaying the field. Class is required to extend CMB2_Type_Base.
+			 *
+			 * The dynamic portion of the hook name, $fieldtype, refers to the (custom) field type.
+			 *
+			 * @since 2.2.4
+			 *
+			 * @param string $display_class_name The custom field display class to use.
+			 * @param object $field              The `CMB2_Field` object.
+			 */
+			$display_class_name = apply_filters( "cmb2_display_class_{$fieldtype}", $display_class_name, $field );
+		}
+
+		return new $display_class_name( $field );
+	}
+
+	/**
 	 * Setup our class vars
 	 *
 	 * @since 2.2.2
-	 *
-	 * @param CMB2_Field $field A CMB2 field object
+	 * @param CMB2_Field $field A CMB2 field object.
 	 */
 	public function __construct( CMB2_Field $field ) {
 		$this->field = $field;
 		$this->value = $this->field->value;
-	}
-
-	/**
-	 * Get the corresponding display class for the field type.
-	 *
-	 * @since  2.2.2
-	 *
-	 * @param  CMB2_Field $field
-	 *
-	 * @return CMB2_Field_Display
-	 */
-	public static function get( CMB2_Field $field ) {
-		switch ( $field->type() ) {
-			case 'text_url':
-				$type = new CMB2_Display_Text_Url( $field );
-				break;
-			case 'text_money':
-				$type = new CMB2_Display_Text_Money( $field );
-				break;
-			case 'colorpicker':
-				$type = new CMB2_Display_Colorpicker( $field );
-				break;
-			case 'checkbox':
-				$type = new CMB2_Display_Checkbox( $field );
-				break;
-			case 'wysiwyg':
-			case 'textarea_small':
-				$type = new CMB2_Display_Textarea( $field );
-				break;
-			case 'textarea_code':
-				$type = new CMB2_Display_Textarea_Code( $field );
-				break;
-			case 'text_time':
-				$type = new CMB2_Display_Text_Time( $field );
-				break;
-			case 'text_date':
-			case 'text_date_timestamp':
-			case 'text_datetime_timestamp':
-				$type = new CMB2_Display_Text_Date( $field );
-				break;
-			case 'text_datetime_timestamp_timezone':
-				$type = new CMB2_Display_Text_Date_Timezone( $field );
-				break;
-			case 'select':
-			case 'radio':
-			case 'radio_inline':
-				$type = new CMB2_Display_Select( $field );
-				break;
-			case 'multicheck':
-			case 'multicheck_inline':
-				$type = new CMB2_Display_Multicheck( $field );
-				break;
-			case 'taxonomy_radio':
-			case 'taxonomy_radio_inline':
-			case 'taxonomy_select':
-				$type = new CMB2_Display_Taxonomy_Radio( $field );
-				break;
-			case 'taxonomy_multicheck':
-			case 'taxonomy_multicheck_inline':
-				$type = new CMB2_Display_Taxonomy_Multicheck( $field );
-				break;
-			case 'file':
-				$type = new CMB2_Display_File( $field );
-				break;
-			case 'file_list':
-				$type = new CMB2_Display_File_List( $field );
-				break;
-			case 'oembed':
-				$type = new CMB2_Display_oEmbed( $field );
-				break;
-			default:
-				$type = new self( $field );
-				break;
-		}
-
-		return $type;
 	}
 
 	/**
@@ -125,21 +143,21 @@ class CMB2_Field_Display {
 	 * @since 2.2.2
 	 */
 	public function display() {
-		// If repeatable
+		// If repeatable.
 		if ( $this->field->args( 'repeatable' ) ) {
 
-			// And has a repeatable value
+			// And has a repeatable value.
 			if ( is_array( $this->field->value ) ) {
 
 				// Then loop and output.
-				echo '<ul class="cmb2-' . str_replace( '_', '-', $this->field->type() ) . '">';
+				echo '<ul class="cmb2-' . esc_attr( sanitize_html_class( str_replace( '_', '-', $this->field->type() ) ) ) . '">';
 				foreach ( $this->field->value as $val ) {
 					$this->value = $val;
-					echo '<li>', $this->_display(), '</li>';;
+					echo '<li>', $this->_display(), '</li>';
+					;
 				}
 				echo '</ul>';
 			}
-
 		} else {
 			$this->_display();
 		}
@@ -174,7 +192,7 @@ class CMB2_Display_Text_Money extends CMB2_Field_Display {
 	 */
 	protected function _display() {
 		$this->value = $this->value ? $this->value : '0';
-		echo( ! $this->field->get_param_callback_result( 'before_field' ) ? '$' : ' ' ), $this->value;
+		echo ( ! $this->field->get_param_callback_result( 'before_field' ) ? '$' : ' ' ), $this->value;
 	}
 }
 
@@ -300,25 +318,26 @@ class CMB2_Display_Text_Date_Timezone extends CMB2_Field_Display {
 	 * @since 2.2.2
 	 */
 	protected function _display() {
-		$field = $this->field;
-
 		if ( empty( $this->value ) ) {
 			return;
 		}
 
-		$datetime    = maybe_unserialize( $this->value );
-		$this->value = $tzstring = '';
-
-		if ( $datetime && $datetime instanceof DateTime ) {
-			$tz          = $datetime->getTimezone();
-			$tzstring    = $tz->getName();
-			$this->value = $datetime->getTimestamp();
+		$datetime = CMB2_Utils::get_datetime_from_value( $this->value );
+		if ( ! $datetime || ! $datetime instanceof DateTime ) {
+			return;
 		}
 
-		$date = $this->field->get_timestamp_format( 'date_format', $this->value );
-		$time = $this->field->get_timestamp_format( 'time_format', $this->value );
+		$date     = $datetime->format( stripslashes( $this->field->args( 'date_format' ) ) );
+		$time     = $datetime->format( stripslashes( $this->field->args( 'time_format' ) ) );
+		$timezone = $datetime->getTimezone()->getName();
 
-		echo $date, ( $time ? ' ' . $time : '' ), ( $tzstring ? ', ' . $tzstring : '' );
+		echo $date;
+		if ( $time ) {
+			echo ' ' . $time;
+		}
+		if ( $timezone ) {
+			echo ', ' . $timezone;
+		}
 	}
 }
 
@@ -329,10 +348,11 @@ class CMB2_Display_Taxonomy_Radio extends CMB2_Field_Display {
 	 * @since 2.2.2
 	 */
 	protected function _display() {
-		$taxonomy   = $this->field->args( 'taxonomy' );
-		$field_type = new CMB2_Type_Taxonomy_Radio( new CMB2_Types( $this->field ) );
-		$terms      = $field_type->get_object_terms();
-		$term       = false;
+		$taxonomy = $this->field->args( 'taxonomy' );
+		$types    = new CMB2_Types( $this->field );
+		$type     = $types->get_new_render_type( $this->field->type(), 'CMB2_Type_Taxonomy_Radio' );
+		$terms    = $type->get_object_terms();
+		$term     = false;
 
 		if ( is_wp_error( $terms ) || empty( $terms ) && ( $default = $this->field->get_default() ) ) {
 			$term = get_term_by( 'slug', $default, $taxonomy );
@@ -354,9 +374,10 @@ class CMB2_Display_Taxonomy_Multicheck extends CMB2_Field_Display {
 	 * @since 2.2.2
 	 */
 	protected function _display() {
-		$taxonomy   = $this->field->args( 'taxonomy' );
-		$field_type = new CMB2_Type_Taxonomy_Multicheck( new CMB2_Types( $this->field ) );
-		$terms      = $field_type->get_object_terms();
+		$taxonomy = $this->field->args( 'taxonomy' );
+		$types    = new CMB2_Types( $this->field );
+		$type     = $types->get_new_render_type( $this->field->type(), 'CMB2_Type_Taxonomy_Multicheck' );
+		$terms    = $type->get_object_terms();
 
 		if ( is_wp_error( $terms ) || empty( $terms ) && ( $default = $this->field->get_default() ) ) {
 			$terms = array();
@@ -373,11 +394,11 @@ class CMB2_Display_Taxonomy_Multicheck extends CMB2_Field_Display {
 
 			$links = array();
 			foreach ( $terms as $term ) {
-				$link    = get_edit_term_link( $term->term_id, $taxonomy );
+				$link = get_edit_term_link( $term->term_id, $taxonomy );
 				$links[] = '<a href="' . esc_url( $link ) . '">' . esc_html( $term->name ) . '</a>';
 			}
 			// Then loop and output.
-			echo '<div class="cmb2-taxonomy-terms-', esc_attr( $taxonomy ), '">';
+			echo '<div class="cmb2-taxonomy-terms-', esc_attr( sanitize_html_class( $taxonomy ) ), '">';
 			echo implode( ', ', $links );
 			echo '</div>';
 		}
@@ -397,17 +418,18 @@ class CMB2_Display_File extends CMB2_Field_Display {
 
 		$this->value = esc_url_raw( $this->value );
 
-		$field_type = new CMB2_Type_File_Base( new CMB2_Types( $this->field ) );
+		$types = new CMB2_Types( $this->field );
+		$type  = $types->get_new_render_type( $this->field->type(), 'CMB2_Type_File_Base' );
 
 		$id = $this->field->get_field_clone( array(
-			'id' => $this->field->_id() . '_id',
+			'id' => $this->field->_id( '', false ) . '_id',
 		) )->escaped_value( 'absint' );
 
-		$this->file_output( $this->value, $id, $field_type );
+		$this->file_output( $this->value, $id, $type );
 	}
 
 	protected function file_output( $url_value, $id, CMB2_Type_File_Base $field_type ) {
-		// If there is no ID saved yet, try to get it from the url
+		// If there is no ID saved yet, try to get it from the url.
 		if ( $url_value && ! $id ) {
 			$id = CMB2_Utils::image_id_from_url( esc_url_raw( $url_value ) );
 		}
@@ -416,10 +438,12 @@ class CMB2_Display_File extends CMB2_Field_Display {
 			$img_size = $this->field->args( 'preview_size' );
 
 			if ( $id ) {
-				$image = wp_get_attachment_image( $id, $img_size, null, array( 'class' => 'cmb-image-display' ) );
+				$image = wp_get_attachment_image( $id, $img_size, null, array(
+					'class' => 'cmb-image-display',
+				) );
 			} else {
-				$size  = is_array( $img_size ) ? $img_size[0] : 200;
-				$image = '<img class="cmb-image-display" style="max-width: ' . absint( $size ) . 'px; width: 100%; height: auto;" src="' . $url_value . '" alt="" />';
+				$size = is_array( $img_size ) ? $img_size[0] : 200;
+				$image = '<img class="cmb-image-display" style="max-width: ' . absint( $size ) . 'px; width: 100%; height: auto;" src="' . esc_url( $url_value ) . '" alt="" />';
 			}
 
 			echo $image;
@@ -427,9 +451,9 @@ class CMB2_Display_File extends CMB2_Field_Display {
 		} else {
 
 			printf( '<div class="file-status"><span>%1$s <strong><a href="%2$s">%3$s</a></strong></span></div>',
-				esc_html( $field_type->_text( 'file_text', esc_html__( 'File:', 'cmb2' ) ) ),
-				$url_value,
-				CMB2_Utils::get_file_name_from_path( $url_value )
+				esc_html( $field_type->_text( 'file_text', __( 'File:', 'cmb2' ) ) ),
+				esc_url( $url_value ),
+				esc_html( CMB2_Utils::get_file_name_from_path( $url_value ) )
 			);
 
 		}
@@ -447,11 +471,12 @@ class CMB2_Display_File_List extends CMB2_Display_File {
 			return;
 		}
 
-		$field_type = new CMB2_Type_File_Base( new CMB2_Types( $this->field ) );
+		$types = new CMB2_Types( $this->field );
+		$type  = $types->get_new_render_type( $this->field->type(), 'CMB2_Type_File_Base' );
 
 		echo '<ul class="cmb2-display-file-list">';
 		foreach ( $this->value as $id => $fullurl ) {
-			echo '<li>', $this->file_output( esc_url_raw( $fullurl ), $id, $field_type ), '</li>';
+			echo '<li>', $this->file_output( esc_url_raw( $fullurl ), $id, $type ), '</li>';
 		}
 		echo '</ul>';
 	}
@@ -472,7 +497,9 @@ class CMB2_Display_oEmbed extends CMB2_Field_Display {
 			'url'         => $this->value,
 			'object_id'   => $this->field->object_id,
 			'object_type' => $this->field->object_type,
-			'oembed_args' => array( 'width' => '300' ),
+			'oembed_args' => array(
+				'width' => '300',
+			),
 			'field_id'    => $this->field->id(),
 		) );
 	}

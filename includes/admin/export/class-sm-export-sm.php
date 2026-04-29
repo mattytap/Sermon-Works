@@ -1,6 +1,6 @@
 <?php
 /**
- * Sermon Manager data export.
+ * Sermon Works data export.
  *
  * @package SM/Core/Admin/Importing
  */
@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) or die;
 
 /**
- * Export data from Sermon Manager
+ * Export data from Sermon Works
  *
  * @since 2.12.0
  */
@@ -73,7 +73,12 @@ class SM_Export_SM {
 			'wpfc_bible_book',
 			'wpfc_service_type',
 		);
-		$custom_terms      = (array) get_terms( $custom_taxonomies, array( 'get' => 'all' ) );
+		$custom_terms      = (array) get_terms(
+			array(
+				'taxonomy'   => $custom_taxonomies,
+				'hide_empty' => false,
+			)
+		);
 
 		// put terms in order with no child going before its parent.
 		while ( $t = array_shift( $custom_terms ) ) {
@@ -96,7 +101,7 @@ class SM_Export_SM {
 		 * @return string
 		 */
 		function wxr_cdata( $str ) {
-			if ( seems_utf8( $str ) == false ) {
+			if ( wp_is_valid_utf8( $str ) == false ) {
 				$str = utf8_encode( $str );
 			}
 
@@ -343,7 +348,6 @@ class SM_Export_SM {
 				<wp:base_blog_url><?php bloginfo_rss( 'url' ); ?></wp:base_blog_url>
 
 				<?php wxr_authors_list(); ?>
-				<?php $assigned_term_images = get_option( 'sermon_image_plugin' ); ?>
 				<?php foreach ( $terms as $t ) : ?>
 					<wp:term>
 						<wp:term_id><?php echo $t->term_id; ?></wp:term_id>
@@ -376,12 +380,6 @@ class SM_Export_SM {
 								<wp:meta_value><?php echo wxr_cdata( $meta->meta_value ); ?></wp:meta_value>
 							</wp:termmeta>
 						<?php endforeach; ?>
-						<?php if ( array_key_exists( $t->term_id, $assigned_term_images ) ) { ?>
-							<wp:termmeta>
-								<wp:meta_key>sm_term_image_id</wp:meta_key>
-								<wp:meta_value><?php echo $assigned_term_images[ $t->term_id ]; ?></wp:meta_value>
-							</wp:termmeta>
-						<?php } ?>
 					</wp:term>
 				<?php endforeach; ?>
 

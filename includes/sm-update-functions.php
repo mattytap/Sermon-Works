@@ -307,8 +307,8 @@ function sm_update_2140_convert_bible_verse() {
 		$bible_passage_end   = get_post_meta( $id, 'bible_passages_end', true );
 
 		if ( $bible_passage_start && $bible_passage_end ) {
-			$bible_passage_start = unserialize( $bible_passage_start );
-			$bible_passage_end   = unserialize( $bible_passage_end );
+			$bible_passage_start = unserialize( $bible_passage_start, array( 'allowed_classes' => false ) );
+			$bible_passage_end   = unserialize( $bible_passage_end, array( 'allowed_classes' => false ) );
 			$bible_passage       = '';
 
 			/**
@@ -469,6 +469,42 @@ function sm_update_21511_update_term_dates() {
  */
 function sm_update_21516_update_term_dates() {
 	sm_update_21511_update_term_dates();
+
+	// Mark it as done, backup way.
+	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
+}
+
+/**
+ * Migrate the bundled taxonomy-images library's term→attachment associations
+ * out of the `sermon_image_plugin` option and into per-term `sm_term_image_id`
+ * term_meta rows.
+ *
+ * One-shot: existing values copied; option preserved indefinitely as a
+ * rollback / re-migration source. The `sm_term_image_migrated_to_meta`
+ * sentinel is set on completion for diagnostics + any future re-runner.
+ *
+ * Idempotent: re-running overwrites term_meta with whatever the option
+ * currently holds, so if a bug is discovered the option-side data can be
+ * restored and a 2.16.x re-runner can re-execute this same migration logic.
+ *
+ * @since 2.16.0
+ */
+function sm_update_2160_migrate_term_images() {
+	$associations = get_option( 'sermon_image_plugin', array() );
+
+	if ( is_array( $associations ) ) {
+		foreach ( $associations as $term_id => $attachment_id ) {
+			$term_id       = (int) $term_id;
+			$attachment_id = (int) $attachment_id;
+			if ( $term_id && $attachment_id ) {
+				update_term_meta( $term_id, 'sm_term_image_id', $attachment_id );
+			}
+		}
+	}
+
+	// Sentinel for "this site has been migrated" — separate from the framework
+	// per-function done-flag so a future re-runner can use a different name.
+	update_option( 'sm_term_image_migrated_to_meta', 1 );
 
 	// Mark it as done, backup way.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );

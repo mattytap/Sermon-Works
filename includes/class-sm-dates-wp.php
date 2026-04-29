@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) or die;
 
 /**
- * Class used to hook into WordPress and make it use Sermon Manager dates, instead of core dates.
+ * Class used to hook into WordPress and make it use Sermon Works dates, instead of core dates.
  *
  * Can be disabled by `add_filter('sm_dates_wp', '__return_false');`.
  *
@@ -130,12 +130,16 @@ class SM_Dates_WP extends SM_Dates {
 	 * @since 2.15.11
 	 */
 	public static function save_terms_dates( $post_ID, $post, $update ) {
+		if ( ! sm_is_legitimate_save( $post_ID ) ) {
+			return;
+		}
+
 		if ( ! isset( $_POST['tax_input'] ) ) {
 			return;
 		}
 
 		$original_terms = $GLOBALS['sm_original_terms'];
-		$updated_terms  = isset( $_POST['tax_input'] ) ? $_POST['tax_input'] : null;
+		$updated_terms  = map_deep( wp_unslash( $_POST['tax_input'] ), 'sanitize_text_field' );
 
 		// Convert terms to term array of term IDs if it's not already that way.
 		foreach ( $updated_terms as $taxonomy => $terms ) {
@@ -297,12 +301,17 @@ class SM_Dates_WP extends SM_Dates {
 	 * @since 2.7
 	 */
 	public static function maybe_update_date( $post_ID, $post, $update ) {
+		if ( ! sm_is_legitimate_save( $post_ID ) ) {
+			return;
+		}
+
+		$sermon_date = isset( $_POST['sermon_date'] ) ? sanitize_text_field( wp_unslash( $_POST['sermon_date'] ) ) : '';
 		$update_date = false;
 		$auto        = false;
 
 		if ( $update ) {
 			// Compare sermon date and if user changed it update sermon date and disable auto update.
-			if ( ! empty( $_POST['sermon_date'] ) ) {
+			if ( '' !== $sermon_date ) {
 				switch ( \SermonManager::getOption( 'date_format' ) ) {
 					case '0':
 						$date_format = 'm/d/Y';
@@ -321,7 +330,7 @@ class SM_Dates_WP extends SM_Dates {
 						break;
 				}
 
-				$dt      = DateTime::createFromFormat( $date_format, $_POST['sermon_date'] );
+				$dt      = DateTime::createFromFormat( $date_format, $sermon_date );
 				$dt_post = DateTime::createFromFormat( 'U', mysql2date( 'U', $post->post_date ) );
 
 				$time = array(
@@ -355,7 +364,7 @@ class SM_Dates_WP extends SM_Dates {
 		 * If sermon date is blank (not set on sermon create or removed later on update), mark
 		 * this post for auto updating and update date now.
 		 */
-		if ( isset( $_POST['sermon_date'] ) && '' == $_POST['sermon_date'] ) {
+		if ( isset( $_POST['sermon_date'] ) && '' === $sermon_date ) {
 			$update_date = true;
 			$auto        = true;
 		}

@@ -8,7 +8,7 @@
 defined( 'ABSPATH' ) or die;
 
 /**
- * Get all Sermon Manager screen ids.
+ * Get all Sermon Works screen ids.
  *
  * @return array Screen IDs
  * @since 2.9
@@ -94,7 +94,7 @@ function wpfc_dashboard() {
 	$num = number_format_i18n( $num_posts->publish );
 	// Put correct singular or plural text
 	// translators: %s integer count of sermons.
-	$text = wp_sprintf( esc_html( _n( '%s sermon', '%s sermons', intval( $num_posts->publish ), 'sermon-manager-for-wordpress' ) ), $num );
+	$text = wp_sprintf( esc_html( _n( '%s sermon', '%s sermons', intval( $num_posts->publish ), 'sermon-works' ) ), $num );
 
 	$count = '<li class="sermon-count">';
 
@@ -172,8 +172,7 @@ function wpfc_taxonomy_short_description_columns( $columns ) {
  */
 function wpfc_taxonomy_short_description_rows( $default, $column_name, $term ) {
 	if ( 'short_description' == $column_name ) {
-		global $taxonomy;
-		$default = term_description( $term, $taxonomy );
+		$default = term_description( $term );
 		$default = wp_trim_words( $default, 10 );
 	}
 

@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) or die;
 /**
  * Class used to get/set custom sermon dates.
  *
- * It will try to be compatible with all Sermon Manager date implementations from previous versions.
+ * It will try to be compatible with all upstream Sermon Manager date implementations from previous versions.
  *
  * @since 2.6
  */
@@ -25,8 +25,8 @@ class SM_Dates {
 	 * @param string      $format                Optional. PHP date format defaults to the date_format option if not
 	 *                                           specified. (or Unix timestamp if date_format option is not set).
 	 * @param int|WP_Post $post                  Optional. Post ID or WP_Post object. Default current post.
-	 * @param bool        $force_unix_sanitation Optional. Sanitation is done only if Sermon Manager is older than 2.6,
-	 *                                           we are assuming that newer (2.6>) Sermon Manager versions will save
+	 * @param bool        $force_unix_sanitation Optional. Sanitation is done only if upstream Sermon Manager is older than 2.6,
+	 *                                           we are assuming that newer (2.6>) upstream Sermon Manager versions will save
 	 *                                           the date as Unix timestamp so sanitation is not required.
 	 * @param bool        $localize              If set to false, it will skip date localization. Default true.
 	 *

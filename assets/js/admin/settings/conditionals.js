@@ -128,6 +128,7 @@ function sm_hide_show_elements( target_value, current_value, not, table_row ) {
 
 		let data = {
 			'action': 'sm_settings_get_select_data',
+			'nonce': sm_settings_ajax.nonce,
 			'category': current_value,
 			'option_id': table_row.find( 'select' ).attr( 'id' ),
 			'podcast_id': $_GET[ 'post' ],
