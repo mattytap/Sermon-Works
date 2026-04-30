@@ -423,11 +423,10 @@ class SM_Export_SM {
 							$meta_value_array = array_unique( array_merge( $meta_value_array, $meta_value ), SORT_REGULAR );
 						}
 					}
-					$attachment_array = array();
-					foreach ( $assigned_term_images as $term => $attachment ) {
-						$attachment_array[] = $attachment;
-					}
-					$attachment_array = array_unique( $attachment_array, SORT_REGULAR );
+					$attachment_array = (array) $wpdb->get_col(
+						"SELECT DISTINCT meta_value FROM {$wpdb->termmeta} WHERE meta_key = 'sm_term_image_id' AND meta_value > 0"
+					);
+					$attachment_array = array_unique( array_map( 'intval', $attachment_array ), SORT_REGULAR );
 					$post_ids         = array_merge( $post_ids, $meta_value_array, $attachment_array );
 					/* NEW CODE END */
 
