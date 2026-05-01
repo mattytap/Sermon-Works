@@ -815,7 +815,7 @@ class SermonManager { // phpcs:ignore
 
 					if ( $the_file ) {
 						if ( isset( $the_file['length'] ) ) {
-							$length                         = date( 'H:i:s', $the_file['length'] );
+							$length                         = gmdate( 'H:i:s', $the_file['length'] );
 							$_POST['_wpfc_sermon_duration'] = $length;
 							update_post_meta( $post_ID, '_wpfc_sermon_duration', $length );
 						}

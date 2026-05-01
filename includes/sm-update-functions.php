@@ -410,7 +410,7 @@ function sm_update_2150_audio_duration_and_size() {
 
 			if ( $attachment_data ) {
 				if ( isset( $attachment_data['length'] ) ) {
-					update_post_meta( $id, '_wpfc_sermon_duration', date( 'H:i:s', $attachment_data['length'] ) );
+					update_post_meta( $id, '_wpfc_sermon_duration', gmdate( 'H:i:s', $attachment_data['length'] ) );
 				}
 
 				if ( isset( $attachment_data['filesize'] ) ) {

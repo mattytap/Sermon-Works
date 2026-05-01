@@ -3,31 +3,31 @@ PHP CODE SNIFFER REPORT SUMMARY
 --------------------------------------------------------------------------------
 FILE                                                            ERRORS  WARNINGS
 --------------------------------------------------------------------------------
-...\Claude\Projects\GitHub Coding Fun\Sermon-Works\sermons.php  59      26
-...ts\GitHub Coding Fun\Sermon-Works\includes\class-sm-api.php  6       1
-...ub Coding Fun\Sermon-Works\includes\class-sm-autoloader.php  4       2
+...\Claude\Projects\Sermon-Works\sermons.php  59      26
+...ts\Sermon-Works\includes\class-sm-api.php  6       1
+...ub Sermon-Works\includes\class-sm-autoloader.php  4       2
 ...g Fun\Sermon-Works\includes\class-sm-background-updater.php  4       0
-...tHub Coding Fun\Sermon-Works\includes\class-sm-dates-wp.php  16      4
-...\GitHub Coding Fun\Sermon-Works\includes\class-sm-dates.php  6       0
-...itHub Coding Fun\Sermon-Works\includes\class-sm-install.php  21      7
-...ub Coding Fun\Sermon-Works\includes\class-sm-post-types.php  18      0
-...\GitHub Coding Fun\Sermon-Works\includes\class-sm-roles.php  2       0
-...ub Coding Fun\Sermon-Works\includes\class-sm-shortcodes.php  63      18
+...tHub Sermon-Works\includes\class-sm-dates-wp.php  16      4
+...\Sermon-Works\includes\class-sm-dates.php  6       0
+...itHub Sermon-Works\includes\class-sm-install.php  21      7
+...ub Sermon-Works\includes\class-sm-post-types.php  18      0
+...\Sermon-Works\includes\class-sm-roles.php  2       0
+...ub Sermon-Works\includes\class-sm-shortcodes.php  63      18
 ...un\Sermon-Works\includes\class-sm-widget-recent-sermons.php  44      1
-...tHub Coding Fun\Sermon-Works\includes\sm-core-functions.php  81      32
+...tHub Sermon-Works\includes\sm-core-functions.php  81      32
 ...oding Fun\Sermon-Works\includes\sm-deprecated-functions.php  30      11
 ...oding Fun\Sermon-Works\includes\sm-formatting-functions.php  9       2
-...b Coding Fun\Sermon-Works\includes\sm-podcast-functions.php  8       2
-... Coding Fun\Sermon-Works\includes\sm-template-functions.php  31      11
-...ub Coding Fun\Sermon-Works\includes\sm-update-functions.php  30      5
+...b Sermon-Works\includes\sm-podcast-functions.php  8       2
+... Sermon-Works\includes\sm-template-functions.php  31      11
+...ub Sermon-Works\includes\sm-update-functions.php  30      5
 ...g Fun\Sermon-Works\includes\admin\class-sm-admin-assets.php  6       2
 ...ermon-Works\includes\admin\class-sm-admin-import-export.php  4       0
 ...ng Fun\Sermon-Works\includes\admin\class-sm-admin-menus.php  17      3
 ...n\Sermon-Works\includes\admin\class-sm-admin-post-types.php  20      4
 ...Fun\Sermon-Works\includes\admin\class-sm-admin-settings.php  71      21
-...b Coding Fun\Sermon-Works\includes\admin\class-sm-admin.php  4       0
+...b Sermon-Works\includes\admin\class-sm-admin.php  4       0
 ...ding Fun\Sermon-Works\includes\admin\sm-admin-functions.php  10      10
-...Coding Fun\Sermon-Works\includes\admin\sm-cmb-functions.php  35      1
+...Sermon-Works\includes\admin\sm-cmb-functions.php  35      1
 ...n\Sermon-Works\includes\admin\export\class-sm-export-sm.php  96      11
 ...n\Sermon-Works\includes\admin\import\class-sm-import-sb.php  26      19
 ...n\Sermon-Works\includes\admin\import\class-sm-import-se.php  64      15
@@ -40,16 +40,16 @@ FILE                                                            ERRORS  WARNINGS
 ...n-Works\includes\admin\settings\class-sm-settings-verse.php  20      0
 ...mon-Works\includes\admin\views\html-admin-import-export.php  39      0
 ...n\Sermon-Works\includes\admin\views\html-admin-settings.php  20      2
-...Projects\GitHub Coding Fun\Sermon-Works\tests\bootstrap.php  6       0
-...ojects\GitHub Coding Fun\Sermon-Works\tests\test-sample.php  2       0
-...itHub Coding Fun\Sermon-Works\views\archive-wpfc_sermon.php  9       0
-...GitHub Coding Fun\Sermon-Works\views\single-wpfc_sermon.php  8       0
-... Coding Fun\Sermon-Works\views\taxonomy-wpfc_bible_book.php  9       0
-...ub Coding Fun\Sermon-Works\views\taxonomy-wpfc_preacher.php  9       0
+...Projects\Sermon-Works\tests\bootstrap.php  6       0
+...ojects\Sermon-Works\tests\test-sample.php  2       0
+...itHub Sermon-Works\views\archive-wpfc_sermon.php  9       0
+...Sermon-Works\views\single-wpfc_sermon.php  8       0
+... Sermon-Works\views\taxonomy-wpfc_bible_book.php  9       0
+...ub Sermon-Works\views\taxonomy-wpfc_preacher.php  9       0
 ...ding Fun\Sermon-Works\views\taxonomy-wpfc_sermon_series.php  9       0
 ...ding Fun\Sermon-Works\views\taxonomy-wpfc_sermon_topics.php  9       0
 ...oding Fun\Sermon-Works\views\taxonomy-wpfc_service_type.php  9       0
-...\GitHub Coding Fun\Sermon-Works\views\wpfc-podcast-feed.php  122     8
+...\Sermon-Works\views\wpfc-podcast-feed.php  122     8
 ... Fun\Sermon-Works\views\partials\content-sermon-archive.php  25      0
 ...\Sermon-Works\views\partials\content-sermon-attachments.php  8       0
 ...un\Sermon-Works\views\partials\content-sermon-filtering.php  29      0

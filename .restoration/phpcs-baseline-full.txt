@@ -1,5 +1,5 @@
 
-FILE: ...ts\GitHub Coding Fun\Sermon-Works\includes\admin\class-sm-admin-assets.php
+FILE: ...ts\Sermon-Works\includes\admin\class-sm-admin-assets.php
 --------------------------------------------------------------------------------
 FOUND 6 ERRORS AND 2 WARNINGS AFFECTING 7 LINES
 --------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...ub Coding Fun\Sermon-Works\includes\admin\class-sm-admin-import-export.php
+FILE: ...ub Sermon-Works\includes\admin\class-sm-admin-import-export.php
 --------------------------------------------------------------------------------
 FOUND 4 ERRORS AFFECTING 4 LINES
 --------------------------------------------------------------------------------
@@ -49,7 +49,7 @@ PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...cts\GitHub Coding Fun\Sermon-Works\includes\admin\class-sm-admin-menus.php
+FILE: ...cts\Sermon-Works\includes\admin\class-sm-admin-menus.php
 --------------------------------------------------------------------------------
 FOUND 17 ERRORS AND 3 WARNINGS AFFECTING 8 LINES
 --------------------------------------------------------------------------------
@@ -73,7 +73,7 @@ FOUND 17 ERRORS AND 3 WARNINGS AFFECTING 8 LINES
     |         |     function call to add_submenu_page(). Please check the
     |         |     spelling of the capability. If this is a custom capability,
     |         |     please verify the capability is registered with WordPress
-    |         |     via a call to WP_Role(s)->add_cap().
+    |         |     via a call to WP_Role(s)->add_cap().
     |         |     Custom capabilities can be made known to this sniff by
     |         |     setting the "custom_capabilities" property in the PHPCS
     |         |     ruleset. (WordPress.WP.Capabilities.Unknown)
@@ -102,7 +102,7 @@ FOUND 17 ERRORS AND 3 WARNINGS AFFECTING 8 LINES
     |         |     function call to add_submenu_page(). Please check the
     |         |     spelling of the capability. If this is a custom capability,
     |         |     please verify the capability is registered with WordPress
-    |         |     via a call to WP_Role(s)->add_cap().
+    |         |     via a call to WP_Role(s)->add_cap().
     |         |     Custom capabilities can be made known to this sniff by
     |         |     setting the "custom_capabilities" property in the PHPCS
     |         |     ruleset. (WordPress.WP.Capabilities.Unknown)
@@ -129,7 +129,7 @@ PHPCBF CAN FIX THE 15 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...itHub Coding Fun\Sermon-Works\includes\admin\class-sm-admin-post-types.php
+FILE: ...itHub Sermon-Works\includes\admin\class-sm-admin-post-types.php
 --------------------------------------------------------------------------------
 FOUND 20 ERRORS AND 4 WARNINGS AFFECTING 20 LINES
 --------------------------------------------------------------------------------
@@ -206,7 +206,7 @@ PHPCBF CAN FIX THE 10 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...\GitHub Coding Fun\Sermon-Works\includes\admin\class-sm-admin-settings.php
+FILE: ...\Sermon-Works\includes\admin\class-sm-admin-settings.php
 --------------------------------------------------------------------------------
 FOUND 71 ERRORS AND 21 WARNINGS AFFECTING 81 LINES
 --------------------------------------------------------------------------------
@@ -520,7 +520,7 @@ PHPCBF CAN FIX THE 16 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...\Projects\GitHub Coding Fun\Sermon-Works\includes\admin\class-sm-admin.php
+FILE: ...\Projects\Sermon-Works\includes\admin\class-sm-admin.php
 --------------------------------------------------------------------------------
 FOUND 4 ERRORS AFFECTING 4 LINES
 --------------------------------------------------------------------------------
@@ -539,7 +539,7 @@ PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...itHub Coding Fun\Sermon-Works\includes\admin\export\class-sm-export-sm.php
+FILE: ...itHub Sermon-Works\includes\admin\export\class-sm-export-sm.php
 --------------------------------------------------------------------------------
 FOUND 96 ERRORS AND 11 WARNINGS AFFECTING 98 LINES
 --------------------------------------------------------------------------------
@@ -936,7 +936,7 @@ PHPCBF CAN FIX THE 9 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...itHub Coding Fun\Sermon-Works\includes\admin\import\class-sm-import-sb.php
+FILE: ...itHub Sermon-Works\includes\admin\import\class-sm-import-sb.php
 --------------------------------------------------------------------------------
 FOUND 26 ERRORS AND 19 WARNINGS AFFECTING 39 LINES
 --------------------------------------------------------------------------------
@@ -1087,7 +1087,7 @@ PHPCBF CAN FIX THE 12 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...itHub Coding Fun\Sermon-Works\includes\admin\import\class-sm-import-se.php
+FILE: ...itHub Sermon-Works\includes\admin\import\class-sm-import-se.php
 --------------------------------------------------------------------------------
 FOUND 64 ERRORS AND 15 WARNINGS AFFECTING 40 LINES
 --------------------------------------------------------------------------------
@@ -1336,7 +1336,7 @@ PHPCBF CAN FIX THE 47 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...itHub Coding Fun\Sermon-Works\includes\admin\import\class-sm-import-sm.php
+FILE: ...itHub Sermon-Works\includes\admin\import\class-sm-import-sm.php
 --------------------------------------------------------------------------------
 FOUND 119 ERRORS AND 37 WARNINGS AFFECTING 106 LINES
 --------------------------------------------------------------------------------
@@ -1841,7 +1841,7 @@ PHPCBF CAN FIX THE 4 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...Coding Fun\Sermon-Works\includes\admin\settings\class-sm-settings-page.php
+FILE: ...Sermon-Works\includes\admin\settings\class-sm-settings-page.php
 --------------------------------------------------------------------------------
 FOUND 9 ERRORS AND 2 WARNINGS AFFECTING 8 LINES
 --------------------------------------------------------------------------------
@@ -2000,7 +2000,7 @@ PHPCBF CAN FIX THE 16 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...jects\GitHub Coding Fun\Sermon-Works\includes\admin\sm-admin-functions.php
+FILE: ...jects\Sermon-Works\includes\admin\sm-admin-functions.php
 --------------------------------------------------------------------------------
 FOUND 10 ERRORS AND 10 WARNINGS AFFECTING 14 LINES
 --------------------------------------------------------------------------------
@@ -2063,7 +2063,7 @@ PHPCBF CAN FIX THE 11 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...rojects\GitHub Coding Fun\Sermon-Works\includes\admin\sm-cmb-functions.php
+FILE: ...rojects\Sermon-Works\includes\admin\sm-cmb-functions.php
 --------------------------------------------------------------------------------
 FOUND 35 ERRORS AND 1 WARNING AFFECTING 30 LINES
 --------------------------------------------------------------------------------
@@ -2181,7 +2181,7 @@ PHPCBF CAN FIX THE 30 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ... Coding Fun\Sermon-Works\includes\admin\views\html-admin-import-export.php
+FILE: ... Sermon-Works\includes\admin\views\html-admin-import-export.php
 --------------------------------------------------------------------------------
 FOUND 39 ERRORS AFFECTING 38 LINES
 --------------------------------------------------------------------------------
@@ -2319,7 +2319,7 @@ PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...itHub Coding Fun\Sermon-Works\includes\admin\views\html-admin-settings.php
+FILE: ...itHub Sermon-Works\includes\admin\views\html-admin-settings.php
 --------------------------------------------------------------------------------
 FOUND 20 ERRORS AND 2 WARNINGS AFFECTING 13 LINES
 --------------------------------------------------------------------------------
@@ -2393,7 +2393,7 @@ PHPCBF CAN FIX THE 8 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...s\Claude\Projects\GitHub Coding Fun\Sermon-Works\includes\class-sm-api.php
+FILE: ...s\Claude\Projects\Sermon-Works\includes\class-sm-api.php
 --------------------------------------------------------------------------------
 FOUND 6 ERRORS AND 1 WARNING AFFECTING 6 LINES
 --------------------------------------------------------------------------------
@@ -2420,7 +2420,7 @@ PHPCBF CAN FIX THE 5 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...e\Projects\GitHub Coding Fun\Sermon-Works\includes\class-sm-autoloader.php
+FILE: ...e\Projects\Sermon-Works\includes\class-sm-autoloader.php
 --------------------------------------------------------------------------------
 FOUND 4 ERRORS AND 2 WARNINGS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
@@ -2445,7 +2445,7 @@ PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...ts\GitHub Coding Fun\Sermon-Works\includes\class-sm-background-updater.php
+FILE: ...ts\Sermon-Works\includes\class-sm-background-updater.php
 --------------------------------------------------------------------------------
 FOUND 4 ERRORS AFFECTING 4 LINES
 --------------------------------------------------------------------------------
@@ -2464,7 +2464,7 @@ PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...ude\Projects\GitHub Coding Fun\Sermon-Works\includes\class-sm-dates-wp.php
+FILE: ...ude\Projects\Sermon-Works\includes\class-sm-dates-wp.php
 --------------------------------------------------------------------------------
 FOUND 16 ERRORS AND 4 WARNINGS AFFECTING 17 LINES
 --------------------------------------------------------------------------------
@@ -2523,7 +2523,7 @@ PHPCBF CAN FIX THE 4 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...Claude\Projects\GitHub Coding Fun\Sermon-Works\includes\class-sm-dates.php
+FILE: ...Claude\Projects\Sermon-Works\includes\class-sm-dates.php
 --------------------------------------------------------------------------------
 FOUND 6 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
@@ -2548,7 +2548,7 @@ PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...aude\Projects\GitHub Coding Fun\Sermon-Works\includes\class-sm-install.php
+FILE: ...aude\Projects\Sermon-Works\includes\class-sm-install.php
 --------------------------------------------------------------------------------
 FOUND 21 ERRORS AND 7 WARNINGS AFFECTING 20 LINES
 --------------------------------------------------------------------------------
@@ -2637,7 +2637,7 @@ PHPCBF CAN FIX THE 12 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...e\Projects\GitHub Coding Fun\Sermon-Works\includes\class-sm-post-types.php
+FILE: ...e\Projects\Sermon-Works\includes\class-sm-post-types.php
 --------------------------------------------------------------------------------
 FOUND 18 ERRORS AFFECTING 18 LINES
 --------------------------------------------------------------------------------
@@ -2709,7 +2709,7 @@ PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...Claude\Projects\GitHub Coding Fun\Sermon-Works\includes\class-sm-roles.php
+FILE: ...Claude\Projects\Sermon-Works\includes\class-sm-roles.php
 --------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
 --------------------------------------------------------------------------------
@@ -2723,7 +2723,7 @@ PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...e\Projects\GitHub Coding Fun\Sermon-Works\includes\class-sm-shortcodes.php
+FILE: ...e\Projects\Sermon-Works\includes\class-sm-shortcodes.php
 --------------------------------------------------------------------------------
 FOUND 63 ERRORS AND 18 WARNINGS AFFECTING 54 LINES
 --------------------------------------------------------------------------------
@@ -2970,7 +2970,7 @@ PHPCBF CAN FIX THE 37 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...GitHub Coding Fun\Sermon-Works\includes\class-sm-widget-recent-sermons.php
+FILE: ...Sermon-Works\includes\class-sm-widget-recent-sermons.php
 --------------------------------------------------------------------------------
 FOUND 44 ERRORS AND 1 WARNING AFFECTING 37 LINES
 --------------------------------------------------------------------------------
@@ -3140,7 +3140,7 @@ PHPCBF CAN FIX THE 6 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...ude\Projects\GitHub Coding Fun\Sermon-Works\includes\sm-core-functions.php
+FILE: ...ude\Projects\Sermon-Works\includes\sm-core-functions.php
 --------------------------------------------------------------------------------
 FOUND 81 ERRORS AND 32 WARNINGS AFFECTING 79 LINES
 --------------------------------------------------------------------------------
@@ -3471,7 +3471,7 @@ PHPCBF CAN FIX THE 54 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...ojects\GitHub Coding Fun\Sermon-Works\includes\sm-deprecated-functions.php
+FILE: ...ojects\Sermon-Works\includes\sm-deprecated-functions.php
 --------------------------------------------------------------------------------
 FOUND 30 ERRORS AND 11 WARNINGS AFFECTING 30 LINES
 --------------------------------------------------------------------------------
@@ -3607,7 +3607,7 @@ PHPCBF CAN FIX THE 9 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...ojects\GitHub Coding Fun\Sermon-Works\includes\sm-formatting-functions.php
+FILE: ...ojects\Sermon-Works\includes\sm-formatting-functions.php
 --------------------------------------------------------------------------------
 FOUND 9 ERRORS AND 2 WARNINGS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
@@ -3649,7 +3649,7 @@ PHPCBF CAN FIX THE 6 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...\Projects\GitHub Coding Fun\Sermon-Works\includes\sm-podcast-functions.php
+FILE: ...\Projects\Sermon-Works\includes\sm-podcast-functions.php
 --------------------------------------------------------------------------------
 FOUND 8 ERRORS AND 2 WARNINGS AFFECTING 8 LINES
 --------------------------------------------------------------------------------
@@ -3689,7 +3689,7 @@ PHPCBF CAN FIX THE 7 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...Projects\GitHub Coding Fun\Sermon-Works\includes\sm-template-functions.php
+FILE: ...Projects\Sermon-Works\includes\sm-template-functions.php
 --------------------------------------------------------------------------------
 FOUND 31 ERRORS AND 11 WARNINGS AFFECTING 38 LINES
 --------------------------------------------------------------------------------
@@ -3834,7 +3834,7 @@ PHPCBF CAN FIX THE 4 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...e\Projects\GitHub Coding Fun\Sermon-Works\includes\sm-update-functions.php
+FILE: ...e\Projects\Sermon-Works\includes\sm-update-functions.php
 --------------------------------------------------------------------------------
 FOUND 30 ERRORS AND 5 WARNINGS AFFECTING 35 LINES
 --------------------------------------------------------------------------------
@@ -3972,7 +3972,7 @@ PHPCBF CAN FIX THE 7 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...Drive\Documents\Claude\Projects\GitHub Coding Fun\Sermon-Works\sermons.php
+FILE: ...Drive\Documents\Claude\Projects\Sermon-Works\sermons.php
 --------------------------------------------------------------------------------
 FOUND 59 ERRORS AND 26 WARNINGS AFFECTING 73 LINES
 --------------------------------------------------------------------------------
@@ -4230,7 +4230,7 @@ PHPCBF CAN FIX THE 15 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...cuments\Claude\Projects\GitHub Coding Fun\Sermon-Works\tests\bootstrap.php
+FILE: ...cuments\Claude\Projects\Sermon-Works\tests\bootstrap.php
 --------------------------------------------------------------------------------
 FOUND 6 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
@@ -4258,7 +4258,7 @@ PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...ments\Claude\Projects\GitHub Coding Fun\Sermon-Works\tests\test-sample.php
+FILE: ...ments\Claude\Projects\Sermon-Works\tests\test-sample.php
 --------------------------------------------------------------------------------
 FOUND 2 ERRORS AFFECTING 2 LINES
 --------------------------------------------------------------------------------
@@ -4271,7 +4271,7 @@ PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...aude\Projects\GitHub Coding Fun\Sermon-Works\views\archive-wpfc_sermon.php
+FILE: ...aude\Projects\Sermon-Works\views\archive-wpfc_sermon.php
 --------------------------------------------------------------------------------
 FOUND 9 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
@@ -4309,7 +4309,7 @@ FOUND 9 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
 
 
-FILE: ...s\GitHub Coding Fun\Sermon-Works\views\partials\content-sermon-archive.php
+FILE: ...s\Sermon-Works\views\partials\content-sermon-archive.php
 --------------------------------------------------------------------------------
 FOUND 25 ERRORS AFFECTING 24 LINES
 --------------------------------------------------------------------------------
@@ -4410,7 +4410,7 @@ PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...tHub Coding Fun\Sermon-Works\views\partials\content-sermon-attachments.php
+FILE: ...tHub Sermon-Works\views\partials\content-sermon-attachments.php
 --------------------------------------------------------------------------------
 FOUND 8 ERRORS AFFECTING 8 LINES
 --------------------------------------------------------------------------------
@@ -4449,7 +4449,7 @@ PHPCBF CAN FIX THE 1 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...GitHub Coding Fun\Sermon-Works\views\partials\content-sermon-filtering.php
+FILE: ...Sermon-Works\views\partials\content-sermon-filtering.php
 --------------------------------------------------------------------------------
 FOUND 29 ERRORS AFFECTING 23 LINES
 --------------------------------------------------------------------------------
@@ -4547,7 +4547,7 @@ PHPCBF CAN FIX THE 13 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...ts\GitHub Coding Fun\Sermon-Works\views\partials\content-sermon-single.php
+FILE: ...ts\Sermon-Works\views\partials\content-sermon-single.php
 --------------------------------------------------------------------------------
 FOUND 30 ERRORS AND 1 WARNING AFFECTING 25 LINES
 --------------------------------------------------------------------------------
@@ -4669,7 +4669,7 @@ PHPCBF CAN FIX THE 2 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...tHub Coding Fun\Sermon-Works\views\partials\content-sermon-wrapper-end.php
+FILE: ...tHub Sermon-Works\views\partials\content-sermon-wrapper-end.php
 --------------------------------------------------------------------------------
 FOUND 141 ERRORS AND 8 WARNINGS AFFECTING 96 LINES
 --------------------------------------------------------------------------------
@@ -5083,7 +5083,7 @@ PHPCBF CAN FIX THE 19 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...ub Coding Fun\Sermon-Works\views\partials\content-sermon-wrapper-start.php
+FILE: ...ub Sermon-Works\views\partials\content-sermon-wrapper-start.php
 --------------------------------------------------------------------------------
 FOUND 534 ERRORS AND 14 WARNINGS AFFECTING 401 LINES
 --------------------------------------------------------------------------------
@@ -6639,7 +6639,7 @@ PHPCBF CAN FIX THE 52 MARKED SNIFF VIOLATIONS AUTOMATICALLY
 --------------------------------------------------------------------------------
 
 
-FILE: ...laude\Projects\GitHub Coding Fun\Sermon-Works\views\single-wpfc_sermon.php
+FILE: ...laude\Projects\Sermon-Works\views\single-wpfc_sermon.php
 --------------------------------------------------------------------------------
 FOUND 8 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
@@ -6676,7 +6676,7 @@ FOUND 8 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
 
 
-FILE: ...Projects\GitHub Coding Fun\Sermon-Works\views\taxonomy-wpfc_bible_book.php
+FILE: ...Projects\Sermon-Works\views\taxonomy-wpfc_bible_book.php
 --------------------------------------------------------------------------------
 FOUND 9 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
@@ -6716,7 +6716,7 @@ FOUND 9 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
 
 
-FILE: ...e\Projects\GitHub Coding Fun\Sermon-Works\views\taxonomy-wpfc_preacher.php
+FILE: ...e\Projects\Sermon-Works\views\taxonomy-wpfc_preacher.php
 --------------------------------------------------------------------------------
 FOUND 9 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
@@ -6756,7 +6756,7 @@ FOUND 9 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
 
 
-FILE: ...jects\GitHub Coding Fun\Sermon-Works\views\taxonomy-wpfc_sermon_series.php
+FILE: ...jects\Sermon-Works\views\taxonomy-wpfc_sermon_series.php
 --------------------------------------------------------------------------------
 FOUND 9 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
@@ -6796,7 +6796,7 @@ FOUND 9 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
 
 
-FILE: ...jects\GitHub Coding Fun\Sermon-Works\views\taxonomy-wpfc_sermon_topics.php
+FILE: ...jects\Sermon-Works\views\taxonomy-wpfc_sermon_topics.php
 --------------------------------------------------------------------------------
 FOUND 9 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
@@ -6836,7 +6836,7 @@ FOUND 9 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
 
 
-FILE: ...ojects\GitHub Coding Fun\Sermon-Works\views\taxonomy-wpfc_service_type.php
+FILE: ...ojects\Sermon-Works\views\taxonomy-wpfc_service_type.php
 --------------------------------------------------------------------------------
 FOUND 9 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
@@ -6876,7 +6876,7 @@ FOUND 9 ERRORS AFFECTING 6 LINES
 --------------------------------------------------------------------------------
 
 
-FILE: ...Claude\Projects\GitHub Coding Fun\Sermon-Works\views\wpfc-podcast-feed.php
+FILE: ...Claude\Projects\Sermon-Works\views\wpfc-podcast-feed.php
 --------------------------------------------------------------------------------
 FOUND 122 ERRORS AND 8 WARNINGS AFFECTING 111 LINES
 --------------------------------------------------------------------------------

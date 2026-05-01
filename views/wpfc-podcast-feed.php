@@ -269,7 +269,7 @@ $cover_image_url  = $settings['itunes_cover_image'];
 		<atom:link href="<?php self_link(); ?>" rel="self" type="application/rss+xml"/>
 		<description><?php echo $description; ?></description>
 		<language><?php echo $language; ?></language>
-		<lastBuildDate><?php echo $last_sermon_date ? date( 'r', intval( $last_sermon_date ) ) : date( 'r' ); ?></lastBuildDate>
+		<lastBuildDate><?php echo $last_sermon_date ? gmdate( 'r', intval( $last_sermon_date ) ) : gmdate( 'r' ); ?></lastBuildDate>
 		<sy:updatePeriod>hourly</sy:updatePeriod>
 		<sy:updateFrequency>1</sy:updateFrequency>
 		<copyright><?php echo $copyright; ?></copyright>
