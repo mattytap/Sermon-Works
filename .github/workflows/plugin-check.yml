@@ -1,0 +1,37 @@
+name: Plugin Check
+
+# Manual-only for now while we triage submission-readiness.
+# Once findings are clean we can add `push` and `pull_request` triggers
+# to keep the WP.org-readiness bar visible on every change.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  plugin-check:
+    name: WordPress Plugin Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Stage runtime tree (mirrors release ZIP allow-list)
+        run: |
+          mkdir -p build/sermon-works
+          cp -R \
+            sermons.php \
+            readme.txt \
+            changelog.txt \
+            LICENSE \
+            assets \
+            includes \
+            languages \
+            views \
+            build/sermon-works/
+
+      - name: Run Plugin Check
+        uses: WordPress/plugin-check-action@v1
+        with:
+          build-dir: ./build/sermon-works
