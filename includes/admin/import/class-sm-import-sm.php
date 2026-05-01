@@ -1019,21 +1019,21 @@ class SM_Import_SM {
 		);
 
 		if ( is_wp_error( $response ) ) {
-			@unlink( $upload['file'] );
+			wp_delete_file( $upload['file'] );
 
 			return new WP_Error( 'import_file_error', $response->get_error_message() );
 		}
 
 		$response_code = wp_remote_retrieve_response_code( $response );
 		if ( 200 !== (int) $response_code ) {
-			@unlink( $upload['file'] );
+			wp_delete_file( $upload['file'] );
 
 			return new WP_Error( 'import_file_error', sprintf( __( 'Remote server returned error response %1$d %2$s', 'wordpress-importer' ), (int) $response_code, get_status_header_desc( $response_code ) ) );
 		}
 
 		$body = wp_remote_retrieve_body( $response );
 		if ( false === file_put_contents( $upload['file'], $body ) ) {
-			@unlink( $upload['file'] );
+			wp_delete_file( $upload['file'] );
 
 			return new WP_Error( 'import_file_error', __( 'Could not write to upload file', 'wordpress-importer' ) );
 		}
@@ -1055,20 +1055,20 @@ class SM_Import_SM {
 		$filesize = filesize( $upload['file'] );
 
 		if ( isset( $headers['content-length'] ) && $filesize != $headers['content-length'] ) {
-			@unlink( $upload['file'] );
+			wp_delete_file( $upload['file'] );
 
 			return new WP_Error( 'import_file_error', __( 'Remote file is incorrect size', 'wordpress-importer' ) );
 		}
 
 		if ( 0 == $filesize ) {
-			@unlink( $upload['file'] );
+			wp_delete_file( $upload['file'] );
 
 			return new WP_Error( 'import_file_error', __( 'Zero size file downloaded', 'wordpress-importer' ) );
 		}
 
 		$max_size = (int) $this->max_attachment_size();
 		if ( ! empty( $max_size ) && $filesize > $max_size ) {
-			@unlink( $upload['file'] );
+			wp_delete_file( $upload['file'] );
 
 			return new WP_Error( 'import_file_error', sprintf( __( 'Remote file is too large, limit is %s', 'wordpress-importer' ), size_format( $max_size ) ) );
 		}
