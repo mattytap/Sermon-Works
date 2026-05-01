@@ -995,6 +995,7 @@ class SM_Import_SM {
 		// SSRF guard: reject non-public / non-http(s) URLs before any fetch.
 		$valid = sm_validate_public_url( $url );
 		if ( is_wp_error( $valid ) ) {
+			/* translators: %s: error message returned by the URL validator. */
 			return new WP_Error( 'import_file_error', sprintf( __( 'Remote URL rejected: %s', 'sermon-works' ), $valid->get_error_message() ) );
 		}
 
@@ -1028,6 +1029,7 @@ class SM_Import_SM {
 		if ( 200 !== (int) $response_code ) {
 			wp_delete_file( $upload['file'] );
 
+			/* translators: 1: HTTP response code, 2: HTTP response status message. */
 			return new WP_Error( 'import_file_error', sprintf( __( 'Remote server returned error response %1$d %2$s', 'sermon-works' ), (int) $response_code, get_status_header_desc( $response_code ) ) );
 		}
 
@@ -1070,6 +1072,7 @@ class SM_Import_SM {
 		if ( ! empty( $max_size ) && $filesize > $max_size ) {
 			wp_delete_file( $upload['file'] );
 
+			/* translators: %s: size limit, e.g. "8 MB". */
 			return new WP_Error( 'import_file_error', sprintf( __( 'Remote file is too large, limit is %s', 'sermon-works' ), size_format( $max_size ) ) );
 		}
 
