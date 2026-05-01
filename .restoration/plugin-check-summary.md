@@ -1,91 +1,80 @@
-# Plugin Check findings summary — v3.0-rc2
+# Plugin Check findings summary — v3.0-rc4
 
-**Run:** GitHub Actions workflow `plugin-check.yml`, run ID 25207310684, 2026-05-01.
+**Latest run:** GitHub Actions workflow `plugin-check.yml`, run ID 25227901173, 2026-05-01.
 **Plugin Check Action:** `WordPress/plugin-check-action@v1`.
 **Source artefact:** `.restoration/plugin-check/plugin-check-results.txt` (gitignored).
 
 ## Headline
 
-- **1,335 total findings** across 53 files
-  - **395 ERRORs** (WP.org-flagged; reviewers may block submission)
-  - **940 WARNINGs** (most are accepted noise; some legitimate)
-- Concentration: **5 files account for 54%** of findings (`content-sermon-wrapper-start.php`, `wpfc-podcast-feed.php`, `class-sm-export-sm.php`, `content-sermon-wrapper-end.php`, `class-sm-admin-settings.php`).
+- **1,265 total findings** across 53 files (down from 1,335 on rc2)
+  - **325 ERRORs** (down from 395; -70 closed by Bucket A)
+  - **940 WARNINGs** (unchanged; same accepted-noise mix as before)
 
-## ERROR breakdown (submission-blockers, 395 total)
+## ERROR breakdown (325 remaining)
 
 | Count | Code | Notes |
 |---:|---|---|
-| 316 | `WordPress.Security.EscapeOutput.OutputNotEscaped` | The big one. Mostly in view templates where `<?php echo $var ?>` should be `<?php echo esc_html( $var ) ?>` (or the appropriate escaper). |
-| 14 | `WordPress.DateTime.RestrictedFunctions.date_date` | `date()` to `gmdate()`. Mechanical. |
-| 11 | `missing_direct_file_access_protection` | Add `defined( 'ABSPATH' ) or die;` guard. Mechanical. |
-| 10 | `WordPress.WP.I18n.MissingArgDomain` | Add `'sermon-works'` text-domain arg to `__()`/`_e()`/etc. |
-| 9 | `WordPress.WP.I18n.TextDomainMismatch` | Wrong domain (e.g. `'wordpress-importer'`). Easy. |
-| 8 | `parse_url_parse_url` | `parse_url()` to `wp_parse_url()`. |
-| 7 | `strip_tags_strip_tags` | `strip_tags()` to `wp_strip_all_tags()`. |
-| 6 | `unlink_unlink` | `unlink()` to `wp_delete_file()`. |
-| 3 | `MissingTranslatorsComment` | Add `/* translators: ... */` to placeholder strings. |
-| 3 | `file_system_operations_fread` | Use `WP_Filesystem` API. Less mechanical. |
-| 2 | `WordPress.DB.PreparedSQL.NotPrepared` | SQL injection guard. Real concern. |
-| 2 | `file_system_operations_fopen` | Use `WP_Filesystem` API. |
-| 1 | `plugin_header_no_license` | Add `License: GPLv2` etc. to plugin header. Trivial. |
-| 1 | `WordPress.WP.EnqueuedResources.NonEnqueuedScript` | Inline `<script>` not enqueued. |
-| 1 | `PluginCheck.Security.DirectDB.UnescapedDBParameter` | SQL escaping. |
-| 1 | `rand_rand` | `rand()` to `wp_rand()`. |
+| 316 | `WordPress.Security.EscapeOutput.OutputNotEscaped` | **Bucket B**, parked. Mostly in view templates where `<?php echo $var ?>` should be `<?php echo esc_html( $var ) ?>` (or the appropriate escaper). |
+| 3 | `WordPress.WP.AlternativeFunctions.file_system_operations_fread` | **Tier 2**. Needs WP_Filesystem refactor. |
+| 2 | `WordPress.WP.AlternativeFunctions.file_system_operations_fopen` | **Tier 2**. Same. |
+| 2 | `WordPress.DB.PreparedSQL.NotPrepared` | **Tier 2**. SQL injection guard, needs audit. |
+| 1 | `WordPress.WP.EnqueuedResources.NonEnqueuedScript` | **Tier 2**. Inline `<script>` needs proper enqueue. |
+| 1 | `PluginCheck.Security.DirectDB.UnescapedDBParameter` | **Tier 2**. SQL escaping. |
 
-## WARNING breakdown (940 total)
+## Bucket A — closed in 3.0-rc4
 
-- **723 are "sm-prefix-too-short"** noise (`NonPrefixedVariableFound`, `NonPrefixedHooknameFound`, `NonPrefixedFunctionFound`). PHPCS already flags these despite `sm` being declared in `phpcs.xml.dist`'s prefix list. Accepted noise per CLAUDE.md gotchas. Renaming everything `sm_` to `sermonworks_` would be a project-wide breaking change with no security benefit.
-- **95** combined `DirectDatabaseQuery` (Direct call + NoCaching). Legitimate but historically deferred for SM-style plugins.
-- **37** combined `NonceVerification` (Missing + Recommended). Some are real, some are admin-flow false positives. Worth a focused review.
-- **20** combined `ValidatedSanitizedInput` (MissingUnslash + InputNotSanitized). Real concerns.
-- **9** `slow_db_query_meta_key`. Performance hint.
-- Other smaller categories.
+All 70 sites cleared in 10 small commits between commits `47bd230` and `a199f81`, version-bumped at `93ea6ef`. Categories closed:
 
-## Triage groupings
+| Code | Count | Commit |
+|---|---:|---|
+| `plugin_header_no_license` | 1 | `47bd230` |
+| `missing_direct_file_access_protection` | 11 | `4f7695b` |
+| `WordPress.DateTime.RestrictedFunctions.date_date` | 14 | `9641710` (12 to `gmdate()`, 2 to `wp_date()`) |
+| `WordPress.WP.AlternativeFunctions.parse_url_parse_url` | 8 | `7760875` |
+| `WordPress.WP.AlternativeFunctions.strip_tags_strip_tags` | 7 | `bd0e2d8` |
+| `WordPress.WP.AlternativeFunctions.unlink_unlink` | 6 | `fa23b58` |
+| `WordPress.WP.AlternativeFunctions.rand_rand` | 1 | `3c35c5e` |
+| `WordPress.WP.I18n.MissingArgDomain` | 10 | `5949fd4` |
+| `WordPress.WP.I18n.TextDomainMismatch` | 9 | `b7eca56` |
+| `WordPress.WP.I18n.MissingTranslatorsComment` | 3 | `a199f81` |
 
-### Bucket A — quick mechanical errors (~75 sites, 1-2 sessions)
+## Bucket B — output escaping sweep (316 sites, parked)
 
-Easy class. Mostly find-and-replace plus a tiny audit:
+The big remaining ask. Bounded but substantial. Hot spots (per file, descending):
 
-- `date()` to `gmdate()` (14)
-- `defined('ABSPATH')` guard (11)
-- i18n missing domain (10) and mismatched domain (9) and translators comments (3)
-- `parse_url`/`strip_tags`/`unlink`/`rand` swaps (22)
-- License header (1)
-- Plus 5-6 of the smaller error codes
+- `views/partials/content-sermon-wrapper-start.php` (~338 of the file's total findings include this code)
+- `views/wpfc-podcast-feed.php` (~118)
+- `views/partials/content-sermon-wrapper-end.php` (~89)
+- `includes/admin/export/class-sm-export-sm.php` (~109)
+- `includes/admin/class-sm-admin-settings.php` (~67)
 
-### Bucket B — output escaping sweep (316 sites, multi-session)
+Five files account for the bulk of the work; the remaining sites are scattered.
 
-The big one. Bounded but substantial. Hot spots:
+**Approach:** file-by-file pass. Add `esc_html()`, `esc_attr()`, `esc_url()`, `wp_kses_post()` at output sites depending on context (HTML body text, attribute value, URL, allow-some-HTML). Each escape decision needs a moment of judgement, not pure find/replace. The sm-prefix warnings will mask things visually in the report; filter by ERROR severity when reading.
 
-- `views/partials/content-sermon-wrapper-start.php` (338 total findings; many likely OutputNotEscaped)
-- `views/wpfc-podcast-feed.php` (118)
-- `views/partials/content-sermon-wrapper-end.php` (89)
-- `includes/admin/export/class-sm-export-sm.php` (109)
-- `includes/admin/class-sm-admin-settings.php` (67)
+**Suggested cadence:** one hot-spot file per session. After each file, re-run `gh workflow run plugin-check.yml` and confirm the ERROR count drop matches the file's Bucket B contribution. Ship a fresh rcN per file or per pair.
 
-Approach: file-by-file pass with `esc_html()`, `esc_attr()`, `esc_url()`, `wp_kses_post()` where appropriate. Each escape decision needs a moment of judgement (HTML vs text vs URL vs allow-some-HTML), so it's not a pure find-replace.
+## Tier 2 substantive errors (9 sites, parked)
 
-### Bucket C — real-but-deferred warnings (~150 sites)
+Smaller scattered set, less mechanical than Bucket A. Specifics:
 
-`DirectDatabaseQuery`, `NonceVerification` (admin flows), `ValidatedSanitizedInput`. Substantive WP best-practice work. Probably a separate stream after the error buckets close.
+- **`includes/sm-core-functions.php`**: 1× `fopen` at line 302, 1× `fread` at line 310, 1× `fopen` at line 338. Switch to `WP_Filesystem` API or use `file_get_contents` / `file_put_contents` if the Plugin Check is happy with those.
+- **2× `WordPress.DB.PreparedSQL.NotPrepared`**: SQL queries built without `$wpdb->prepare()`. Need to read the queries, decide whether the inputs are trusted (e.g. constants) or need preparation. May intersect with existing `DirectDatabaseQuery` warnings.
+- **1× `NonEnqueuedScript`**: an inline `<script>` somewhere needs to be moved to `wp_enqueue_script()` with an external file or use `wp_add_inline_script()`.
+- **1× `UnescapedDBParameter`**: SQL parameter not run through `esc_sql()` / `$wpdb->prepare()`.
 
-### Bucket D — accepted noise (723 warnings)
+These can ship together as 3.0-rcN once Bucket B is at least partially down — they're not the high-value next step.
 
-The `sm_` short-prefix complaints. Don't action.
+## Bucket C — real-but-deferred warnings (~150 sites, no work yet)
 
-## Implications for WP.org submission
+`DirectDatabaseQuery` (Direct call + NoCaching, ~95), `NonceVerification` (Missing + Recommended, ~37), `ValidatedSanitizedInput` (~20). Substantive WP best-practice work. After the error buckets close.
 
-A submission with 395 errors will face friction. The plugin team's typical pattern is to send detailed feedback on first review and ask for fixes before approval. That can take 2-4 review cycles with weeks between each. So submitting now would either:
+## Bucket D — accepted noise (723 warnings, do not action)
 
-- Get bounced for OutputNotEscaped + ABSPATH-guard counts (most likely)
-- Or get a long feedback email pointing at all the buckets above
+The `sm_` short-prefix complaints (`NonPrefixedVariableFound` ~476, `NonPrefixedHooknameFound` ~176, `NonPrefixedFunctionFound` ~71). PHPCS already flags these despite `sm` being declared in `phpcs.xml.dist`'s prefix list. Project-wide breaking change with no security benefit.
 
-Either way, doing Bucket A and at least a partial pass on Bucket B before submitting is the high-value move. Bucket A is cheap; Bucket B is the real cost.
+## WP.org submission readiness
 
-## Recommendation
+WP.org plugin reviewers focus on the ERROR count. With 325 remaining and 316 of those being `OutputNotEscaped`, a submission today would still get bounced or face a long feedback cycle. The Bucket A pass cleared the hygiene + scaffolding errors that don't reflect real risk; the remaining errors *do* mostly reflect real escaping risk that reviewers care about.
 
-1. Schedule a "Bucket A sweep" session — probably 2-4 hours of focused work to clear the quick mechanical errors, ship as 3.0-rc3.
-2. Decide whether to commit to the Bucket B sweep before submission, or submit-and-iterate based on reviewer feedback. Bucket B is real work but bounded.
-3. Re-run Plugin Check after each commit to track progress (the workflow is in place).
-4. Until then, slug-squat risk continues; rely on the public-evidence story for any disputes.
+**Path to ready:** complete Bucket B (or at least the 5 hot-spot files), then either ship and iterate or finish Tier 2 for clean submission.
