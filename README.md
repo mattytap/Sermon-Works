@@ -6,12 +6,12 @@ A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Ser
 
 ## Status
 
-Work in progress. This repository is currently private; the codebase is being audited, secured, and modernised before public release and submission to WordPress.org.
+Currently in 3.0 release-candidate cycle. Latest tag: `3.0-rc2`.
 
-- **Security audit complete** — 25 issues filed on the [tracker](https://github.com/mattytap/Sermon-Works/issues), including three publicly-disclosed CVEs.
-- **Security fixes in progress** — most audit findings have shipping patches; the remainder are scheduled major-vendor work. Verification on a real WordPress install is the next gate.
-- **Modernisation in progress** — bringing the codebase up to current PHP and WordPress APIs. PHP 8.1 is the version floor.
-- **WordPress.org submission** — the eventual destination, gated on the above.
+- **Security audit complete.** 25 issues filed on the [tracker](https://github.com/mattytap/Sermon-Works/issues), including three publicly-disclosed CVEs (CVE-2025-12368, CVE-2025-63000, CVE-2025-63002). All filed findings have shipping patches; operational verification at formal UAT closes each issue.
+- **Modernisation complete.** Codebase brought up to current PHP and WordPress APIs. PHP 8.1+ floor, WordPress 6.0+ floor.
+- **Drop-in compatibility preserved.** `wpfc_sermon` post type, `wpfc_*` taxonomies and option keys, and shortcode output structure unchanged from Sermon Manager 2.15.16.
+- **WordPress.org submission planned for 3.0 stable.** Gated on UAT sign-off.
 
 ## Who is Sermon Works for?
 

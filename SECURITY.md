@@ -33,7 +33,7 @@ When a fix ships:
 
 ## Supported versions
 
-Sermon Works is in pre-public-release restoration. The latest commit on `main` is the only supported version; a versioned-release matrix will replace this section at the first stable release.
+Sermon Works is in 3.0 release-candidate cycle. The latest commit on `main` is the only supported version; a versioned-release matrix will replace this section at the first stable release.
 
 ## Scope
 

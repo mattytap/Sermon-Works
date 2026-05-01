@@ -1,6 +1,6 @@
 # Contributing to Sermon Works
 
-Thanks for considering a contribution. Sermon Works is a caretaker restoration of WP-for-Church's [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) plugin, currently in pre-release. Contributions are welcome — and shaped by the project's stance: **fix not change** for code that already works, with security and correctness prioritised over feature additions.
+Thanks for considering a contribution. Sermon Works is a caretaker restoration of WP-for-Church's [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) plugin, currently in 3.0 release-candidate cycle. Contributions are welcome — and shaped by the project's stance: **fix not change** for code that already works, with security and correctness prioritised over feature additions.
 
 By participating, you agree to abide by the [Code of Conduct](../CODE_OF_CONDUCT.md).
 
