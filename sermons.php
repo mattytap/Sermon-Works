@@ -170,17 +170,17 @@ class SermonManager { // phpcs:ignore
 			}
 
 			$content .= sm_get_taxonomy_field( 'wpfc_preacher', 'singular_name' ) . ': ';
-			$content .= strip_tags( get_the_term_list( $post->ID, 'wpfc_preacher', '', ', ', '' ) );
+			$content .= wp_strip_all_tags( get_the_term_list( $post->ID, 'wpfc_preacher', '', ', ', '' ) );
 		}
 
 		if ( $has_series ) {
 			if ( $has_preachers ) {
 				$content .= ' | ';
 			}
-			$content .= strip_tags( get_the_term_list( $post->ID, 'wpfc_sermon_series', __( 'Series:', 'sermon-works' ) . ' ', ', ', '' ) );
+			$content .= wp_strip_all_tags( get_the_term_list( $post->ID, 'wpfc_sermon_series', __( 'Series:', 'sermon-works' ) . ' ', ', ', '' ) );
 		}
 
-		$description = strip_tags( trim( get_post_meta( $post->ID, 'sermon_description', true ) ) );
+		$description = wp_strip_all_tags( trim( get_post_meta( $post->ID, 'sermon_description', true ) ) );
 
 		if ( '' !== $description ) {
 			$content .= ' | ' . $description;
