@@ -9,3 +9,4 @@ CLAUDE.md
 .restoration/uat-issue-pack.json
 .restoration/cowork-uat-results/
 dist/
+.restoration/plugin-check/
