@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.1
-Stable tag: 3.0-rc3
+Stable tag: 3.0-rc4
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,23 @@ No. Sermon Works is GPLv2 free software with no paid tier, no premium add-ons, a
 Sermon Works is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Sermon-Works/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.0-rc4 =
+
+WordPress.org Plugin Check sweep, "Bucket A" mechanical fixes (~70 sites across 10 commits):
+
+* Plugin header: added `License: GPLv2` and `License URI` lines for WP.org guideline compliance.
+* Direct file access protection: added `defined( 'ABSPATH' ) or die;` guards to 11 view templates (`views/*.php`).
+* Replaced `date()` with `gmdate()` (12 sites) or `wp_date()` (2 user-facing admin column sites) in 9 files. PHP `date()` is affected by `date_default_timezone_set()` and unsafe inside WordPress. Incidentally corrects a latent bug in the RSS feed (`pubDate` and `lastBuildDate` previously claimed `+0000` UTC while passing server-local timestamps).
+* Replaced `parse_url()` with `wp_parse_url()` (8 sites). WP wrapper suppresses warnings on malformed URLs.
+* Replaced `strip_tags()` with `wp_strip_all_tags()` (7 sites). WP wrapper additionally strips script/style tag contents.
+* Replaced `@unlink()` with `wp_delete_file()` (6 sites in the WXR importer). WP wrapper respects the `wp_delete_file` filter.
+* Replaced `rand()` with `wp_rand()` (1 site). WP wrapper produces better random numbers.
+* i18n: added the `'sermon-works'` text-domain argument to 10 `__()` / `esc_html__()` calls that previously omitted it (Plugin Check `MissingArgDomain`).
+* i18n: corrected 9 calls in the WXR importer that used `'wordpress-importer'` instead of `'sermon-works'` as the text-domain (Plugin Check `TextDomainMismatch`).
+* i18n: added `/* translators: */` comments above 3 placeholder strings (Plugin Check `MissingTranslatorsComment`).
+
+Tier 2 substantive Plugin Check items (file system operations, prepared SQL audits, enqueued scripts, output escaping) are deferred to a future release; see [`.restoration/plugin-check-summary.md`](https://github.com/mattytap/Sermon-Works/blob/main/.restoration/plugin-check-summary.md) for the full triage.
 
 = 3.0-rc3 =
 
