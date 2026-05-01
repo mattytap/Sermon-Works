@@ -551,7 +551,7 @@ class SermonManager { // phpcs:ignore
 			function ( $url, $attachment_id ) {
 				$db_url = get_post_meta( $attachment_id, '_wp_attached_file', true );
 
-				if ( $db_url && parse_url( $db_url, PHP_URL_SCHEME ) !== null ) {
+				if ( $db_url && wp_parse_url( $db_url, PHP_URL_SCHEME ) !== null ) {
 					return $db_url;
 				}
 
@@ -801,8 +801,8 @@ class SermonManager { // phpcs:ignore
 					return;
 				}
 
-				$parsed_audio_url   = parse_url( $audio_url, PHP_URL_HOST );
-				$parsed_website_url = parse_url( home_url(), PHP_URL_HOST );
+				$parsed_audio_url   = wp_parse_url( $audio_url, PHP_URL_HOST );
+				$parsed_website_url = wp_parse_url( home_url(), PHP_URL_HOST );
 
 				if ( $parsed_audio_url !== $parsed_website_url ) {
 					$audio_id = '';

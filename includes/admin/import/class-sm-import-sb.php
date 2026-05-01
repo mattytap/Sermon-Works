@@ -448,7 +448,7 @@ class SM_Import_SB {
 				$url = $item->name;
 
 				if ( 'file' === $item->type || 'url' === $item->type ) {
-					if ( parse_url( $url, PHP_URL_SCHEME ) === null ) {
+					if ( wp_parse_url( $url, PHP_URL_SCHEME ) === null ) {
 						$url = site_url( ( ! empty( $options['upload_dir'] ) ? $options['upload_dir'] : 'wp-content/uploads/sermons/' ) . rawurlencode( $url ) );
 						$this->log( 'File URL is local, created a full URL. ("' . $url . '")', 253 );
 					}
