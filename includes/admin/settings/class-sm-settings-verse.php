@@ -127,8 +127,8 @@ class SM_Settings_Verse extends SM_Settings_Page {
 					'YLT'         => 'Young\'s Literal Translation (YLT)',
 
 					// French versions.
-					'LSG'         		=> 'La Bible Louis Second 1910',
-					'EC-SBGBIBS212007' 	=> 'La Bible Second 21'
+					'LSG'              => 'La Bible Louis Second 1910',
+					'EC-SBGBIBS212007' => 'La Bible Second 21',
 				),
 				'default' => 'ESV',
 			),
