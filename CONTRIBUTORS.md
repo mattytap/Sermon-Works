@@ -16,7 +16,9 @@ Each entry below represents an upstream PR merged into Sermon Works with the ori
 
 | Upstream PR | Original author | Landed in Sermon Works as | Description |
 |---|---|---|---|
-| *(none yet — entries added as PRs are ingested)* | | | |
+| [#274](https://github.com/WP-for-Church/Sermon-Manager/pull/274) | [@brianfreytag](https://github.com/brianfreytag) | `11d6d4e` | Fix shortcode pagination on static front page |
+| [#292](https://github.com/WP-for-Church/Sermon-Manager/pull/292) | [@tstephen](https://github.com/tstephen) | `763ac0a` | Defensive check on sermons_array (foreach guard) |
+| [#264](https://github.com/WP-for-Church/Sermon-Manager/pull/264) | [@rjorel](https://github.com/rjorel) | `1c2c80c` | Add French Bible versions to verse-popup settings |
 
 ## Issue reporters whose reports led to fixes
 
