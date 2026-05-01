@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.1
-Stable tag: 3.0-rc1
+Stable tag: 3.0-rc2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,7 +89,15 @@ Sermon Works is a restoration of [Sermon Manager for WordPress](https://wordpres
 
 == Changelog ==
 
-= 3.0 — Sermon Works restoration =
+= 3.0-rc2 =
+
+Salvaged bug-fix PRs from the upstream open-PR backlog, ingested with original authors preserved as git commit authors:
+
+* Fix shortcode pagination on static front page (upstream PR [#274](https://github.com/WP-for-Church/Sermon-Manager/pull/274) by [@brianfreytag](https://github.com/brianfreytag)).
+* Defensive guard around the import-message cleanup loop in `sermons.php` (upstream PR [#292](https://github.com/WP-for-Church/Sermon-Manager/pull/292) by [@tstephen](https://github.com/tstephen)). Prevents a PHP 8.x fatal when `_sm_import_se_messages` / `_sm_import_sb_messages` options are non-array.
+* Add French Bible versions (Louis Segond 1910, Segond 21) to the verse-popup settings dropdown (upstream PR [#264](https://github.com/WP-for-Church/Sermon-Manager/pull/264) by [@rjorel](https://github.com/rjorel)).
+
+= 3.0-rc1 — Sermon Works restoration =
 
 This release renames the plugin from Sermon Manager to Sermon Works (text domain `sermon-works`) and ships the in-place restoration completed across early 2026:
 
