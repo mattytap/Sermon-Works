@@ -16,6 +16,8 @@
  * @since   2.15.0 - fix audio URL edge case
  */
 
+defined( 'ABSPATH' ) or die;
+
 global $post;
 ?>
 <?php if ( ! \SermonManager::getOption( 'theme_compatibility' ) ) : ?>
