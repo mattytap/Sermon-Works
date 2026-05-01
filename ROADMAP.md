@@ -38,6 +38,7 @@ Areas of interest with no committed timeline.
 - Block-theme compatibility for `wpfc_sermon` archives.
 - Unit test pattern building on the existing PHPUnit infrastructure (upstream `#195`).
 - Archived-sermons widget (upstream `#150`).
+- **Namespace the bundled CMB2 library.** Rename `CMB2_*` classes throughout `includes/vendor/CMB2/` to a project-specific prefix (e.g. `SW_CMB2_*`) to prevent runtime collisions with other active plugins that also bundle their own CMB2 copy (GiveWP, MetaBox, WPForms Pro, and many others). The case-sensitivity fix in 3.0-rc3 closed one Linux-host variant of this issue, but a different active plugin shipping a different CMB2 version can still cause class-already-defined or class-not-found fatals depending on load order. Substantial mechanical refactor across the bundled vendor tree; ships when there is appetite.
 
 ## Out of scope
 
