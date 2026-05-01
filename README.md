@@ -4,6 +4,18 @@
 
 A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) — a WordPress plugin that helps churches publish sermons online — left dormant by its original maintainers, [WP-for-Church](https://wpforchurch.com/), since 2019.
 
+## Install
+
+The current release is **3.0-rc2** (release candidate). Production sites should wait for 3.0 stable; pilot and test installs are welcome now.
+
+1. Open the [Releases page](https://github.com/mattytap/Sermon-Works/releases) and download `sermon-works-3.0-rc2.zip` from the latest release.
+2. In WordPress admin, go to **Plugins, Add New, Upload Plugin**.
+3. Choose the ZIP, click **Install Now**, then **Activate**.
+
+Existing Sermon Manager users can deactivate Sermon Manager and activate Sermon Works in its place. Database, shortcodes, post types and taxonomies are unchanged, so existing sermons, preachers and series carry across.
+
+Requires PHP 8.1+ and WordPress 6.0+.
+
 ## Status
 
 Currently in 3.0 release-candidate cycle. Latest tag: `3.0-rc2`.
