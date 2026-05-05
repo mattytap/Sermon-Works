@@ -16,7 +16,7 @@ defined( 'ABSPATH' ) or die;
 		<div id="the-list">
 			<div class="plugin-card card-import-sm">
 				<div class="plugin-card-top">
-					<img src="<?php echo SM_URL; ?>assets/images/import-sm.jpg" class="plugin-icon"
+					<img src="<?php echo esc_url( SM_URL ); ?>assets/images/import-sm.jpg" class="plugin-icon"
 							alt="<?php esc_attr_e( 'Import from file', 'sermon-works' ); ?>">
 					<div class="name column-name">
 						<h3>
@@ -38,7 +38,7 @@ defined( 'ABSPATH' ) or die;
 										</p>
 										<p>
 											<strong>
-												<?php echo $upload_dir['error']; ?>
+												<?php echo esc_html( $upload_dir['error'] ); ?>
 											</strong>
 										</p>
 									</div>
@@ -49,7 +49,7 @@ defined( 'ABSPATH' ) or die;
 										<p>
 											<input type="file" id="upload" name="import" size="25"/>
 											<input type="hidden" name="action" value="save"/>
-											<input type="hidden" name="max_file_size" value="<?php echo $bytes; ?>"/>
+											<input type="hidden" name="max_file_size" value="<?php echo (int) $bytes; ?>"/>
 										</p>
 										<input class="button" id="submit" type="submit" name="submit"
 												value="<?php esc_attr_e( 'Import from file', 'sermon-works' ); ?>"/>
@@ -59,7 +59,7 @@ defined( 'ABSPATH' ) or die;
 											<?php esc_html_e( 'Import', 'sermon-works' ); ?>
 										</span>
 										<span class="import-sniper">
-											<img src="<?php echo admin_url( 'images/wpspin_light.gif' ); ?>">
+											<img src="<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>">
 										</span>
 									</span>
 								<?php endif; ?>
@@ -77,7 +77,7 @@ defined( 'ABSPATH' ) or die;
 			</div>
 			<div class="plugin-card card-export-sm">
 				<div class="plugin-card-top">
-					<img src="<?php echo SM_URL; ?>assets/images/export-sm.jpg" class="plugin-icon"
+					<img src="<?php echo esc_url( SM_URL ); ?>assets/images/export-sm.jpg" class="plugin-icon"
 							alt="<?php esc_attr_e( 'Export to file', 'sermon-works' ); ?>">
 					<div class="name column-name">
 						<h3>
@@ -112,7 +112,7 @@ defined( 'ABSPATH' ) or die;
 			<div class="plugin-card <?php echo SM_Import_SB::is_installed() ? '' : 'not-available'; ?>">
 				<h2>Plugin not installed</h2>
 				<div class="plugin-card-top">
-					<img src="<?php echo SM_URL; ?>assets/images/import-sb.jpg" class="plugin-icon"
+					<img src="<?php echo esc_url( SM_URL ); ?>assets/images/import-sb.jpg" class="plugin-icon"
 							alt="<?php esc_attr_e( 'Sermon Browser', 'sermon-works' ); ?>">
 					<div class="name column-name">
 						<h3>
@@ -132,7 +132,7 @@ defined( 'ABSPATH' ) or die;
 						<p>
 							<?php
 							// translators: %s Plugin name.
-							echo wp_sprintf( __( 'Import your existing %s sermon library into Sermon Works', 'sermon-works' ), 'Sermon Browser' );
+							echo esc_html( wp_sprintf( __( 'Import your existing %s sermon library into Sermon Works', 'sermon-works' ), 'Sermon Browser' ) );
 							?>
 						</p>
 						<p class="import-note">
@@ -144,7 +144,7 @@ defined( 'ABSPATH' ) or die;
 			<div class="plugin-card <?php echo SM_Import_SE::is_installed() ? '' : 'not-available'; ?>">
 				<h2>Plugin not installed</h2>
 				<div class="plugin-card-top">
-					<img src="<?php echo SM_URL; ?>assets/images/import-se.jpg" class="plugin-icon"
+					<img src="<?php echo esc_url( SM_URL ); ?>assets/images/import-se.jpg" class="plugin-icon"
 							alt="<?php esc_attr_e( 'Series Engine', 'sermon-works' ); ?>">
 					<div class="name column-name">
 						<h3>
@@ -164,7 +164,7 @@ defined( 'ABSPATH' ) or die;
 						<p>
 							<?php
 							// translators: %s Plugin name.
-							echo wp_sprintf( __( 'Import your existing %s sermon library into Sermon Works', 'sermon-works' ), 'Series Engine' );
+							echo esc_html( wp_sprintf( __( 'Import your existing %s sermon library into Sermon Works', 'sermon-works' ), 'Series Engine' ) );
 							?>
 						</p>
 						<p class="import-note">

@@ -42,7 +42,7 @@ foreach (
 }
 
 ?>
-<div id="<?php echo $args['id']; ?>" class="<?php echo $args['classes']; ?>">
+<div id="<?php echo esc_attr( $args['id'] ); ?>" class="<?php echo esc_attr( $args['classes'] ); ?>">
 	<?php foreach ( $filters as $filter ) : ?>
 		<?php if ( isset( $visibility_mapping[ $filter['taxonomy'] ] ) && in_array( $args[ $visibility_mapping[ $filter['taxonomy'] ] ], array(
 			'yes',
@@ -55,16 +55,16 @@ foreach (
 		<?php endif; ?>
 
 		<?php if ( ( ! empty( $args[ $filter['taxonomy'] ] ) && 'none' !== $args['visibility'] ) || empty( $args[ $filter['taxonomy'] ] ) ) : ?>
-			<div class="<?php echo $filter['className']; ?>" style="display: inline-block">
-				<form action="<?php echo $args['action']; ?>" method="get">
-					<select name="<?php echo $filter['taxonomy']; ?>"
-							title="<?php echo $filter['title']; ?>"
-							id="<?php echo $filter['taxonomy']; ?>"
+			<div class="<?php echo esc_attr( $filter['className'] ); ?>" style="display: inline-block">
+				<form action="<?php echo esc_url( $args['action'] ); ?>" method="get">
+					<select name="<?php echo esc_attr( $filter['taxonomy'] ); ?>"
+							title="<?php echo esc_attr( $filter['title'] ); ?>"
+							id="<?php echo esc_attr( $filter['taxonomy'] ); ?>"
 							onchange="if(this.options[this.selectedIndex].value !== ''){return this.form.submit()}else{window.location = window.location.href.split('?')[0];}"
 							autocomplete="off"
 						<?php echo ! empty( $args[ $filter['taxonomy'] ] ) && 'disable' === $args['visibility'] ? 'disabled' : ''; ?>>
-						<option value=""><?php echo $filter['title']; ?></option>
-						<?php echo wpfc_get_term_dropdown( $filter['taxonomy'], ! empty( $args[ $filter['taxonomy'] ] ) ? $args[ $filter['taxonomy'] ] : '' ); ?>
+						<option value=""><?php echo esc_html( $filter['title'] ); ?></option>
+						<?php echo wpfc_get_term_dropdown( $filter['taxonomy'], ! empty( $args[ $filter['taxonomy'] ] ) ? $args[ $filter['taxonomy'] ] : '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns <option> markup built from term names; safe by construction. ?>
 					</select>
 					<?php $series = explode( ',', $args['series_filter'] ); ?>
 					<?php if ( isset( $args['series_filter'] ) && '' !== $args['series_filter'] && $series ) : ?>

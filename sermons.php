@@ -470,11 +470,11 @@ class SermonManager { // phpcs:ignore
 		}
 
 		foreach ( $GLOBALS['sm_plyr_scripts'] as $script ) {
-			echo '<script type="text/javascript" data-cfasync="false" src="' . $script->src . '"></script>';
+			echo '<script type="text/javascript" data-cfasync="false" src="' . esc_url( $script->src ) . '"></script>';
 
 			if ( ! empty( $script->extra ) ) {
 				/* @noinspection BadExpressionStatementJS */
-				printf( "<script type='text/javascript'>\n%s\n</script>\n", $script->extra['data'] );
+				echo "<script type='text/javascript'>\n" . $script->extra['data'] . "\n</script>\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Inline JS body from wp_localize_script() data property; already serialised by WP core.
 			}
 		}
 
@@ -634,7 +634,7 @@ class SermonManager { // phpcs:ignore
 								?>
 								<div class="notice notice-info">
 									<p>Debug info:</p>
-									<pre><?php echo get_option( 'sm_last_import_info' ) ?: 'No data available.'; ?></pre>
+									<pre><?php echo esc_html( get_option( 'sm_last_import_info' ) ?: 'No data available.' ); ?></pre>
 								</div>
 							<?php endif; ?>
 
@@ -661,7 +661,7 @@ class SermonManager { // phpcs:ignore
 
 					?>
 					<div class="notice notice-success">
-						<p><code><?php echo $value; ?></code> executed.</p>
+						<p><code><?php echo esc_html( $value ); ?></code> executed.</p>
 					</div>
 					<?php
 				}
@@ -682,7 +682,7 @@ class SermonManager { // phpcs:ignore
 
 					?>
 					<div class="notice notice-success">
-						<p>Removed <?php echo $wpdb->rows_affected; ?> transient fields.</p>
+						<p>Removed <?php echo (int) $wpdb->rows_affected; ?> transient fields.</p>
 					</div>
 					<?php
 				}
@@ -709,7 +709,7 @@ class SermonManager { // phpcs:ignore
 
 								?>
 								<div class="notice notice-success">
-									<p><code><?php echo $function; ?></code> executed.</p>
+									<p><code><?php echo esc_html( $function ); ?></code> executed.</p>
 								</div>
 								<?php
 							}
@@ -855,7 +855,7 @@ class SermonManager { // phpcs:ignore
 						<p>
 							<?php
 							// translators: %s: The plugin name. Effectively "<strong>Sermon Works</strong>".
-							echo wp_sprintf( __( '%s requires output buffering to be turned on to display content. It is currently off. Please enable it or contact your hosting provider for help. Most of plugin functionality will be disabled until output buffering is enabled.', 'sermon-works' ), '<strong>' . __( 'Sermon Works', 'sermon-works' ) . '</strong>' );
+							echo wp_kses_post( wp_sprintf( __( '%s requires output buffering to be turned on to display content. It is currently off. Please enable it or contact your hosting provider for help. Most of plugin functionality will be disabled until output buffering is enabled.', 'sermon-works' ), '<strong>' . __( 'Sermon Works', 'sermon-works' ) . '</strong>' ) );
 							?>
 						</p>
 					</div>
