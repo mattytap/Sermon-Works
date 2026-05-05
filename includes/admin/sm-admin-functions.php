@@ -99,14 +99,18 @@ function wpfc_dashboard() {
 	$count = '<li class="sermon-count">';
 
 	if ( current_user_can( 'edit_posts' ) ) {
-		$count .= '<a href="' . admin_url( 'edit.php?post_type=wpfc_sermon' ) . '">' . $text . '</a>';
+		$count .= '<a href="' . esc_url( admin_url( 'edit.php?post_type=wpfc_sermon' ) ) . '">' . $text . '</a>';
 	} else {
 		$count .= $text;
 	}
 
 	$count .= '</li>';
 	$count .= "<style>.sermon-count a:before { content: '\\f330' !important;}</style>";
-	echo $count;
+	echo wp_kses( $count, array(
+		'li'    => array( 'class' => array() ),
+		'a'     => array( 'href' => array() ),
+		'style' => array(),
+	) );
 }
 
 add_action( 'dashboard_glance_items', 'wpfc_dashboard' );

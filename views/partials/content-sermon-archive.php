@@ -45,7 +45,7 @@ if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_archi
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 	<?php endif; ?>
 	<?php if ( 'x' === $theme ) : ?>
-		<?php echo $sm_image_html; ?>
+		<?php echo wp_kses_post( $sm_image_html ); ?>
 	<?php endif; ?>
 	<div class="wpfc-sermon-inner entry-wrap">
 		<?php if ( 'x' !== $theme ) : ?>

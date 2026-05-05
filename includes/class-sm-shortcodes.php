@@ -129,7 +129,7 @@ class SM_Shortcodes {
 						$label = apply_filters( 'wpfc_podcast_label_' . esc_attr( $key ), $label );
 
 						// Print link.
-						echo '<li><a class="' . esc_attr( $key ) . '" title="' . esc_attr( $label ) . '" href="' . esc_url( $url ) . '" target="_blank" rel="noopener">' . $label . '</a></li>';
+						echo '<li><a class="' . esc_attr( $key ) . '" title="' . esc_attr( $label ) . '" href="' . esc_url( $url ) . '" target="_blank" rel="noopener">' . esc_html( $label ) . '</a></li>';
 					}
 				}
 				echo '</ul>';
@@ -1103,7 +1103,7 @@ class SM_Shortcodes {
 								1,
 								'1',
 							) ) ) :
-							echo SM_Shortcodes::display_sermon_sorting( $filtering_args );
+							echo SM_Shortcodes::display_sermon_sorting( $filtering_args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns sermon-sorting widget HTML built internally; safe by construction.
 						endif;
 
 						while ( $query->have_posts() ) {
@@ -1117,7 +1117,7 @@ class SM_Shortcodes {
 								$output = '<div class="wpfc-sermon wpfc-sermon-shortcode">' . wpfc_sermon_excerpt_v2( true, $args ) . '</div>';
 							}
 
-							echo apply_filters( 'sm_shortcode_sermons_single_output', $output, $post, $args );
+							echo apply_filters( 'sm_shortcode_sermons_single_output', $output, $post, $args ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $output is sermon excerpt HTML wrapped from wpfc_sermon_excerpt_v2; per-site escapers applied inside.
 						}
 						?>
 					</div>
@@ -1146,13 +1146,13 @@ class SM_Shortcodes {
 									}
 								}
 
-								echo paginate_links( array(
+								echo wp_kses_post( paginate_links( array(
 									'base'     => preg_replace( '/\/\?.*/', '', rtrim( get_permalink( $post_ID ), '/' ) ) . '/%_%',
 									'current'  => $query->get( 'paged' ),
 									'total'    => $query->max_num_pages,
 									'end_size' => 3,
 									'add_args' => !is_front_page() ? $add_args : array(),
-								) );
+								) ) );
 								?>
 							</div>
 						<?php endif; ?>

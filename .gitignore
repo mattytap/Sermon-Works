@@ -10,3 +10,4 @@ CLAUDE.md
 .restoration/cowork-uat-results/
 dist/
 .restoration/plugin-check/
+.restoration/pre-submission-*/

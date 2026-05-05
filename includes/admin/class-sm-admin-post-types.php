@@ -152,7 +152,7 @@ class SM_Admin_Post_Types {
 			$data = __( 'Error', 'sermon-works' );
 		}
 
-		echo $data;
+		echo wp_kses_post( $data );
 	}
 
 	/**
@@ -328,7 +328,10 @@ class SM_Admin_Post_Types {
 
 		$output .= '</select>';
 
-		echo apply_filters( 'sm_sermon_filters', $output );
+		echo wp_kses( apply_filters( 'sm_sermon_filters', $output ), array(
+			'select' => array( 'name' => array(), 'id' => array(), 'class' => array() ),
+			'option' => array( 'value' => array(), 'selected' => array() ),
+		) );
 	}
 }
 

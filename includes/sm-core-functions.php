@@ -84,7 +84,7 @@ function sm_the_date( $d = '', $before = '', $after = '', $post = null ) {
 	 * @since 2.6
 	 *
 	 */
-	echo apply_filters( 'the_date', $the_date, $d, $before, $after, $post );
+	echo wp_kses_post( apply_filters( 'the_date', $the_date, $d, $before, $after, $post ) );
 }
 
 /**
