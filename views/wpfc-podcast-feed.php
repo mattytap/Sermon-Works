@@ -264,33 +264,33 @@ $cover_image_url  = $settings['itunes_cover_image'];
 >
 
 	<channel>
-		<title><?php echo $title; ?></title>
-		<link><?php echo $link; ?></link>
+		<title><?php echo esc_html( $title ); ?></title>
+		<link><?php echo esc_url( $link ); ?></link>
 		<atom:link href="<?php self_link(); ?>" rel="self" type="application/rss+xml"/>
-		<description><?php echo $description; ?></description>
-		<language><?php echo $language; ?></language>
-		<lastBuildDate><?php echo $last_sermon_date ? gmdate( 'r', intval( $last_sermon_date ) ) : gmdate( 'r' ); ?></lastBuildDate>
+		<description><?php echo esc_html( $description ); ?></description>
+		<language><?php echo esc_html( $language ); ?></language>
+		<lastBuildDate><?php echo esc_html( $last_sermon_date ? gmdate( 'r', intval( $last_sermon_date ) ) : gmdate( 'r' ) ); ?></lastBuildDate>
 		<sy:updatePeriod>hourly</sy:updatePeriod>
 		<sy:updateFrequency>1</sy:updateFrequency>
-		<copyright><?php echo $copyright; ?></copyright>
-		<itunes:subtitle><?php echo $subtitle; ?></itunes:subtitle>
-		<itunes:author><?php echo $author; ?></itunes:author>
-		<itunes:summary><?php echo $summary; ?></itunes:summary>
+		<copyright><?php echo esc_html( $copyright ); ?></copyright>
+		<itunes:subtitle><?php echo esc_html( $subtitle ); ?></itunes:subtitle>
+		<itunes:author><?php echo esc_html( $author ); ?></itunes:author>
+		<itunes:summary><?php echo esc_html( $summary ); ?></itunes:summary>
 		<itunes:owner>
-			<itunes:name><?php echo $owner_name; ?></itunes:name>
-			<itunes:email><?php echo $owner_email; ?></itunes:email>
+			<itunes:name><?php echo esc_html( $owner_name ); ?></itunes:name>
+			<itunes:email><?php echo esc_html( $owner_email ); ?></itunes:email>
 		</itunes:owner>
 		<itunes:explicit>no</itunes:explicit>
 		<?php if ( $cover_image_url ) : ?>
-			<itunes:image href="<?php echo $cover_image_url; ?>"/>
+			<itunes:image href="<?php echo esc_url( $cover_image_url ); ?>"/>
 		<?php endif; ?>
 
 		<?php if ( ! $category_override ) : ?>
-			<itunes:category text="<?php echo $category; ?>">
-				<itunes:category text="<?php echo $subcategory; ?>"/>
+			<itunes:category text="<?php echo esc_attr( $category ); ?>">
+				<itunes:category text="<?php echo esc_attr( $subcategory ); ?>"/>
 			</itunes:category>
 		<?php else : ?>
-			<?php echo $category_override; ?>
+			<?php echo wp_kses_post( $category_override ); ?>
 		<?php endif; ?>
 		<?php
 		if ( $sermon_podcast_query->have_posts() ) :
@@ -349,23 +349,23 @@ $cover_image_url  = $settings['itunes_cover_image'];
 						<comments><?php comments_link_feed(); ?></comments>
 					<?php endif; ?>
 
-					<pubDate><?php echo $settings['use_published_date'] ? $date_published : $date_preached; ?></pubDate>
+					<pubDate><?php echo esc_html( $settings['use_published_date'] ? $date_published : $date_preached ); ?></pubDate>
 					<dc:creator><![CDATA[<?php echo esc_html( $speaker ); ?>]]></dc:creator>
 					<?php the_category_rss( 'rss2' ); ?>
 
 					<guid isPermaLink="false"><?php the_guid(); ?></guid>
-					<description><![CDATA[<?php echo $description; ?>]]></description>
-					<content:encoded><![CDATA[<?php echo $description; ?>]]></content:encoded>
-					<itunes:summary><![CDATA[<?php echo $description; ?>]]></itunes:summary>
+					<description><![CDATA[<?php echo $description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML content wrapped in CDATA; ]]> sequences are escaped at construction (see str_replace above). ?>]]></description>
+					<content:encoded><![CDATA[<?php echo $description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML content wrapped in CDATA; ]]> sequences are escaped at construction (see str_replace above). ?>]]></content:encoded>
+					<itunes:summary><![CDATA[<?php echo $description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML content wrapped in CDATA; ]]> sequences are escaped at construction (see str_replace above). ?>]]></itunes:summary>
 
 					<itunes:author><?php echo esc_html( $speakers ); ?></itunes:author>
-					<itunes:subtitle><?php echo $description_short; ?></itunes:subtitle>
+					<itunes:subtitle><?php echo esc_html( $description_short ); ?></itunes:subtitle>
 					<?php if ( $post_image ) : ?>
 						<itunes:image href="<?php echo esc_url( $post_image ); ?>"/>
 					<?php endif; ?>
 
 					<?php if ( $custom_enclosure ) : ?>
-						<?php echo $custom_enclosure; ?>
+						<?php echo wp_kses_post( $custom_enclosure ); ?>
 					<?php else : ?>
 						<!--suppress CheckEmptyScriptTag -->
 						<enclosure url="<?php echo esc_url( $audio ); ?>"
