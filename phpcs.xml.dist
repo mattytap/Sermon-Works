@@ -44,6 +44,20 @@
         </properties>
     </rule>
 
+    <!--
+        WordPress core's wp-admin/includes/export.php helper. Wraps content in
+        <![CDATA[ ... ]]> which is the XML-safe encoding for WXR exports. Treat
+        its output as already-escaped so the export class doesn't need a
+        per-line phpcs:ignore on every wxr_cdata() call.
+    -->
+    <rule ref="WordPress.Security.EscapeOutput">
+        <properties>
+            <property name="customAutoEscapedFunctions" type="array">
+                <element value="wxr_cdata"/>
+            </property>
+        </properties>
+    </rule>
+
     <!-- Add several extra word delimiters. -->
     <rule ref="WordPress.NamingConventions.ValidHookName">
         <properties>
