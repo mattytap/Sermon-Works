@@ -658,7 +658,7 @@ function get_sermon_image_url( $fallback = true, $image_size = 'post-thumbnail',
 
 	// Get the series image.
 	foreach (
-		apply_filters( 'sermon-images-get-the-terms', '', array( // phpcs:ignore
+		(array) apply_filters( 'sermon-images-get-the-terms', array(), array( // phpcs:ignore
 			'post_id'    => $post->ID,
 			'image_size' => $image_size,
 		) ) as $term

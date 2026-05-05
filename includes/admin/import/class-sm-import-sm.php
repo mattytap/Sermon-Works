@@ -320,7 +320,7 @@ class SM_Import_SM {
 		$line = '';
 
 		if ( ! $no_time ) {
-			$line .= "[${time}]";
+			$line .= "[{$time}]";
 		}
 
 		switch ( $severity ) {
