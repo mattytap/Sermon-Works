@@ -51,7 +51,7 @@ class SM_Widget_Recent_Sermons extends WP_Widget {
 		 * @since 2.13.0
 		 */
 		if ( isset( $cache[ $args['widget_id'] ] ) && ! apply_filters( 'sm_recent_sermons_widget_override_cache', false ) ) {
-			echo $cache[ $args['widget_id'] ];
+			echo wp_kses_post( $cache[ $args['widget_id'] ] );
 
 			return;
 		}
@@ -78,13 +78,13 @@ class SM_Widget_Recent_Sermons extends WP_Widget {
 			) );
 			if ( $r->have_posts() ) {
 				?>
-				<?php echo $args['before_widget']; ?>
+				<?php echo wp_kses_post( $args['before_widget'] ); ?>
 				<?php if ( $title ) : ?>
-					<?php echo $args['before_title'] . $title . $args['after_title']; ?>
+					<?php echo wp_kses_post( $args['before_title'] . $title . $args['after_title'] ); ?>
 				<?php endif; ?>
 				<?php if ( $before_widget ) : ?>
 					<div class="sm-before-widget">
-						<?php echo $before_widget; ?>
+						<?php echo wp_kses_post( $before_widget ); ?>
 					</div>
 				<?php endif; ?>
 				<ul>
@@ -107,16 +107,16 @@ class SM_Widget_Recent_Sermons extends WP_Widget {
 										class="title-link">
 									<span class="dashicons dashicons-microphone"></span>
 									<span class="title">
-									<?php echo get_the_title(); ?>
+									<?php echo esc_html( get_the_title() ); ?>
 								</span>
 								</a>
 								<div class="meta">
 									<?php if ( $preacher_links ) : ?>
-										<span class="preachers"><?php echo join( ', ', $preacher_links ); ?></span><span
+										<span class="preachers"><?php echo esc_html( join( ', ', $preacher_links ) ); ?></span><span
 												class="separator">, </span>
 									<?php endif; ?>
 									<span class="date">
-									<?php echo sm_get_the_date(); ?>
+									<?php echo esc_html( sm_get_the_date() ); ?>
 								</span>
 
 									<?php if ( \SermonManager::getOption( 'widget_show_key_verse' ) ) : ?>
@@ -129,10 +129,10 @@ class SM_Widget_Recent_Sermons extends WP_Widget {
 				</ul>
 				<?php if ( $after_widget ) : ?>
 					<div class="sm-after-widget">
-						<?php echo $after_widget; ?>
+						<?php echo wp_kses_post( $after_widget ); ?>
 					</div>
 				<?php endif; ?>
-				<?php echo $args['after_widget']; ?>
+				<?php echo wp_kses_post( $args['after_widget'] ); ?>
 				<?php
 				wp_reset_postdata();
 			}
@@ -201,25 +201,25 @@ class SM_Widget_Recent_Sermons extends WP_Widget {
 		$after_widget  = isset( $instance['after_widget'] ) ? wp_kses_post( $instance['after_widget'] ) : '';
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php esc_html_e( 'Title:', 'sermon-works' ); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>"
-					name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>"/>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'sermon-works' ); ?></label>
+			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
+					name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>"/>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'number' ); ?>"><?php esc_html_e( 'Number of sermons to show:', 'sermon-works' ); ?></label>
-			<input id="<?php echo $this->get_field_id( 'number' ); ?>"
-					name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>"
+			<label for="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>"><?php esc_html_e( 'Number of sermons to show:', 'sermon-works' ); ?></label>
+			<input id="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>"
+					name="<?php echo esc_attr( $this->get_field_name( 'number' ) ); ?>" type="text" value="<?php echo (int) $number; ?>"
 					size="3"/>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'before_widget' ); ?>"><?php esc_html_e( 'HTML to show before the widget:', 'sermon-works' ); ?></label>
-			<textarea id="<?php echo $this->get_field_id( 'before_widget' ); ?>"
-					name="<?php echo $this->get_field_name( 'before_widget' ); ?>"><?php echo $before_widget; ?></textarea>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'before_widget' ) ); ?>"><?php esc_html_e( 'HTML to show before the widget:', 'sermon-works' ); ?></label>
+			<textarea id="<?php echo esc_attr( $this->get_field_id( 'before_widget' ) ); ?>"
+					name="<?php echo esc_attr( $this->get_field_name( 'before_widget' ) ); ?>"><?php echo esc_textarea( $before_widget ); ?></textarea>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'after_widget' ); ?>"><?php esc_html_e( 'HTML to show after the widget:', 'sermon-works' ); ?></label>
-			<textarea id="<?php echo $this->get_field_id( 'after_widget' ); ?>"
-					name="<?php echo $this->get_field_name( 'after_widget' ); ?>"><?php echo $after_widget; ?></textarea>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'after_widget' ) ); ?>"><?php esc_html_e( 'HTML to show after the widget:', 'sermon-works' ); ?></label>
+			<textarea id="<?php echo esc_attr( $this->get_field_id( 'after_widget' ) ); ?>"
+					name="<?php echo esc_attr( $this->get_field_name( 'after_widget' ) ); ?>"><?php echo esc_textarea( $after_widget ); ?></textarea>
 		</p>
 		<?php
 	}
