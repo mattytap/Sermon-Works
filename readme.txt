@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.1
-Stable tag: 3.0-rc4
+Stable tag: 3.0-rc5
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,19 @@ No. Sermon Works is GPLv2 free software with no paid tier, no premium add-ons, a
 Sermon Works is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Sermon-Works/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.0-rc5 =
+
+WordPress.org submission-ready cut, held back behind one more RC for maintainer verification before the 3.0 stable tag flips. Two work strands gating the stable tag are now closed.
+
+Plugin Check "Bucket B" output-escaping sweep (317 sites across 28 files): every `echo` and `<?= ?>` site that the WordPress.org reviewer ruleset flagged as `WordPress.Security.EscapeOutput.OutputNotEscaped` now uses a context-appropriate escaper. `esc_html` for text content between tags, `esc_attr` for HTML attribute values, `esc_url` for URLs, `(int)` cast for numeric IDs, `wp_kses_post` for already-built HTML fragments, `esc_textarea` for textarea content, and `esc_xml`-equivalent (`esc_html` plus CDATA wrapping where appropriate) for XML output in the WXR exporter and the iTunes podcast feed. Where `wp_kses_post` would strip needed markup (audio/video player iframes, Uncode theme integration), per-line `phpcs:ignore` annotations carry the rationale rather than weakening the sniff. The WXR exporter also picks up `wxr_cdata` as a registered custom-auto-escaped function in the project's PHPCS config.
+
+Pre-3.0 small fixes pulled forward from the pre-submission audit:
+
+* Fixed a runtime PHP 8.0+ warning (`foreach() argument must be of type array|object, string given`) in `sm-core-functions.php:663`. The `apply_filters( 'sermon-images-get-the-terms', '', ... )` default value was an empty string; foreach over a string fails on PHP 8.0+. Default coerced to `array()` with a belt-and-braces `(array)` cast on the result.
+* Added the `defined( 'ABSPATH' ) || exit;` guard to `includes/class-sm-roles.php` (missed in the rc4 sweep).
+* Fixed two PHP 8.2 deprecation warnings: `"[${time}]"` -> `"[{$time}]"` in the Sermon Browser and Sermon Manager importers. Plugin floor stays at PHP 8.1 where this isn't deprecated, but WordPress.org test environments cover 8.2 and 8.3.
+* Bug fix in the recent-sermons widget admin form: textarea contents for `before_widget` / `after_widget` were being echoed as kses-stripped HTML, which renders as visible literal text in a textarea. Now `esc_textarea`, which entity-encodes for the textarea context. Round-trip edit workflow now matches what the user typed at save.
 
 = 3.0-rc4 =
 
