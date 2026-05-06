@@ -6,9 +6,9 @@ A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Ser
 
 ## Install
 
-The current release is **3.0-rc4** (release candidate). Production sites should wait for 3.0 stable; pilot and test installs are welcome now.
+The current release is **3.0-rc5** (release candidate). Production sites should wait for 3.0 stable; pilot and test installs are welcome now.
 
-1. Open the [Releases page](https://github.com/mattytap/Sermon-Works/releases) and download `sermon-works-3.0-rc4.zip` from the latest release.
+1. Open the [Releases page](https://github.com/mattytap/Sermon-Works/releases) and download `sermon-works-3.0-rc5.zip` from the latest release.
 2. In WordPress admin, go to **Plugins, Add New, Upload Plugin**.
 3. Choose the ZIP, click **Install Now**, then **Activate**.
 
@@ -18,7 +18,7 @@ Requires PHP 8.1+ and WordPress 6.0+.
 
 ## Status
 
-Currently in 3.0 release-candidate cycle. Latest tag: `3.0-rc4`.
+Currently in 3.0 release-candidate cycle. Latest tag: `3.0-rc5`.
 
 - **Security audit complete.** 25 issues filed on the [tracker](https://github.com/mattytap/Sermon-Works/issues), including three publicly-disclosed CVEs (CVE-2025-12368, CVE-2025-63000, CVE-2025-63002). All filed findings have shipping patches; operational verification at formal UAT closes each issue.
 - **Modernisation complete.** Codebase brought up to current PHP and WordPress APIs. PHP 8.1+ floor, WordPress 6.0+ floor.

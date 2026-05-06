@@ -1,8 +1,17 @@
-# Plugin Check findings summary — v3.0-rc4
+# Plugin Check findings summary
 
-**Latest run:** GitHub Actions workflow `plugin-check.yml`, run ID 25227901173, 2026-05-01.
+**Snapshot baseline:** v3.0-rc4 (Plugin Check workflow run on 2026-05-01).
+**Current state on `main`:** v3.0-rc5. **Bucket B closed**, see § rc5 update.
+
+**Latest captured run:** GitHub Actions workflow `plugin-check.yml`, run ID 25227901173, 2026-05-01.
 **Plugin Check Action:** `WordPress/plugin-check-action@v1`.
 **Source artefact:** `.restoration/plugin-check/plugin-check-results.txt` (gitignored).
+
+## rc5 update (2026-05-05)
+
+The Bucket B output-escape sweep landed in 3.0-rc5 across 11 commits (`1290533` to `f3b89c3` on `main`). The 316 `WordPress.Security.EscapeOutput.OutputNotEscaped` errors plus one drift site retired in full (317 -> 0) without any new errors introduced. The four W-1/W-2/LB-5 small fixes from the 2026-05-04 pre-submission audit also landed in the same RC (`1290533`). Detailed sweep notes live at `.restoration/pre-submission-3.0-2026-05-04/REPORT.md` (gitignored).
+
+The body sections below preserve the rc4 baseline as the snapshot against which the rc5 work was planned and measured. The "WP.org submission readiness" assessment at the bottom is superseded; rc5 closes the OutputNotEscaped gate that the rc4 paragraph called out as the reason a same-day submission would bounce.
 
 ## Headline
 
