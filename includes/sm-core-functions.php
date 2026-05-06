@@ -299,6 +299,7 @@ function sm_get_image_dimensions( $img_loc ) {
  * @since 2.10
  */
 function sm_get_png_dimensions( $img_loc ) {
+	// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen, WordPress.WP.AlternativeFunctions.file_system_operations_fread -- Reads the first 24 bytes of a PNG to extract dimensions without downloading the full image. WP_Filesystem reads whole files only and offers no byte-bounded raw read; fopen+fread is the only PHP-level option.
 	$handle = fopen( $img_loc, 'rb' );
 
 	// Check if url is accessible or fail gracefully.
@@ -322,6 +323,7 @@ function sm_get_png_dimensions( $img_loc ) {
 	}
 
 	return false;
+	// phpcs:enable WordPress.WP.AlternativeFunctions.file_system_operations_fopen, WordPress.WP.AlternativeFunctions.file_system_operations_fread
 }
 
 /**
@@ -335,6 +337,7 @@ function sm_get_png_dimensions( $img_loc ) {
  * @see   http://php.net/manual/en/function.getimagesize.php#88793
  */
 function sm_get_jpeg_dimensions( $img_loc ) {
+	// phpcs:disable WordPress.WP.AlternativeFunctions.file_system_operations_fopen, WordPress.WP.AlternativeFunctions.file_system_operations_fread -- Reads JPEG header bytes to extract dimensions without downloading the full image. WP_Filesystem reads whole files only and offers no byte-bounded raw read; fopen+fread is the only PHP-level option.
 	$handle = fopen( $img_loc, 'rb' );
 
 	// Check if url is accessible or fail gracefully.
@@ -398,6 +401,7 @@ function sm_get_jpeg_dimensions( $img_loc ) {
 	}
 
 	return false;
+	// phpcs:enable WordPress.WP.AlternativeFunctions.file_system_operations_fopen, WordPress.WP.AlternativeFunctions.file_system_operations_fread
 }
 
 /**
