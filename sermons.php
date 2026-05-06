@@ -470,6 +470,7 @@ class SermonManager { // phpcs:ignore
 		}
 
 		foreach ( $GLOBALS['sm_plyr_scripts'] as $script ) {
+			// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- Manually emitted with the data-cfasync="false" attribute to opt out of Cloudflare's Rocket Loader; wp_enqueue_script doesn't expose arbitrary script-tag attributes without a script_loader_tag filter, which would add complexity for the same end result.
 			echo '<script type="text/javascript" data-cfasync="false" src="' . esc_url( $script->src ) . '"></script>';
 
 			if ( ! empty( $script->extra ) ) {
@@ -678,6 +679,7 @@ class SermonManager { // phpcs:ignore
 					global $wpdb;
 
 					$sql = 'DELETE FROM ' . $wpdb->options . ' WHERE ( `option_name` LIKE "_transient_%" OR `option_name` LIKE "transient_%")';
+					// phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Hardcoded LIKE patterns with no user input; $wpdb->options is a WP-controlled table-prefix property. No values to bind via $wpdb->prepare().
 					$wpdb->query( $sql );
 
 					?>
