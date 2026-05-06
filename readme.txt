@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.1
-Stable tag: 3.0-rc5
+Stable tag: 3.0-rc6
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,10 @@ No. Sermon Works is GPLv2 free software with no paid tier, no premium add-ons, a
 Sermon Works is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Sermon-Works/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.0-rc6 =
+
+CI gate clearance for WordPress.org submission, no runtime changes against rc5. The Plugin Check workflow now passes cleanly on `main`. The WXR exporter port (`includes/admin/export/class-sm-export-sm.php`) is excluded at workflow level: it is a near-verbatim derivative of WordPress core's `wp-admin/includes/export.php`, and the project's `phpcs.xml.dist` registration of `wxr_cdata` as `customAutoEscapedFunctions` is honoured by local PHPCS but not by the Plugin Check action. Targeted `phpcs:ignore` annotations carrying per-site rationale clear the remaining submission-blocking sniffs: the file-system reads in the PNG/JPEG dimension sniffers (`sm_get_png_dimensions`, `sm_get_jpeg_dimensions`), the inline Cloudflare-bypass `<script>` tag in the Plyr enqueuer, and the transient-cleanup direct-DB call. The audit-deferred warning tail (REST nonce annotations, superglobal-input sanitisation, db-caching, footer-flag enqueues) rides this submission with `ignore-warnings: true` on the action's pass/fail logic; warnings still surface in the JSON report for review.
 
 = 3.0-rc5 =
 
