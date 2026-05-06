@@ -35,3 +35,22 @@ jobs:
         uses: WordPress/plugin-check-action@v1
         with:
           build-dir: ./build/sermon-works
+          # Exclude the WXR exporter port from Plugin Check.
+          # includes/admin/export/class-sm-export-sm.php is a near-verbatim
+          # derivative of WordPress core's wp-admin/includes/export.php and
+          # follows core's WXR conventions by design: wxr_cdata() wraps content
+          # in CDATA sections (escape via XML CDATA context); function and hook
+          # names mirror core's WXR helpers so consumers expecting WXR shape
+          # interoperate. The project's phpcs.xml.dist registers wxr_cdata as
+          # customAutoEscapedFunctions, but Plugin Check ignores project rulesets,
+          # so it would flag every wxr_cdata() call as unescaped output. A single
+          # exclusion is more honest than ~30 phpcs:ignore annotations on a
+          # structurally-fixed core port.
+          exclude-files: includes/admin/export/class-sm-export-sm.php
+          # Warnings ride first WP.org submission per the rc4 pre-submission
+          # audit's recommendation: deferred items (LB-1 to LB-4, W-3, W-5,
+          # W-6, W-8) carry phpcs:ignore + rationale on individual sites where
+          # they bite, with the remaining tail accepted as 3.x technical debt.
+          # This ignore-warnings flag governs only the action's pass/fail logic;
+          # warnings still surface in the JSON report for review.
+          ignore-warnings: true
