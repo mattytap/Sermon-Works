@@ -1,7 +1,7 @@
 # Plugin Check findings summary
 
 **Snapshot baseline:** v3.0-rc4 (Plugin Check workflow run on 2026-05-01).
-**Current state on `main`:** v3.0-rc6. **Bucket B closed in rc5; Plugin Check CI gate closed in rc6.** See § rc6 update and § rc5 update below.
+**Current state on `main`:** v3.0 (3.0 stable cut at `a48d422`; comment-only against rc6). **Bucket B closed in rc5; Plugin Check CI gate closed in rc6.** See § rc6 update and § rc5 update below.
 
 **Latest captured run:** GitHub Actions workflow `plugin-check.yml`, run ID 25227901173, 2026-05-01.
 **Plugin Check Action:** `WordPress/plugin-check-action@v1`.
