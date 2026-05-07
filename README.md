@@ -6,9 +6,9 @@ A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Ser
 
 ## Install
 
-The current release is **3.0-rc6** (release candidate). Production sites should wait for 3.0 stable; pilot and test installs are welcome now.
+The current release is **3.0**.
 
-1. Open the [Releases page](https://github.com/mattytap/Sermon-Works/releases) and download `sermon-works-3.0-rc6.zip` from the latest release.
+1. Open the [Releases page](https://github.com/mattytap/Sermon-Works/releases) and download `sermon-works-3.0.zip` from the latest release.
 2. In WordPress admin, go to **Plugins, Add New, Upload Plugin**.
 3. Choose the ZIP, click **Install Now**, then **Activate**.
 
@@ -18,12 +18,12 @@ Requires PHP 8.1+ and WordPress 6.0+.
 
 ## Status
 
-Currently in 3.0 release-candidate cycle. Latest tag: `3.0-rc6`.
+Latest tag: `3.0`. WordPress.org submission pending.
 
 - **Security audit complete.** 25 issues filed on the [tracker](https://github.com/mattytap/Sermon-Works/issues), including three publicly-disclosed CVEs (CVE-2025-12368, CVE-2025-63000, CVE-2025-63002). All filed findings have shipping patches; operational verification at formal UAT closes each issue.
 - **Modernisation complete.** Codebase brought up to current PHP and WordPress APIs. PHP 8.1+ floor, WordPress 6.0+ floor.
 - **Drop-in compatibility preserved.** `wpfc_sermon` post type, `wpfc_*` taxonomies and option keys, and shortcode output structure unchanged from Sermon Manager 2.15.16.
-- **WordPress.org submission planned for 3.0 stable.** Gated on UAT sign-off.
+- **WordPress.org submission queued.** UAT cleared at 3.0-rc5; Plugin Check CI cleared at 3.0-rc6; 3.0 stable cut.
 
 ## Who is Sermon Works for?
 
