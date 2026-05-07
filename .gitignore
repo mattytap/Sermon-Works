@@ -11,3 +11,4 @@ CLAUDE.md
 dist/
 .restoration/plugin-check/
 .restoration/pre-submission-*/
+.restoration/_archive/

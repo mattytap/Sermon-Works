@@ -2,6 +2,12 @@
 > Classified catalog of open issues and PRs from the abandoned `WP-for-Church/Sermon-Manager` upstream. This is Claude Code's working backlog for the restoration.
 *Generated 2026-04-23 from upstream state as of scrape time. 78 open issues, 11 open PRs.*
 
+---
+
+> **Status (2026-05-07):** Historical baseline scrape. Not maintained as a live backlog — use `gh issue list --repo mattytap/Sermon-Works` for current state. Carryover since capture: PR #274 (Brian Freytag), PR #292 (Tim Stephenson), and PR #264 (Raphael Jorel) ingested in v3.0-rc2 with original-author preservation. PR #273 (`sermon_video_embed` rename) deferred to 3.x as breaking-without-migrator. 12 first-pass upstream bugs migrated to local tracker as #1–#12 (all `scope: deferred`, 3.x backlog). Security audit folded into `security-audit-findings.md`; modernisation pass folded into `modernisation-findings.md`; Stream B vendor surgery into `stream-b-plan.md`. The 66 unmigrated upstream issues remain optional triage and the catalogue below is the reference for that work.
+
+---
+
 ## Legend
 - **Scope `First-pass`**: bugs and security — the maintainer's stated priority is 'fix not change in first instance'
 - **Scope `Deferred`**: features and enhancements — revisit after first-pass security + bug fixes land
