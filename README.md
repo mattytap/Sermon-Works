@@ -2,7 +2,7 @@
 
 > Sola fide. Fully featured.
 
-A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) — a WordPress plugin that helps churches publish sermons online. Originally by WP-for-Church, last published to WordPress.org as version 2.30.0 in September 2024; the upstream maintainer's web presence is no longer reachable, and several publicly-disclosed CVEs against the upstream remain unpatched. Sermon Works is the maintained successor line.
+A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) — a WordPress plugin that helps churches publish sermons online. Originally by WP-for-Church alongside a paid Pro tier; public development on GitHub stopped in early 2019, but free-version releases continued privately to WordPress.org for another five years, ending at 2.30.0 in September 2024. The upstream maintainer's web presence is no longer reachable, and three publicly-disclosed CVEs against the WordPress.org-shipped version remain unpatched. Sermon Works is the maintained successor line.
 
 ## Install
 
@@ -38,6 +38,8 @@ Three audiences are particularly in scope.
 ## Why "Sermon Works"?
 
 The strapline gives it away if you know the territory. Beyond the joke, the name signals **caretaker restoration** rather than new brand: existing Sermon Manager users encountering Sermon Works should recognise it as the same line of work, modernised — not a competitor or a replacement they have to evaluate from scratch.
+
+What we're restoring isn't quite the "abandoned 2019 plugin" story it might initially look like. WP-for-Church kept the free version on WordPress.org through eleven releases between 2019 and 2024, alongside a paid Pro tier. Bundled vendor libraries weren't kept current and the security backlog wasn't worked; three CVEs disclosed in late 2025 against the WordPress.org-shipped version remain unpatched. So Sermon Works is more accurately a caretaker for the 2024 plugin than the 2019 one — for the churches and volunteers who relied on the free version.
 
 ## Principles
 
