@@ -14,3 +14,4 @@ dist/
 .restoration/_archive/
 .restoration/upstream-2.15.16-snapshot/
 .restoration/upstream-2.30.0-snapshot/
+.restoration/wporg-swap-note.md
