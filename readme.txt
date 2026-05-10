@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.1
-Stable tag: 3.0
+Stable tag: 3.0.1
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,21 @@ Sermon Works is a restoration of [Sermon Manager for WordPress](https://wordpres
 
 == Changelog ==
 
+= 3.0.1 =
+
+Drop-in compatibility cherry-picks from upstream Sermon Manager 2.30.0 (the last WP.org-shipped version of the original plugin), informed by a 10-surface compatibility audit against the 2.30.0 baseline (`.restoration/DROP-IN-AUDIT.md`):
+
+* Multi-attachments for notes and bulletin: the front-end view template now renders the `sermon_notes_multiple` and `sermon_bulletin_multiple` arrays alongside the singular keys. Existing 2.30.0 sites that ran the upstream multi-attachments migration have data in the `_multiple` keys; this restores their visibility on the front-end. Two new `file_list` CMB2 fields ("Sermon Notes (multiple)", "Bulletin (multiple)") are added to the Sermon Files metabox so Sermon Works admins can also create new multi-attachments themselves.
+* Post-body editor support: `'editor'` is added to the `wpfc_sermon` post type's `supports` array, enabling the WordPress block (or classic) editor on the edit-sermon screen. The Sermon Works rendering model continues to use `sermon_description` plus the `the_content` filter; existing sermons render unchanged. New sermons created post-3.0.1 can populate `post_content` via the editor pane in addition to `sermon_description`.
+* Twenty Twenty-Four theme wrapper: the theme-specific archive wrapper now has a balanced `twentytwentyfour` case opening `<div class="wp-block-group has-global-padding is-layout-constrained ..."><div id="primary"><main class="site-main wpfc-sermon-container wpfc-twentytwentyfour ...">` and the matching close in the wrapper-end partial. Upstream 2.30.0 ships unbalanced (no matching close); Sermon Works ships balanced.
+
+Three upstream changes from 2.30.0 are deliberately not cherry-picked, with rationale documented in `.restoration/DROP-IN-AUDIT.md`:
+
+* The full editor-support cluster (REST surface change, `the_content` filter disablement, AJAX `update_sermon_posts` migration with "Sync Now" button): the upstream rendering-model swap from `sermon_description` to `post_content` is invasive, partial cherry-picks risk broken rendering, and the upstream migration has quality issues (missing capability check, debug residue, no rollback UI). Sermon Works keeps the sermon_description-based rendering model.
+* The `[latest_sermon]` shortcode: the upstream handler has three known bugs (orderby attribute silently ignored due to a typo in query-args assembly, duplicate HTML id on a nested div, static-property side effects that persist across requests). Use `[sermons per_page="N" order="DESC" orderby="date"]` for the same effect.
+
+Framing correction in README and readme.txt: the original Sermon Manager line was actively maintained on WordPress.org through September 2024 (last published version 2.30.0). The "abandoned since 2019" framing in pre-3.0.1 docs was based on the GitHub state and missed the WP.org line.
+
 = 3.0 =
 
 3.0 stable cut. No runtime changes against rc6 — this entry promotes the release-candidate cycle to stable, capping the restoration arc that began in rc1.
@@ -155,6 +170,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Sermon-Works/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.0.1 =
+
+Drop-in compatibility cherry-picks from upstream 2.30.0: multi-attachments rendering for notes and bulletin (closes a render gap on sites that ran the upstream multi-attachments migration), post-body editor support, and Twenty Twenty-Four theme wrapper. Database and front-end render unchanged for existing sites.
 
 = 3.0 =
 
