@@ -30,10 +30,14 @@ if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 	 */
 	function add_wpfc_sermon_content( $content ) {
 		if ( 'wpfc_sermon' === get_post_type() && in_the_loop() == true ) {
+			$editor_content = $content;
 			if ( ! is_feed() && ( is_archive() || is_search() ) ) {
 				$content = wpfc_sermon_excerpt_v2( true );
 			} elseif ( is_singular() && is_main_query() ) {
 				$content = wpfc_sermon_single_v2( true );
+				if ( '' !== trim( wp_strip_all_tags( $editor_content ) ) ) {
+					$content .= "\n" . '<div class="wpfc-sermon-editor-content">' . $editor_content . '</div>';
+				}
 			}
 		}
 
