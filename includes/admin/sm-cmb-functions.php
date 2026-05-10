@@ -129,6 +129,15 @@ function wpfc_sermon_metaboxes() {
 		),
 	) );
 	$sermon_files_meta->add_field( array(
+		'name' => esc_html__( 'Sermon Notes (multiple)', 'sermon-works' ),
+		'desc' => esc_html__( 'Upload one or more PDF files. Use this when a sermon has more than one notes attachment.', 'sermon-works' ),
+		'id'   => 'sermon_notes_multiple',
+		'type' => 'file_list',
+		'text' => array(
+			'add_upload_files_text' => esc_html__( 'Add Files', 'sermon-works' ),
+		),
+	) );
+	$sermon_files_meta->add_field( array(
 		'name' => esc_html__( 'Bulletin', 'sermon-works' ),
 		'desc' => esc_html__( 'Upload a pdf file or enter an URL.', 'sermon-works' ),
 		'id'   => 'sermon_bulletin',
@@ -136,6 +145,15 @@ function wpfc_sermon_metaboxes() {
 		'text' => array(
 			'add_upload_file_text' => esc_html__( 'Add File', 'sermon-works' ),
 			// Change upload button text. Default: "Add or Upload File".
+		),
+	) );
+	$sermon_files_meta->add_field( array(
+		'name' => esc_html__( 'Bulletin (multiple)', 'sermon-works' ),
+		'desc' => esc_html__( 'Upload one or more PDF files. Use this when a sermon has more than one bulletin attachment.', 'sermon-works' ),
+		'id'   => 'sermon_bulletin_multiple',
+		'type' => 'file_list',
+		'text' => array(
+			'add_upload_files_text' => esc_html__( 'Add Files', 'sermon-works' ),
 		),
 	) );
 
