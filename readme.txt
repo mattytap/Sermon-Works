@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.1
-Stable tag: 3.0.1
+Stable tag: 3.0.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,14 @@ Sermon Works is a restoration of [Sermon Manager for WordPress](https://wordpres
 
 == Changelog ==
 
+= 3.0.2 =
+
+Editor-pane render fix following the 3.0.1 cherry-pick of `'editor'` into the `wpfc_sermon` post type's `supports` array. In 3.0.1 the WordPress block (or classic) editor pane was visible on the edit-sermon screen but content typed there did not reach the front-end: the `add_wpfc_sermon_content` callback that drives the `the_content` filter for sermon posts replaced the post body entirely with the sermon-template render, discarding `post_content`. Site administrators reaching for the editor pane first (the natural place for any WordPress user) would publish a sermon and see their typed content vanish on the public page.
+
+3.0.2 closes this. The callback now preserves the incoming `post_content` and, on singular sermon views where it is non-empty, appends it after the sermon-template render in a `<div class="wpfc-sermon-editor-content">` wrapper that themes can target. Existing sermons (whose body content lives in the `sermon_description` post meta key, not in `post_content`) are unaffected: their `post_content` is empty, the conditional skip fires, and the front-end render is byte-identical to 3.0.1. New sermons authored via the editor pane now render their content alongside the legacy `sermon_description` rendering.
+
+No security delta against 3.0.1; no API surface changes; no data migration. Single-file change in `includes/sm-template-functions.php`.
+
 = 3.0.1 =
 
 Drop-in compatibility cherry-picks from upstream Sermon Manager 2.30.0 (the last WP.org-shipped version of the original plugin), informed by a 10-surface compatibility audit against the 2.30.0 baseline (`.restoration/DROP-IN-AUDIT.md`):
@@ -170,6 +178,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Sermon-Works/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.0.2 =
+
+Editor-pane render fix following 3.0.1. Content typed into the WordPress editor on the edit-sermon screen now renders on the front-end alongside the existing `sermon_description` rendering. Existing sermons unaffected; no data migration.
 
 = 3.0.1 =
 
