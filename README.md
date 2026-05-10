@@ -2,7 +2,7 @@
 
 > Sola fide. Fully featured.
 
-A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) — a WordPress plugin that helps churches publish sermons online — left dormant by its original maintainers, [WP-for-Church](https://wpforchurch.com/), since 2019.
+A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) — a WordPress plugin that helps churches publish sermons online. Originally by WP-for-Church, last published to WordPress.org as version 2.30.0 in September 2024; the upstream maintainer's web presence is no longer reachable, and several publicly-disclosed CVEs against the upstream remain unpatched. Sermon Works is the maintained successor line.
 
 ## Install
 
@@ -22,7 +22,7 @@ Latest tag: `3.0`. WordPress.org submission pending.
 
 - **Security audit complete.** 25 issues filed on the [tracker](https://github.com/mattytap/Sermon-Works/issues), including three publicly-disclosed CVEs (CVE-2025-12368, CVE-2025-63000, CVE-2025-63002). All filed findings have shipping patches; operational verification at formal UAT closes each issue.
 - **Modernisation complete.** Codebase brought up to current PHP and WordPress APIs. PHP 8.1+ floor, WordPress 6.0+ floor.
-- **Drop-in compatibility preserved.** `wpfc_sermon` post type, `wpfc_*` taxonomies and option keys, and shortcode output structure unchanged from Sermon Manager 2.15.16.
+- **Drop-in compatibility against 2.30.0.** The `wpfc_sermon` post type, `wpfc_*` taxonomies, core option keys, six shortcodes, and view-template surface match the WP.org-shipped 2.30.0 line. Multi-attachments for notes and bulletin, post-body editor support, and the Twenty Twenty-Four theme wrapper are cherry-picked from upstream 2.30.0; a small set of upstream changes are documented as gaps with rationale. See [`.restoration/DROP-IN-AUDIT.md`](.restoration/DROP-IN-AUDIT.md) for the full classification.
 - **WordPress.org submission queued.** UAT cleared at 3.0-rc5; Plugin Check CI cleared at 3.0-rc6; 3.0 stable cut.
 
 ## Who is Sermon Works for?
@@ -44,7 +44,7 @@ The strapline gives it away if you know the territory. Beyond the joke, the name
 These shape what gets accepted and what gets shipped.
 
 - **Fix not change.** For code that already works, the bar to alter behaviour is high; the bar to fix bugs and security holes is low. Sermon Works exists to take care of an existing codebase, not to redesign it.
-- **Drop-in compatibility.** Existing Sermon Manager installations should be able to switch to Sermon Works and have everything keep working. The `wpfc_sermon` custom post type, the `wpfc_preacher` and `wpfc_sermon_series` taxonomies, and all `wpfc_*` option keys are preserved deliberately.
+- **Drop-in compatibility against 2.30.0.** Existing Sermon Manager installations should be able to switch to Sermon Works and have data and front-end render keep working. The `wpfc_sermon` custom post type, the `wpfc_preacher` and `wpfc_sermon_series` taxonomies, and all `wpfc_*` option keys are preserved deliberately. Where 2.30.0 added features beyond the 2.15.16 GitHub baseline Sermon Works forked from, upstream surface is either cherry-picked or documented as a gap with rationale. The audit reference is [`.restoration/DROP-IN-AUDIT.md`](.restoration/DROP-IN-AUDIT.md).
 - **Attribution preserved.** Upstream authors retain their place in the git commit history; ingested upstream Pull Requests preserve the original author as commit author. See [CONTRIBUTORS.md](CONTRIBUTORS.md) for the human-readable record and [`.restoration/ATTRIBUTION-PLAN.md`](.restoration/ATTRIBUTION-PLAN.md) for the methodology.
 - **Security-first, in public.** Audit findings are filed on the tracker as issues, fixed via tracked commits, and credited in release notes. New vulnerability reports go through [SECURITY.md](SECURITY.md)'s private disclosure channel first; coordinated disclosure protects existing Sermon Manager installs that may share the same code path.
 
