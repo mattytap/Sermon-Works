@@ -54,6 +54,9 @@ switch ( $template ) {
 	case 'twentynineteen':
 		echo '</main></section>';
 		break;
+	case 'twentytwentyfour':
+		echo '</main></div></div>';
+		break;
 	case 'Divi':
 		echo '</main>';
 		if ( ! apply_filters( 'sm_disable_sidebar', false ) ) {
