@@ -272,10 +272,16 @@ class SermonManager { // phpcs:ignore
 	/**
 	 * Load plugin translations
 	 *
+	 * Body intentionally empty: WordPress.org auto-loads translations for
+	 * hosted plugins from /languages/, and switch_to_locale() triggers a
+	 * change_locale action that reloads loaded text domains for the new
+	 * locale. The method itself stays as a hook anchor for the
+	 * after_setup_theme registration and for the two sm_switch_to_*_locale
+	 * callers in includes/sm-core-functions.php.
+	 *
 	 * @return void
 	 */
 	public static function load_translations() {
-		load_plugin_textdomain( 'mattytap-sermons', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 	}
 
 	/**
