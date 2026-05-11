@@ -323,31 +323,24 @@ class SermonManager { // phpcs:ignore
 
 				break;
 			case 'plyr':
-				wp_localize_script(
+				$sm_data = array(
+					'debug'                    => defined( 'WP_DEBUG' ) && WP_DEBUG === true ? 1 : 0,
+					'use_native_player_safari' => SermonManager::getOption( 'use_native_player_safari', false ) ? 1 : 0,
+				);
+				wp_add_inline_script(
 					'wpfc-sm-plyr-loader',
-					'sm_data',
-					array(
-						'debug'                    => defined( 'WP_DEBUG' ) && WP_DEBUG === true ? 1 : 0,
-						'use_native_player_safari' => SermonManager::getOption( 'use_native_player_safari', false ) ? 1 : 0,
-					)
+					'var sm_data = ' . wp_json_encode( $sm_data ) . ';',
+					'before'
 				);
 
 				if ( SermonManager::getOption( 'disable_cloudflare_plyr' ) ) {
-					global $wp_scripts;
-
-					$GLOBALS['sm_plyr_scripts'] = array(
-						'wpfc-sm-plyr-loader' => $wp_scripts->registered['wpfc-sm-plyr-loader'],
-						'wpfc-sm-plyr'        => $wp_scripts->registered['wpfc-sm-plyr'],
-					);
-
-					add_action( 'wp_print_scripts', array( __CLASS__, 'maybe_print_cloudflare_plyr' ) );
-					add_action( 'wp_print_footer_scripts', array( __CLASS__, 'maybe_print_cloudflare_plyr' ) );
-				} else {
-					// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
-					wp_enqueue_script( 'wpfc-sm-plyr' );
-					// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
-					wp_enqueue_script( 'wpfc-sm-plyr-loader' );
+					add_filter( 'script_loader_tag', array( __CLASS__, 'filter_cloudflare_plyr_tag' ), 10, 2 );
 				}
+
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
+				wp_enqueue_script( 'wpfc-sm-plyr' );
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
+				wp_enqueue_script( 'wpfc-sm-plyr-loader' );
 
 				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 				wp_enqueue_style( 'wpfc-sm-plyr-css' );
@@ -385,7 +378,11 @@ class SermonManager { // phpcs:ignore
 			 */
 			$verse_popup_data = apply_filters( 'sm_verse_popup_data', $verse_popup_data );
 
-			wp_localize_script( 'wpfc-sm-verse-script', 'verse', $verse_popup_data );
+			wp_add_inline_script(
+				'wpfc-sm-verse-script',
+				'var verse = ' . wp_json_encode( $verse_popup_data ) . ';',
+				'before'
+			);
 		}
 
 		// Do not enqueue twice.
@@ -469,30 +466,20 @@ class SermonManager { // phpcs:ignore
 	}
 
 	/**
-	 * Workaround for Cloudflare caching.
+	 * Inject data-cfasync="false" on Plyr script tags to opt out of Cloudflare's Rocket Loader.
 	 *
 	 * @since 2.15.2
+	 *
+	 * @param string $tag    The full <script> tag as built by WP.
+	 * @param string $handle The enqueued script handle.
+	 *
+	 * @return string The script tag, possibly with data-cfasync="false" injected.
 	 */
-	public static function maybe_print_cloudflare_plyr() {
-		if ( defined( 'SM_CLOUDFLARE_DONE' ) ) {
-			return;
+	public static function filter_cloudflare_plyr_tag( $tag, $handle ) {
+		if ( 'wpfc-sm-plyr' !== $handle && 'wpfc-sm-plyr-loader' !== $handle ) {
+			return $tag;
 		}
-
-		if ( ! isset( $GLOBALS['sm_plyr_scripts'] ) ) {
-			return;
-		}
-
-		foreach ( $GLOBALS['sm_plyr_scripts'] as $script ) {
-			// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- Manually emitted with the data-cfasync="false" attribute to opt out of Cloudflare's Rocket Loader; wp_enqueue_script doesn't expose arbitrary script-tag attributes without a script_loader_tag filter, which would add complexity for the same end result.
-			echo '<script type="text/javascript" data-cfasync="false" src="' . esc_url( $script->src ) . '"></script>';
-
-			if ( ! empty( $script->extra ) ) {
-				/* @noinspection BadExpressionStatementJS */
-				echo "<script type='text/javascript'>\n" . $script->extra['data'] . "\n</script>\n"; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Inline JS body from wp_localize_script() data property; already serialised by WP core.
-			}
-		}
-
-		define( 'SM_CLOUDFLARE_DONE', true );
+		return str_replace( '<script ', '<script data-cfasync="false" ', $tag );
 	}
 
 	/**
