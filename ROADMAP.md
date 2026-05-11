@@ -1,16 +1,16 @@
 # ROADMAP
 
-A working backlog of features under consideration for **Sermon Works**. None of these are commitments.
+A working backlog of features under consideration for **Mattytap Sermons**. None of these are commitments.
 
-Sermon Works is a caretaker restoration. The aim is not to be the most-featured sermon plugin in the space, but to keep an abandoned and security-vulnerable codebase running for the churches still relying on it. Best-practice contributions (security hardening, accessibility, performance, Gutenberg block support) have a clear path. Radical scope changes (rebrands, pivots into adjacent niches) do not.
+Mattytap Sermons is a caretaker restoration. The aim is not to be the most-featured sermon plugin in the space, but to keep an abandoned and security-vulnerable codebase running for the churches still relying on it. Best-practice contributions (security hardening, accessibility, performance, Gutenberg block support) have a clear path. Radical scope changes (rebrands, pivots into adjacent niches) do not.
 
 There is no paid tier and no plan to introduce one. The plugin is, and will remain, free and GPLv2.
 
-For known bugs and security findings, see the [issue tracker](https://github.com/mattytap/Sermon-Works/issues). For how to propose a new feature, see [CONTRIBUTING.md](.github/CONTRIBUTING.md).
+For known bugs and security findings, see the [issue tracker](https://github.com/mattytap/Mattytap-Sermons/issues). For how to propose a new feature, see [CONTRIBUTING.md](.github/CONTRIBUTING.md).
 
 ## 3.0: restoration release
 
-The first stable Sermon Works release. Closes out the restoration scope:
+The first stable Mattytap Sermons release. Closes out the restoration scope:
 
 - All security audit findings (`#13`–`#37`) shipping with patches.
 - Codebase modernised against current PHP (8.1+ floor) and WordPress (6.0+ floor) APIs.
@@ -48,4 +48,4 @@ Areas of interest with no committed timeline.
 
 ## How to nominate a feature
 
-Open an [issue](https://github.com/mattytap/Sermon-Works/issues/new/choose) and make the case. The bar for adding a new feature is higher than the bar for fixing a bug. Sermon Works is a caretaker restoration and "fix not change" is the working stance. Requests aligned with current best practice (accessibility, performance, modern WordPress APIs) have the clearest path; radical scope changes will be declined. See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for what makes a strong feature request.
+Open an [issue](https://github.com/mattytap/Mattytap-Sermons/issues/new/choose) and make the case. The bar for adding a new feature is higher than the bar for fixing a bug. Mattytap Sermons is a caretaker restoration and "fix not change" is the working stance. Requests aligned with current best practice (accessibility, performance, modern WordPress APIs) have the clearest path; radical scope changes will be declined. See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for what makes a strong feature request.

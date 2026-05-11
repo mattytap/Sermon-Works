@@ -1,14 +1,14 @@
-# Contributing to Sermon Works
+# Contributing to Mattytap Sermons
 
-Thanks for considering a contribution. Sermon Works is a caretaker restoration of WP-for-Church's [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) plugin, currently in 3.0 release-candidate cycle. Contributions are welcome — and shaped by the project's stance: **fix not change** for code that already works, with security and correctness prioritised over feature additions.
+Thanks for considering a contribution. Mattytap Sermons is a caretaker restoration of WP-for-Church's [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) plugin, currently in 3.0 release-candidate cycle. Contributions are welcome — and shaped by the project's stance: **fix not change** for code that already works, with security and correctness prioritised over feature additions.
 
 By participating, you agree to abide by the [Code of Conduct](../CODE_OF_CONDUCT.md).
 
 ## Before you start
 
-1. **Check the [issue tracker](https://github.com/mattytap/Sermon-Works/issues) first.** Many bugs are already filed and many feature ideas are already on the [ROADMAP](../ROADMAP.md) as no-commitment backlog items.
+1. **Check the [issue tracker](https://github.com/mattytap/Mattytap-Sermons/issues) first.** Many bugs are already filed and many feature ideas are already on the [ROADMAP](../ROADMAP.md) as no-commitment backlog items.
 2. **Open an issue before opening a PR for non-trivial changes.** A short description of what you are proposing — and why — is faster than writing code that may not fit. Trivial fixes (typos, comment corrections, obvious one-line bug fixes) are fine to PR directly.
-3. **Security findings go through [SECURITY.md](../SECURITY.md), not the public issue tracker.** Sermon Works is tracking security work openly, but new findings need private disclosure first so existing Sermon Manager installations aren't exposed.
+3. **Security findings go through [SECURITY.md](../SECURITY.md), not the public issue tracker.** Mattytap Sermons is tracking security work openly, but new findings need private disclosure first so existing Sermon Manager installations aren't exposed.
 
 ## Branching and commits
 
@@ -22,7 +22,7 @@ Commit style:
 
 ## Attribution for ingested upstream work
 
-Sermon Works preserves attribution to the original Sermon Manager authors at both the file level (existing PHPDoc tags retained) and the commit level (when ingesting upstream Pull Requests, the original author is preserved as git commit author). See [`.restoration/ATTRIBUTION-PLAN.md`](../.restoration/ATTRIBUTION-PLAN.md) for the methodology.
+Mattytap Sermons preserves attribution to the original Sermon Manager authors at both the file level (existing PHPDoc tags retained) and the commit level (when ingesting upstream Pull Requests, the original author is preserved as git commit author). See [`.restoration/ATTRIBUTION-PLAN.md`](../.restoration/ATTRIBUTION-PLAN.md) for the methodology.
 
 If your contribution picks up someone else's prior work, please add `Co-authored-by:` trailers so the credit is preserved and reflected in [CONTRIBUTORS.md](../CONTRIBUTORS.md).
 
@@ -45,8 +45,8 @@ PHPUnit is configured (`phpunit.xml.dist`) but the WordPress test harness is not
 
 ## Translations
 
-Translations will be coordinated via WordPress.org's GlotPress once Sermon Works is published there. The translation pipeline is not live yet.
+Translations will be coordinated via WordPress.org's GlotPress once Mattytap Sermons is published there. The translation pipeline is not live yet.
 
 ## Questions?
 
-Open a [GitHub Discussion](https://github.com/mattytap/Sermon-Works/discussions) or an issue tagged `question`. The maintainer is [@mattytap](https://github.com/mattytap).
+Open a [GitHub Discussion](https://github.com/mattytap/Mattytap-Sermons/discussions) or an issue tagged `question`. The maintainer is [@mattytap](https://github.com/mattytap).
