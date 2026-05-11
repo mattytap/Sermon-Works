@@ -80,7 +80,7 @@ if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 			} elseif ( is_singular() && is_main_query() ) {
 				$content = wpfc_sermon_single_v2( true );
 				if ( '' !== trim( wp_strip_all_tags( $editor_content ) ) ) {
-					$content .= "\n" . '<div class="wpfc-sermon-editor-content">' . $editor_content . '</div>';
+					$content .= "\n" . '<div class="wpfc-sermon-editor-content">' . wp_kses_post( $editor_content ) . '</div>';
 				}
 			}
 		}

@@ -120,9 +120,10 @@ class SM_Shortcodes {
 					if ( ! empty( $url ) ) {
 						// Set default labels.
 						if ( 'itunes' === $key ) {
-							$label = 'Subscribe using iTunes';
+							$label = __( 'Subscribe using iTunes', 'mattytap-sermons' );
 						} else {
-							$label = 'Subscribe using ' . ucwords( $key );
+							/* translators: %s: Podcast service name (e.g. Android, Overcast). */
+							$label = sprintf( __( 'Subscribe using %s', 'mattytap-sermons' ), ucwords( $key ) );
 						}
 
 						// Allow custom labels.
@@ -134,7 +135,7 @@ class SM_Shortcodes {
 				}
 				echo '</ul>';
 			} else {
-				echo 'No podcast services have been specified. Please check your include/exclude settings.';
+				echo esc_html__( 'No podcast services have been specified. Please check your include/exclude settings.', 'mattytap-sermons' );
 			}
 
 			// Return output.
@@ -143,7 +144,7 @@ class SM_Shortcodes {
 			$content = '';
 		}
 
-		return $content;
+		return wp_kses_post( $content );
 	}
 
 	/**
