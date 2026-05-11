@@ -102,7 +102,7 @@ class SM_Export_SM {
 		 */
 		function wxr_cdata( $str ) {
 			if ( wp_is_valid_utf8( $str ) == false ) {
-				$str = utf8_encode( $str );
+				$str = mb_convert_encoding( $str, 'UTF-8', 'ISO-8859-1' );
 			}
 
 			$str = '<![CDATA[' . str_replace( ']]>', ']]]]><![CDATA[>', $str ) . ']]>';
