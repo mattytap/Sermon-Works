@@ -1,4 +1,4 @@
-=== Sermon Works ===
+=== Mattytap Sermons ===
 Contributors: mattytap
 Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
@@ -8,15 +8,15 @@ Stable tag: 3.0.2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Sola fide. Fully featured. A maintained restoration of Sermon Manager — publish, organise, and podcast sermons on a WordPress site.
+Faithful to the source. A maintained restoration of Sermon Manager — publish, organise, and podcast sermons on a WordPress site.
 
 == Description ==
 
-Sermon Works lets a church publish sermons online with the structure they actually need: speakers, series, topics, books of the Bible, and service types — all as proper WordPress taxonomies, all searchable, all filterable. Add audio and video, attach handouts (PDF, DOC, PPT, anything), embed video from YouTube or Vimeo, and ship a fully-featured iTunes-compatible podcast feed for the whole library or for any individual series, speaker, topic, or book.
+Mattytap Sermons lets a church publish sermons online with the structure they actually need: speakers, series, topics, books of the Bible, and service types — all as proper WordPress taxonomies, all searchable, all filterable. Add audio and video, attach handouts (PDF, DOC, PPT, anything), embed video from YouTube or Vimeo, and ship a fully-featured iTunes-compatible podcast feed for the whole library or for any individual series, speaker, topic, or book.
 
-Sermon Works is a maintained restoration of [Sermon Manager](https://wordpress.org/plugins/sermon-manager-for-wordpress/) by WP for Church. The original plugin was last published to WordPress.org in September 2024 (version 2.30.0); the upstream maintainer's web presence is no longer reachable, and several publicly-disclosed CVEs remain unpatched in 2.30.0 and earlier. Sermon Works is the successor line. Existing Sermon Manager installs (including 2.30.0) can switch to Sermon Works as a drop-in replacement: the database schema, custom post type (`wpfc_sermon`), taxonomies (`wpfc_preacher`, `wpfc_sermon_series`, etc.), all `wpfc_*` option keys, six core shortcodes, and view templates are preserved. Multi-attachments for notes and bulletin, post-body editor support, and Twenty Twenty-Four theme wrapper are cherry-picked from upstream 2.30.0.
+Mattytap Sermons is a maintained restoration of [Sermon Manager](https://wordpress.org/plugins/sermon-manager-for-wordpress/) by WP for Church. The original plugin was last published to WordPress.org in September 2024 (version 2.30.0); the upstream maintainer's web presence is no longer reachable, and several publicly-disclosed CVEs remain unpatched in 2.30.0 and earlier. Mattytap Sermons is the successor line. Existing Sermon Manager installs (including 2.30.0) can switch to Mattytap Sermons as a drop-in replacement: the database schema, custom post type (`wpfc_sermon`), taxonomies (`wpfc_preacher`, `wpfc_sermon_series`, etc.), all `wpfc_*` option keys, six core shortcodes, and view templates are preserved. Multi-attachments for notes and bulletin, post-body editor support, and Twenty Twenty-Four theme wrapper are cherry-picked from upstream 2.30.0.
 
-= What Sermon Works preserves =
+= What Mattytap Sermons preserves =
 
 * Same shortcodes (`[sermons]`, `[sermon_images]`, `[list_podcasts]`, `[list_sermons]`, `[latest_series]`, `[sermon_sort_fields]`)
 * Same custom post type and taxonomies — existing sermon data carries over without import
@@ -24,12 +24,12 @@ Sermon Works is a maintained restoration of [Sermon Manager](https://wordpress.o
 * Same Bib.ly Bible-reference integration
 * Same iTunes-compatible podcast feeds
 
-= What's new in Sermon Works =
+= What's new in Mattytap Sermons =
 
-* Active security maintenance, with [private vulnerability reporting](https://github.com/mattytap/Sermon-Works/security) for responsible disclosure
+* Active security maintenance, with [private vulnerability reporting](https://github.com/mattytap/Mattytap-Sermons/security) for responsible disclosure
 * Modernised for PHP 8.1+ and WordPress 6.0+
 * Bundled outdated third-party dependencies removed or upgraded (CMB2, wp-background-processing, the entry-views polyfill, taxonomy-images)
-* Continuing development on [GitHub](https://github.com/mattytap/Sermon-Works)
+* Continuing development on [GitHub](https://github.com/mattytap/Mattytap-Sermons)
 
 = Popular shortcodes =
 
@@ -43,18 +43,18 @@ Sermon Works is a maintained restoration of [Sermon Manager](https://wordpress.o
 
 == Installation ==
 
-1. Use the "Add New" button in the Plugins section of your WordPress dashboard. Search for "Sermon Works".
+1. Use the "Add New" button in the Plugins section of your WordPress dashboard. Search for "Mattytap Sermons".
 2. Activate the plugin.
 3. Add a sermon through the dashboard.
 4. Display sermons on the front end via shortcode (`[sermons]` in any page or post), or by visiting `https://yourdomain.example/sermons` (with pretty permalinks enabled) or `https://yourdomain.example/?post_type=wpfc_sermon` (without).
 
 = Migrating from Sermon Manager =
 
-If you have an existing Sermon Manager install, install and activate Sermon Works, then deactivate Sermon Manager. All your sermons, speakers, series, topics, and settings carry over without further action — the two plugins use the same database schema. Don't run both at once; the schema overlap will cause conflicts.
+If you have an existing Sermon Manager install, install and activate Mattytap Sermons, then deactivate Sermon Manager. All your sermons, speakers, series, topics, and settings carry over without further action — the two plugins use the same database schema. Don't run both at once; the schema overlap will cause conflicts.
 
 = Migrating from Sermon Browser or Series Engine =
 
-Sermon Works inherits Sermon Manager's import functionality for these older sermon plugins. Once Sermon Works is activated, the importer is available under Tools → Import.
+Mattytap Sermons inherits Sermon Manager's import functionality for these older sermon plugins. Once Mattytap Sermons is activated, the importer is available under Tools → Import.
 
 == Frequently Asked Questions ==
 
@@ -68,15 +68,15 @@ Go to Appearance → Menus. In "Custom Links" add `https://yourdomain.example/?p
 
 = I'm coming from Sermon Manager. Will my sermons survive? =
 
-Yes. Sermon Works uses the same database schema, custom post type, taxonomies, and option keys as Sermon Manager. Activate Sermon Works, deactivate Sermon Manager, and existing sermons keep working. Don't run both at once — the overlapping schema will conflict.
+Yes. Mattytap Sermons uses the same database schema, custom post type, taxonomies, and option keys as Sermon Manager. Activate Mattytap Sermons, deactivate Sermon Manager, and existing sermons keep working. Don't run both at once — the overlapping schema will conflict.
 
 = How do I report a bug or request a feature? =
 
-[GitHub Issues](https://github.com/mattytap/Sermon-Works/issues). For security issues, please use [private vulnerability reporting](https://github.com/mattytap/Sermon-Works/security/advisories/new) rather than public issues.
+[GitHub Issues](https://github.com/mattytap/Mattytap-Sermons/issues). For security issues, please use [private vulnerability reporting](https://github.com/mattytap/Mattytap-Sermons/security/advisories/new) rather than public issues.
 
 = Is there a paid version or commercial support? =
 
-No. Sermon Works is GPLv2 free software with no paid tier, no premium add-ons, and no commercial support. Bug fixes, feature requests, and translation contributions are welcome through GitHub.
+No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-ons, and no commercial support. Bug fixes, feature requests, and translation contributions are welcome through GitHub.
 
 == Screenshots ==
 
@@ -85,7 +85,7 @@ No. Sermon Works is GPLv2 free software with no paid tier, no premium add-ons, a
 
 == Credits ==
 
-Sermon Works is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Sermon-Works/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
+Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
 
@@ -148,7 +148,7 @@ WordPress.org Plugin Check sweep, "Bucket A" mechanical fixes (~70 sites across 
 * i18n: corrected 9 calls in the WXR importer that used `'wordpress-importer'` instead of `'sermon-works'` as the text-domain (Plugin Check `TextDomainMismatch`).
 * i18n: added `/* translators: */` comments above 3 placeholder strings (Plugin Check `MissingTranslatorsComment`).
 
-Tier 2 substantive Plugin Check items (file system operations, prepared SQL audits, enqueued scripts, output escaping) are deferred to a future release; see [`.restoration/plugin-check-summary.md`](https://github.com/mattytap/Sermon-Works/blob/main/.restoration/plugin-check-summary.md) for the full triage.
+Tier 2 substantive Plugin Check items (file system operations, prepared SQL audits, enqueued scripts, output escaping) are deferred to a future release; see [`.restoration/plugin-check-summary.md`](https://github.com/mattytap/Mattytap-Sermons/blob/main/.restoration/plugin-check-summary.md) for the full triage.
 
 = 3.0-rc3 =
 
@@ -175,7 +175,7 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 
 = Older releases =
 
-For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Sermon-Works/blob/main/changelog.txt) in the plugin directory.
+For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
 
