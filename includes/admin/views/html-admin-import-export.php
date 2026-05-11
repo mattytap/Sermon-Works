@@ -45,7 +45,7 @@ defined( 'ABSPATH' ) or die;
 								<?php else : ?>
 									<form enctype="multipart/form-data" id="sm-import-upload-form" method="post"
 											class="wp-upload-form"
-											action="<?php echo esc_url( wp_nonce_url( $_SERVER['REQUEST_URI'] . '&doimport=sm', 'sm_import_export_sm' ) ); ?>">
+											action="<?php echo esc_url( wp_nonce_url( esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) . '&doimport=sm', 'sm_import_export_sm' ) ); ?>">
 										<p>
 											<input type="file" id="upload" name="import" size="25"/>
 											<input type="hidden" name="action" value="save"/>
