@@ -8,6 +8,50 @@
 // Exit if accessed directly.
 defined( 'ABSPATH' ) or die;
 
+/**
+ * Allowed HTML for view-template output passed through wp_kses().
+ *
+ * Extends wp_kses_allowed_html( 'post' ) with the markup the plugin's view
+ * templates emit that the default table would strip: data-* attributes for
+ * the Plyr player branches, the onchange handler on the sorting-widget
+ * select, and the Facebook embed div attributes.
+ */
+function sm_template_allowed_html() {
+	$allowed = wp_kses_allowed_html( 'post' );
+
+	if ( ! isset( $allowed['select'] ) || ! is_array( $allowed['select'] ) ) {
+		$allowed['select'] = array();
+	}
+	$allowed['select']['onchange'] = true;
+
+	if ( ! isset( $allowed['div'] ) || ! is_array( $allowed['div'] ) ) {
+		$allowed['div'] = array();
+	}
+	$allowed['div']['data-plyr-provider']   = true;
+	$allowed['div']['data-plyr-embed-id']   = true;
+	$allowed['div']['data-plyr_seek']       = true;
+	$allowed['div']['data-href']            = true;
+	$allowed['div']['data-width']           = true;
+	$allowed['div']['data-allowfullscreen'] = true;
+
+	if ( ! isset( $allowed['audio'] ) || ! is_array( $allowed['audio'] ) ) {
+		$allowed['audio'] = array();
+	}
+	$allowed['audio']['controls']       = true;
+	$allowed['audio']['preload']        = true;
+	$allowed['audio']['data-plyr_seek'] = true;
+
+	if ( ! isset( $allowed['video'] ) || ! is_array( $allowed['video'] ) ) {
+		$allowed['video'] = array();
+	}
+	$allowed['video']['controls']       = true;
+	$allowed['video']['preload']        = true;
+	$allowed['video']['poster']         = true;
+	$allowed['video']['data-plyr_seek'] = true;
+
+	return $allowed;
+}
+
 if ( ! SermonManager::getOption( 'disable_layouts', false ) ) {
 	/**
 	 * Include template files.

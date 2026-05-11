@@ -64,7 +64,7 @@ foreach (
 							autocomplete="off"
 						<?php echo ! empty( $args[ $filter['taxonomy'] ] ) && 'disable' === $args['visibility'] ? 'disabled' : ''; ?>>
 						<option value=""><?php echo esc_html( $filter['title'] ); ?></option>
-						<?php echo wpfc_get_term_dropdown( $filter['taxonomy'], ! empty( $args[ $filter['taxonomy'] ] ) ? $args[ $filter['taxonomy'] ] : '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns <option> markup built from term names; safe by construction. ?>
+						<?php echo wp_kses( wpfc_get_term_dropdown( $filter['taxonomy'], ! empty( $args[ $filter['taxonomy'] ] ) ? $args[ $filter['taxonomy'] ] : '' ), sm_template_allowed_html() ); ?>
 					</select>
 					<?php $series = explode( ',', $args['series_filter'] ); ?>
 					<?php if ( isset( $args['series_filter'] ) && '' !== $args['series_filter'] && $series ) : ?>

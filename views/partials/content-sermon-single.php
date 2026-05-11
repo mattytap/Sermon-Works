@@ -76,7 +76,7 @@ global $post;
 			<div class="wpfc-sermon-single-media">
 				<?php if ( get_wpfc_sermon_meta( 'sermon_video_link' ) ) : ?>
 					<div class="wpfc-sermon-single-video wpfc-sermon-single-video-link">
-						<?php echo wpfc_render_video( get_wpfc_sermon_meta( 'sermon_video_link' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns iframe embed markup; wp_kses_post would strip iframes. URL is sanitised inside wpfc_render_video. ?>
+						<?php echo wp_kses( wpfc_render_video( get_wpfc_sermon_meta( 'sermon_video_link' ) ), sm_template_allowed_html() ); ?>
 					</div>
 				<?php endif; ?>
 				<?php if ( get_wpfc_sermon_meta( 'sermon_video' ) ) : ?>
@@ -92,7 +92,7 @@ global $post;
 					$sermon_audio_url    = $sermon_audio_id && $sermon_audio_url_wp ? $sermon_audio_url_wp : get_wpfc_sermon_meta( 'sermon_audio' );
 					?>
 					<div class="wpfc-sermon-single-audio player-<?php echo esc_attr( strtolower( \SermonManager::getOption( 'player', 'plyr' ) ) ); ?>">
-						<?php echo wpfc_render_audio( $sermon_audio_url ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns audio player markup (Plyr/MediaElement); too many tag/attr combinations for wp_kses_post. URL is sanitised inside wpfc_render_audio. ?>
+						<?php echo wp_kses( wpfc_render_audio( $sermon_audio_url ), sm_template_allowed_html() ); ?>
 						<a class="wpfc-sermon-single-audio-download"
 								href="<?php echo esc_url( $sermon_audio_url ); ?>"
 								download="<?php echo esc_attr( basename( $sermon_audio_url ) ); ?>"

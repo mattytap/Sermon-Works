@@ -10,21 +10,21 @@ defined( 'ABSPATH' ) or die;
 get_header();
 ?>
 
-<?php echo wpfc_get_partial( 'content-sermon-wrapper-start' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Partial emits sermon archive wrapper HTML; per-site escapers are applied inside the partial. ?>
+<?php echo wp_kses( wpfc_get_partial( 'content-sermon-wrapper-start' ), sm_template_allowed_html() ); ?>
 
 <?php
-echo render_wpfc_sorting(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns sermon-sorting widget HTML built internally; safe by construction.
+echo wp_kses( render_wpfc_sorting(), sm_template_allowed_html() );
 
 if ( have_posts() ) :
 
-	echo apply_filters( 'taxonomy-wpfc_sermon_topics-before-sermons', '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme/plugin extension point for HTML markup; sermon admins control filter implementations.
+	echo wp_kses_post( apply_filters( 'taxonomy-wpfc_sermon_topics-before-sermons', '' ) );
 
 	while ( have_posts() ) :
 		the_post();
 		wpfc_sermon_excerpt_v2();
 	endwhile;
 
-	echo apply_filters( 'taxonomy-wpfc_sermon_topics-after-sermons', '' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Theme/plugin extension point for HTML markup; sermon admins control filter implementations.
+	echo wp_kses_post( apply_filters( 'taxonomy-wpfc_sermon_topics-after-sermons', '' ) );
 
 	echo '<div class="sm-pagination ast-pagination">';
 	sm_pagination();
@@ -34,7 +34,7 @@ else :
 endif;
 ?>
 
-<?php echo wpfc_get_partial( 'content-sermon-wrapper-end' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Partial emits closing wrapper HTML; escapers applied inside the partial. ?>
+<?php echo wp_kses( wpfc_get_partial( 'content-sermon-wrapper-end' ), sm_template_allowed_html() ); ?>
 
 <?php
 get_footer();

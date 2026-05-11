@@ -116,11 +116,11 @@ if ( get_sermon_image_url() && ! \SermonManager::getOption( 'disable_image_archi
 
 				<?php if ( \SermonManager::getOption( 'archive_player' ) ) : ?>
 					<div class="wpfc-sermon-audio">
-						<?php echo wpfc_render_audio( $post->ID ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Returns audio player markup (Plyr/MediaElement); too many tag/attr combinations for wp_kses_post. URL is sanitised inside wpfc_render_audio. ?>
+						<?php echo wp_kses( wpfc_render_audio( $post->ID ), sm_template_allowed_html() ); ?>
 					</div>
 				<?php endif; ?>
 			<?php else : ?>
-				<?php echo get_the_password_form( $post ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- WordPress core function returns trusted password form markup. ?>
+				<?php echo wp_kses_post( get_the_password_form( $post ) ); ?>
 			<?php endif; ?>
 
 			<div class="wpfc-sermon-footer">
