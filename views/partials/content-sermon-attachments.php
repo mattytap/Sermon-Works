@@ -27,14 +27,14 @@ $bulletin_multiple = get_wpfc_sermon_meta( 'sermon_bulletin_multiple' );
 ?>
 <div id="wpfc-attachments" class="cf">
 	<p>
-		<strong><?php echo esc_html__( 'Download Files', 'sermon-works' ); ?></strong>
+		<strong><?php echo esc_html__( 'Download Files', 'mattytap-sermons' ); ?></strong>
 
 		<?php if ( $notes ) : ?>
 			<a href="<?php echo esc_url( $notes ); ?>"
 				class="sermon-attachments"
 				download="<?php echo esc_attr( basename( $notes ) ); ?>">
 				<span class="dashicons dashicons-media-document"></span>
-				<?php echo esc_html__( 'Notes', 'sermon-works' ); ?>
+				<?php echo esc_html__( 'Notes', 'mattytap-sermons' ); ?>
 			</a>
 		<?php endif; ?>
 
@@ -44,7 +44,7 @@ $bulletin_multiple = get_wpfc_sermon_meta( 'sermon_bulletin_multiple' );
 					class="sermon-attachments"
 					download="<?php echo esc_attr( basename( $url ) ); ?>">
 					<span class="dashicons dashicons-media-document"></span>
-					<?php echo esc_html__( 'Notes', 'sermon-works' ); ?>
+					<?php echo esc_html__( 'Notes', 'mattytap-sermons' ); ?>
 				</a>
 			<?php endforeach; ?>
 		<?php endif; ?>
@@ -54,7 +54,7 @@ $bulletin_multiple = get_wpfc_sermon_meta( 'sermon_bulletin_multiple' );
 				class="sermon-attachments"
 				download="<?php echo esc_attr( basename( $bulletin ) ); ?>">
 				<span class="dashicons dashicons-media-document"></span>
-				<?php echo esc_html__( 'Bulletin', 'sermon-works' ); ?>
+				<?php echo esc_html__( 'Bulletin', 'mattytap-sermons' ); ?>
 			</a>
 		<?php endif; ?>
 
@@ -64,7 +64,7 @@ $bulletin_multiple = get_wpfc_sermon_meta( 'sermon_bulletin_multiple' );
 					class="sermon-attachments"
 					download="<?php echo esc_attr( basename( $url ) ); ?>">
 					<span class="dashicons dashicons-media-document"></span>
-					<?php echo esc_html__( 'Bulletin', 'sermon-works' ); ?>
+					<?php echo esc_html__( 'Bulletin', 'mattytap-sermons' ); ?>
 				</a>
 			<?php endforeach; ?>
 		<?php endif; ?>

@@ -35,7 +35,7 @@ $current_tab = empty( $current_tab ) ? 'general' : $current_tab;
 					<p class="submit">
 						<?php if ( empty( $GLOBALS['hide_save_button'] ) ) : ?>
 							<input name="save" class="button-primary sm-save-button" type="submit"
-									value="<?php esc_attr_e( 'Save changes', 'sermon-works' ); ?>"/>
+									value="<?php esc_attr_e( 'Save changes', 'mattytap-sermons' ); ?>"/>
 						<?php endif; ?>
 						<?php wp_nonce_field( 'sm-settings' ); ?>
 					</p>

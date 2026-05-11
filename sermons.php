@@ -161,7 +161,7 @@ class SermonManager { // phpcs:ignore
 		$has_series    = has_term( '', 'wpfc_sermon_series', $post );
 
 		if ( $bible_passage ) {
-			$content .= __( 'Bible Text:', 'sermon-works' ) . ' ' . $bible_passage;
+			$content .= __( 'Bible Text:', 'mattytap-sermons' ) . ' ' . $bible_passage;
 		}
 
 		if ( $has_preachers ) {
@@ -177,7 +177,7 @@ class SermonManager { // phpcs:ignore
 			if ( $has_preachers ) {
 				$content .= ' | ';
 			}
-			$content .= wp_strip_all_tags( get_the_term_list( $post->ID, 'wpfc_sermon_series', __( 'Series:', 'sermon-works' ) . ' ', ', ', '' ) );
+			$content .= wp_strip_all_tags( get_the_term_list( $post->ID, 'wpfc_sermon_series', __( 'Series:', 'mattytap-sermons' ) . ' ', ', ', '' ) );
 		}
 
 		$description = wp_strip_all_tags( trim( get_post_meta( $post->ID, 'sermon_description', true ) ) );
@@ -275,7 +275,7 @@ class SermonManager { // phpcs:ignore
 	 * @return void
 	 */
 	public static function load_translations() {
-		load_plugin_textdomain( 'sermon-works', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
+		load_plugin_textdomain( 'mattytap-sermons', false, plugin_basename( dirname( __FILE__ ) ) . '/languages' );
 	}
 
 	/**
@@ -640,7 +640,7 @@ class SermonManager { // phpcs:ignore
 							<?php endif; ?>
 
 							<div class="notice notice-success">
-								<p><?php esc_html_e( 'Import done!', 'sermon-works' ); ?></p>
+								<p><?php esc_html_e( 'Import done!', 'mattytap-sermons' ); ?></p>
 							</div>
 							<?php
 						}
@@ -857,7 +857,7 @@ class SermonManager { // phpcs:ignore
 						<p>
 							<?php
 							// translators: %s: The plugin name. Effectively "<strong>Sermon Works</strong>".
-							echo wp_kses_post( wp_sprintf( __( '%s requires output buffering to be turned on to display content. It is currently off. Please enable it or contact your hosting provider for help. Most of plugin functionality will be disabled until output buffering is enabled.', 'sermon-works' ), '<strong>' . __( 'Sermon Works', 'sermon-works' ) . '</strong>' ) );
+							echo wp_kses_post( wp_sprintf( __( '%s requires output buffering to be turned on to display content. It is currently off. Please enable it or contact your hosting provider for help. Most of plugin functionality will be disabled until output buffering is enabled.', 'mattytap-sermons' ), '<strong>' . __( 'Sermon Works', 'mattytap-sermons' ) . '</strong>' ) );
 							?>
 						</p>
 					</div>

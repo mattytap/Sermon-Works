@@ -16,7 +16,7 @@ class SM_Settings_Verse extends SM_Settings_Page {
 	 */
 	public function __construct() {
 		$this->id    = 'verse';
-		$this->label = __( 'Verse', 'sermon-works' );
+		$this->label = __( 'Verse', 'mattytap-sermons' );
 
 		parent::__construct();
 	}
@@ -73,7 +73,7 @@ class SM_Settings_Verse extends SM_Settings_Page {
 											$value => $value,
 										), $setting['options'] );
 
-										$setting['desc'] = __( 'Note: WordPress is not set to any Spanish variant. Reverted to ESV.', 'sermon-works' );
+										$setting['desc'] = __( 'Note: WordPress is not set to any Spanish variant. Reverted to ESV.', 'mattytap-sermons' );
 
 										break 2;
 									}
@@ -88,23 +88,23 @@ class SM_Settings_Verse extends SM_Settings_Page {
 
 		$settings = apply_filters( 'sm_verse_settings', array(
 			array(
-				'title' => __( 'Verse Settings', 'sermon-works' ),
+				'title' => __( 'Verse Settings', 'mattytap-sermons' ),
 				'type'  => 'title',
 				'desc'  => '',
 				'id'    => 'verse_settings',
 			),
 			array(
-				'title'    => __( 'Verse Popups', 'sermon-works' ),
+				'title'    => __( 'Verse Popups', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
-				'desc'     => __( 'Disable verse popups', 'sermon-works' ),
-				'desc_tip' => __( 'If this option is checked, the verses will not have a link and a popup anymore. But, you would be free to use any other service you want to use without interfering with Sermon Works.', 'sermon-works' ),
+				'desc'     => __( 'Disable verse popups', 'mattytap-sermons' ),
+				'desc_tip' => __( 'If this option is checked, the verses will not have a link and a popup anymore. But, you would be free to use any other service you want to use without interfering with Sermon Works.', 'mattytap-sermons' ),
 				'id'       => 'verse_popup',
 				'default'  => 'no',
 			),
 			array(
-				'title'   => __( 'Bible Version for Verse Popups', 'sermon-works' ),
+				'title'   => __( 'Bible Version for Verse Popups', 'mattytap-sermons' ),
 				'type'    => 'select',
-				'desc'    => __( 'Default: ESV.', 'sermon-works' ),
+				'desc'    => __( 'Default: ESV.', 'mattytap-sermons' ),
 				'id'      => 'verse_bible_version',
 				'options' => array(
 					// English versions.
@@ -133,10 +133,10 @@ class SM_Settings_Verse extends SM_Settings_Page {
 				'default' => 'ESV',
 			),
 			array(
-				'title'    => __( 'Verse In Sermons Widget', 'sermon-works' ),
+				'title'    => __( 'Verse In Sermons Widget', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
-				'desc'     => __( 'Show verse.', 'sermon-works' ),
-				'desc_tip' => __( 'By checking this option, the verse in our WordPress widget will show up. Default unchecked.', 'sermon-works' ),
+				'desc'     => __( 'Show verse.', 'mattytap-sermons' ),
+				'desc_tip' => __( 'By checking this option, the verse in our WordPress widget will show up. Default unchecked.', 'mattytap-sermons' ),
 				'id'       => 'widget_show_key_verse',
 				'default'  => 'no',
 			),

@@ -54,26 +54,26 @@ class SM_Admin_Post_Types {
 		$messages['wpfc_sermon'] = array(
 			0  => '', // Unused. Messages start at index 1.
 			// translators: %s: The URL to the sermon.
-			1  => wp_sprintf( esc_html__( 'Sermon updated. %s', 'sermon-works' ), '<a href="' . esc_url( get_permalink( $post_ID ) ) . '">' . esc_html__( 'View sermon', 'sermon-works' ) . '</a>' ),
-			2  => esc_html__( 'Custom field updated.', 'sermon-works' ),
-			3  => esc_html__( 'Custom field deleted.', 'sermon-works' ),
-			4  => esc_html__( 'Sermon updated.', 'sermon-works' ),
+			1  => wp_sprintf( esc_html__( 'Sermon updated. %s', 'mattytap-sermons' ), '<a href="' . esc_url( get_permalink( $post_ID ) ) . '">' . esc_html__( 'View sermon', 'mattytap-sermons' ) . '</a>' ),
+			2  => esc_html__( 'Custom field updated.', 'mattytap-sermons' ),
+			3  => esc_html__( 'Custom field deleted.', 'mattytap-sermons' ),
+			4  => esc_html__( 'Sermon updated.', 'mattytap-sermons' ),
 			// translators: %s: Date and time of the revision.
-			5  => isset( $_GET['revision'] ) ? wp_sprintf( esc_html__( 'Sermon restored to revision from %s', 'sermon-works' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			5  => isset( $_GET['revision'] ) ? wp_sprintf( esc_html__( 'Sermon restored to revision from %s', 'mattytap-sermons' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
 			// translators: %s: The URL to the sermon.
-			6  => wp_sprintf( esc_html__( 'Sermon published. %s', 'sermon-works' ), '<a href="' . esc_url( get_permalink( $post_ID ) ) . '">' . esc_html__( 'View sermon', 'sermon-works' ) . '</a>' ),
-			7  => esc_html__( 'Sermon saved.', 'sermon-works' ),
+			6  => wp_sprintf( esc_html__( 'Sermon published. %s', 'mattytap-sermons' ), '<a href="' . esc_url( get_permalink( $post_ID ) ) . '">' . esc_html__( 'View sermon', 'mattytap-sermons' ) . '</a>' ),
+			7  => esc_html__( 'Sermon saved.', 'mattytap-sermons' ),
 			// translators: %s: The URL to the sermon.
-			8  => wp_sprintf( esc_html__( 'Sermon submitted. %s', 'sermon-works' ), '<a target="_blank" href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) . '">' . esc_html__( 'Preview sermon', 'sermon-works' ) . '</a>' ),
+			8  => wp_sprintf( esc_html__( 'Sermon submitted. %s', 'mattytap-sermons' ), '<a target="_blank" href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) . '">' . esc_html__( 'Preview sermon', 'mattytap-sermons' ) . '</a>' ),
 			// translators: %1$s: The date and time. %2$s: The preview sermon URL.
-			9  => wp_sprintf( esc_html__( 'Sermon scheduled for: %1$s. %2$s', 'sermon-works' ),
+			9  => wp_sprintf( esc_html__( 'Sermon scheduled for: %1$s. %2$s', 'mattytap-sermons' ),
 				// translators: %1$s: Date. %2$s: Time.
-				'<strong>' . wp_sprintf( esc_html__( '%1$s at %2$s', 'sermon-works' ), get_post_time( get_option( 'date_format' ), false, null, true ), get_post_time( get_option( 'time_format' ), false, null, true ) ) . '</strong>',
+				'<strong>' . wp_sprintf( esc_html__( '%1$s at %2$s', 'mattytap-sermons' ), get_post_time( get_option( 'date_format' ), false, null, true ), get_post_time( get_option( 'time_format' ), false, null, true ) ) . '</strong>',
 				// translators: %s: The preview sermon URL.
-				'<a target="_blank" href="' . esc_url( get_permalink( $post_ID ) ) . '">' . esc_html__( 'Preview sermon', 'sermon-works' ) . '</a>'
+				'<a target="_blank" href="' . esc_url( get_permalink( $post_ID ) ) . '">' . esc_html__( 'Preview sermon', 'mattytap-sermons' ) . '</a>'
 			),
 			// translators: %s The URL to the sermon.
-			10 => wp_sprintf( esc_html__( 'Sermon draft updated. %s', 'sermon-works' ), '<a target="_blank" href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) . '">' . esc_html__( 'View sermon', 'sermon-works' ) . '</a>' ),
+			10 => wp_sprintf( esc_html__( 'Sermon draft updated. %s', 'mattytap-sermons' ), '<a target="_blank" href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $post_ID ) ) ) . '">' . esc_html__( 'View sermon', 'mattytap-sermons' ) . '</a>' ),
 		);
 
 		return $messages;
@@ -93,14 +93,14 @@ class SM_Admin_Post_Types {
 
 		$columns             = array();
 		$columns['cb']       = '<input type="checkbox" />';
-		$columns['title']    = __( 'Sermon Title', 'sermon-works' );
+		$columns['title']    = __( 'Sermon Title', 'mattytap-sermons' );
 		$columns['preacher'] = sm_get_taxonomy_field( 'wpfc_preacher', 'singular_name' );
-		$columns['series']   = __( 'Sermon Series', 'sermon-works' );
-		$columns['topics']   = __( 'Topics', 'sermon-works' );
-		$columns['views']    = __( 'Views', 'sermon-works' );
+		$columns['series']   = __( 'Sermon Series', 'mattytap-sermons' );
+		$columns['topics']   = __( 'Topics', 'mattytap-sermons' );
+		$columns['views']    = __( 'Views', 'mattytap-sermons' );
 		$columns['comments'] = $existing_columns['comments'];
-		$columns['preached'] = __( 'Preached', 'sermon-works' );
-		$columns['date']     = __( 'Published', 'sermon-works' );
+		$columns['preached'] = __( 'Preached', 'mattytap-sermons' );
+		$columns['date']     = __( 'Published', 'mattytap-sermons' );
 
 		return $columns + $existing_columns;
 	}
@@ -135,7 +135,7 @@ class SM_Admin_Post_Types {
 
 				if ( time() - $unix_preached < DAY_IN_SECONDS ) {
 					// translators: %s: The time. Such as "12 hours".
-					$data = sprintf( __( '%s ago', 'sermon-works' ), human_time_diff( $unix_preached ) );
+					$data = sprintf( __( '%s ago', 'mattytap-sermons' ), human_time_diff( $unix_preached ) );
 				} else {
 					$data = wp_date( 'Y/m/d', $unix_preached );
 				}
@@ -149,7 +149,7 @@ class SM_Admin_Post_Types {
 		}
 
 		if ( $data instanceof WP_Error ) {
-			$data = __( 'Error', 'sermon-works' );
+			$data = __( 'Error', 'mattytap-sermons' );
 		}
 
 		echo wp_kses_post( $data );
@@ -255,7 +255,7 @@ class SM_Admin_Post_Types {
 	 */
 	public function enter_title_here( $text, $post ) {
 		if ( 'wpfc_sermon' === $post->post_type ) {
-			$text = __( 'Sermon title', 'sermon-works' );
+			$text = __( 'Sermon title', 'mattytap-sermons' );
 		}
 
 		return $text;
@@ -310,7 +310,7 @@ class SM_Admin_Post_Types {
 
 		$output .= '<select name="wpfc_service_type" id="dropdown_wpfc_service_type">';
 		// translators: %s Taxonomy name. Default: Service Type.
-		$output .= '<option value="">' . wp_sprintf( __( 'Filter by %s', 'sermon-works' ), sm_get_taxonomy_field( 'wpfc_service_type', 'singular_name' ) ) . '</option>';
+		$output .= '<option value="">' . wp_sprintf( __( 'Filter by %s', 'mattytap-sermons' ), sm_get_taxonomy_field( 'wpfc_service_type', 'singular_name' ) ) . '</option>';
 
 		foreach ( $terms as $term ) {
 			$output .= '<option value="' . $term->slug . '" ';

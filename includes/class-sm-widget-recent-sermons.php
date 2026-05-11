@@ -17,9 +17,9 @@ class SM_Widget_Recent_Sermons extends WP_Widget {
 	public function __construct() {
 		$widget_ops = array(
 			'classname'   => 'widget_recent_sermons',
-			'description' => __( 'The most recent sermons on your site', 'sermon-works' ),
+			'description' => __( 'The most recent sermons on your site', 'mattytap-sermons' ),
 		);
-		parent::__construct( 'recent-sermons', __( 'Recent Sermons', 'sermon-works' ), $widget_ops );
+		parent::__construct( 'recent-sermons', __( 'Recent Sermons', 'mattytap-sermons' ), $widget_ops );
 		$this->alt_option_name = 'widget_recent_entries';
 
 		add_action( 'save_post', array( $this, 'flush_widget_cache' ) );
@@ -59,7 +59,7 @@ class SM_Widget_Recent_Sermons extends WP_Widget {
 		if ( SM_OB_ENABLED ) {
 			ob_start();
 
-			$title         = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Recent Sermons', 'sermon-works' ) : $instance['title'], $instance, $this->id_base );
+			$title         = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Recent Sermons', 'mattytap-sermons' ) : $instance['title'], $instance, $this->id_base );
 			$number        = isset( $instance['number'] ) ? absint( $instance['number'] ) : 5;
 			$before_widget = isset( $instance['before_widget'] ) ? wp_kses_post( $instance['before_widget'] ) : '';
 			$after_widget  = isset( $instance['after_widget'] ) ? wp_kses_post( $instance['after_widget'] ) : '';
@@ -120,7 +120,7 @@ class SM_Widget_Recent_Sermons extends WP_Widget {
 								</span>
 
 									<?php if ( \SermonManager::getOption( 'widget_show_key_verse' ) ) : ?>
-										<span class="bible-passage"><br><?php echo esc_html__( 'Bible Text: ', 'sermon-works' ), esc_html( get_wpfc_sermon_meta( 'bible_passage' ) ); ?></span>
+										<span class="bible-passage"><br><?php echo esc_html__( 'Bible Text: ', 'mattytap-sermons' ), esc_html( get_wpfc_sermon_meta( 'bible_passage' ) ); ?></span>
 									<?php endif; ?>
 								</div>
 							</div>
@@ -201,23 +201,23 @@ class SM_Widget_Recent_Sermons extends WP_Widget {
 		$after_widget  = isset( $instance['after_widget'] ) ? wp_kses_post( $instance['after_widget'] ) : '';
 		?>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'sermon-works' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php esc_html_e( 'Title:', 'mattytap-sermons' ); ?></label>
 			<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"
 					name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>"/>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>"><?php esc_html_e( 'Number of sermons to show:', 'sermon-works' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>"><?php esc_html_e( 'Number of sermons to show:', 'mattytap-sermons' ); ?></label>
 			<input id="<?php echo esc_attr( $this->get_field_id( 'number' ) ); ?>"
 					name="<?php echo esc_attr( $this->get_field_name( 'number' ) ); ?>" type="text" value="<?php echo (int) $number; ?>"
 					size="3"/>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'before_widget' ) ); ?>"><?php esc_html_e( 'HTML to show before the widget:', 'sermon-works' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'before_widget' ) ); ?>"><?php esc_html_e( 'HTML to show before the widget:', 'mattytap-sermons' ); ?></label>
 			<textarea id="<?php echo esc_attr( $this->get_field_id( 'before_widget' ) ); ?>"
 					name="<?php echo esc_attr( $this->get_field_name( 'before_widget' ) ); ?>"><?php echo esc_textarea( $before_widget ); ?></textarea>
 		</p>
 		<p>
-			<label for="<?php echo esc_attr( $this->get_field_id( 'after_widget' ) ); ?>"><?php esc_html_e( 'HTML to show after the widget:', 'sermon-works' ); ?></label>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'after_widget' ) ); ?>"><?php esc_html_e( 'HTML to show after the widget:', 'mattytap-sermons' ); ?></label>
 			<textarea id="<?php echo esc_attr( $this->get_field_id( 'after_widget' ) ); ?>"
 					name="<?php echo esc_attr( $this->get_field_name( 'after_widget' ) ); ?>"><?php echo esc_textarea( $after_widget ); ?></textarea>
 		</p>

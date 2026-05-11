@@ -9,18 +9,18 @@ defined( 'ABSPATH' ) or die;
 ?>
 <div class="sm wrap">
 	<div class="intro">
-		<h1 class="wp-heading-inline"><?php esc_html_e( 'Sermon Works Import/Export', 'sermon-works' ); ?></h1>
+		<h1 class="wp-heading-inline"><?php esc_html_e( 'Sermon Works Import/Export', 'mattytap-sermons' ); ?></h1>
 	</div>
 	<div class="wp-list-table widefat">
-		<p><?php esc_html_e( 'We have made it easy to backup, migrate or bring sermons from another plugin. Choose the relevant option below to get started.', 'sermon-works' ); ?></p>
+		<p><?php esc_html_e( 'We have made it easy to backup, migrate or bring sermons from another plugin. Choose the relevant option below to get started.', 'mattytap-sermons' ); ?></p>
 		<div id="the-list">
 			<div class="plugin-card card-import-sm">
 				<div class="plugin-card-top">
 					<img src="<?php echo esc_url( SM_URL ); ?>assets/images/import-sm.jpg" class="plugin-icon"
-							alt="<?php esc_attr_e( 'Import from file', 'sermon-works' ); ?>">
+							alt="<?php esc_attr_e( 'Import from file', 'mattytap-sermons' ); ?>">
 					<div class="name column-name">
 						<h3>
-							<?php esc_html_e( 'Import from file', 'sermon-works' ); ?>
+							<?php esc_html_e( 'Import from file', 'mattytap-sermons' ); ?>
 						</h3>
 					</div>
 					<div class="action-links">
@@ -34,7 +34,7 @@ defined( 'ABSPATH' ) or die;
 									?>
 									<div class="error">
 										<p>
-											<?php esc_html_e( 'Before you can upload your import file, you will need to fix the following error:', 'sermon-works' ); ?>
+											<?php esc_html_e( 'Before you can upload your import file, you will need to fix the following error:', 'mattytap-sermons' ); ?>
 										</p>
 										<p>
 											<strong>
@@ -52,11 +52,11 @@ defined( 'ABSPATH' ) or die;
 											<input type="hidden" name="max_file_size" value="<?php echo (int) $bytes; ?>"/>
 										</p>
 										<input class="button" id="submit" type="submit" name="submit"
-												value="<?php esc_attr_e( 'Import from file', 'sermon-works' ); ?>"/>
+												value="<?php esc_attr_e( 'Import from file', 'mattytap-sermons' ); ?>"/>
 									</form>
 									<span class="button activate-now" id="sm-import-trigger">
 										<span>
-											<?php esc_html_e( 'Import', 'sermon-works' ); ?>
+											<?php esc_html_e( 'Import', 'mattytap-sermons' ); ?>
 										</span>
 										<span class="import-sniper">
 											<img src="<?php echo esc_url( admin_url( 'images/wpspin_light.gif' ) ); ?>">
@@ -65,23 +65,23 @@ defined( 'ABSPATH' ) or die;
 								<?php endif; ?>
 							</li>
 							<li><a href="" class=""
-										aria-label="<?php esc_attr_e( 'More Details', 'sermon-works' ); ?>">
-									<?php esc_html_e( 'More Details', 'sermon-works' ); ?>
+										aria-label="<?php esc_attr_e( 'More Details', 'mattytap-sermons' ); ?>">
+									<?php esc_html_e( 'More Details', 'mattytap-sermons' ); ?>
 								</a></li>
 						</ul>
 					</div>
 					<div class="desc column-description">
-						<p><?php esc_html_e( 'Import sermons from another Sermon Works (or Sermon Manager) installation.', 'sermon-works' ); ?></p>
+						<p><?php esc_html_e( 'Import sermons from another Sermon Works (or Sermon Manager) installation.', 'mattytap-sermons' ); ?></p>
 					</div>
 				</div>
 			</div>
 			<div class="plugin-card card-export-sm">
 				<div class="plugin-card-top">
 					<img src="<?php echo esc_url( SM_URL ); ?>assets/images/export-sm.jpg" class="plugin-icon"
-							alt="<?php esc_attr_e( 'Export to file', 'sermon-works' ); ?>">
+							alt="<?php esc_attr_e( 'Export to file', 'mattytap-sermons' ); ?>">
 					<div class="name column-name">
 						<h3>
-							<?php esc_html_e( 'Export to file', 'sermon-works' ); ?>
+							<?php esc_html_e( 'Export to file', 'mattytap-sermons' ); ?>
 						</h3>
 					</div>
 					<div class="action-links">
@@ -89,42 +89,42 @@ defined( 'ABSPATH' ) or die;
 							<li>
 								<a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'doimport', 'exsm' ), 'sm_import_export_exsm' ) ); ?>"
 										class="button activate-now" id="sm-export-content"
-										aria-label="<?php esc_attr_e( 'Export to file', 'sermon-works' ); ?>">
-									<?php esc_html_e( 'Export', 'sermon-works' ); ?>
+										aria-label="<?php esc_attr_e( 'Export to file', 'mattytap-sermons' ); ?>">
+									<?php esc_html_e( 'Export', 'mattytap-sermons' ); ?>
 								</a>
 							</li>
 							<li><a href="" class=""
-										aria-label="<?php esc_attr_e( 'More Details', 'sermon-works' ); ?>">
-									<?php esc_html_e( 'More Details', 'sermon-works' ); ?></a></li>
+										aria-label="<?php esc_attr_e( 'More Details', 'mattytap-sermons' ); ?>">
+									<?php esc_html_e( 'More Details', 'mattytap-sermons' ); ?></a></li>
 						</ul>
 					</div>
 					<div class="desc column-description">
-						<p><?php esc_html_e( 'Create an export for the purpose of backup or migration to another website.', 'sermon-works' ); ?></p>
+						<p><?php esc_html_e( 'Create an export for the purpose of backup or migration to another website.', 'mattytap-sermons' ); ?></p>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="wp-list-table widefat">
-		<h2><?php esc_html_e( 'Import From 3rd Party Plugins', 'sermon-works' ); ?></h2>
-		<p><?php esc_html_e( 'You can import sermons from the following plugins into Sermon Works', 'sermon-works' ); ?></p>
+		<h2><?php esc_html_e( 'Import From 3rd Party Plugins', 'mattytap-sermons' ); ?></h2>
+		<p><?php esc_html_e( 'You can import sermons from the following plugins into Sermon Works', 'mattytap-sermons' ); ?></p>
 		<div id="the-list">
 			<div class="plugin-card <?php echo SM_Import_SB::is_installed() ? '' : 'not-available'; ?>">
 				<h2>Plugin not installed</h2>
 				<div class="plugin-card-top">
 					<img src="<?php echo esc_url( SM_URL ); ?>assets/images/import-sb.jpg" class="plugin-icon"
-							alt="<?php esc_attr_e( 'Sermon Browser', 'sermon-works' ); ?>">
+							alt="<?php esc_attr_e( 'Sermon Browser', 'mattytap-sermons' ); ?>">
 					<div class="name column-name">
 						<h3>
-							<?php esc_html_e( 'Sermon Browser', 'sermon-works' ); ?>
+							<?php esc_html_e( 'Sermon Browser', 'mattytap-sermons' ); ?>
 						</h3>
 					</div>
 					<div class="action-links">
 						<ul class="plugin-action-buttons">
 							<li><a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'doimport', 'sb' ), 'sm_import_export_sb' ) ); ?>"
 										class="button activate-now <?php echo SM_Import_SB::is_installed() ? '' : 'disabled'; ?>"
-										aria-label="<?php esc_attr_e( 'Import from Sermon Browser', 'sermon-works' ); ?>">
-									<?php esc_html_e( 'Import', 'sermon-works' ); ?></a>
+										aria-label="<?php esc_attr_e( 'Import from Sermon Browser', 'mattytap-sermons' ); ?>">
+									<?php esc_html_e( 'Import', 'mattytap-sermons' ); ?></a>
 							</li>
 						</ul>
 					</div>
@@ -132,11 +132,11 @@ defined( 'ABSPATH' ) or die;
 						<p>
 							<?php
 							// translators: %s Plugin name.
-							echo esc_html( wp_sprintf( __( 'Import your existing %s sermon library into Sermon Works', 'sermon-works' ), 'Sermon Browser' ) );
+							echo esc_html( wp_sprintf( __( 'Import your existing %s sermon library into Sermon Works', 'mattytap-sermons' ), 'Sermon Browser' ) );
 							?>
 						</p>
 						<p class="import-note">
-							<?php esc_html_e( 'Note: Some restrictions apply.', 'sermon-works' ); ?>
+							<?php esc_html_e( 'Note: Some restrictions apply.', 'mattytap-sermons' ); ?>
 						</p>
 					</div>
 				</div>
@@ -145,18 +145,18 @@ defined( 'ABSPATH' ) or die;
 				<h2>Plugin not installed</h2>
 				<div class="plugin-card-top">
 					<img src="<?php echo esc_url( SM_URL ); ?>assets/images/import-se.jpg" class="plugin-icon"
-							alt="<?php esc_attr_e( 'Series Engine', 'sermon-works' ); ?>">
+							alt="<?php esc_attr_e( 'Series Engine', 'mattytap-sermons' ); ?>">
 					<div class="name column-name">
 						<h3>
-							<?php esc_html_e( 'Series Engine', 'sermon-works' ); ?>
+							<?php esc_html_e( 'Series Engine', 'mattytap-sermons' ); ?>
 						</h3>
 					</div>
 					<div class="action-links">
 						<ul class="plugin-action-buttons">
 							<li><a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'doimport', 'se' ), 'sm_import_export_se' ) ); ?>"
 										class="button activate-now <?php echo SM_Import_SE::is_installed() ? '' : 'disabled'; ?>"
-										aria-label="<?php esc_attr_e( 'Import from Series Engine', 'sermon-works' ); ?>">
-									<?php esc_html_e( 'Import', 'sermon-works' ); ?></a>
+										aria-label="<?php esc_attr_e( 'Import from Series Engine', 'mattytap-sermons' ); ?>">
+									<?php esc_html_e( 'Import', 'mattytap-sermons' ); ?></a>
 							</li>
 						</ul>
 					</div>
@@ -164,11 +164,11 @@ defined( 'ABSPATH' ) or die;
 						<p>
 							<?php
 							// translators: %s Plugin name.
-							echo esc_html( wp_sprintf( __( 'Import your existing %s sermon library into Sermon Works', 'sermon-works' ), 'Series Engine' ) );
+							echo esc_html( wp_sprintf( __( 'Import your existing %s sermon library into Sermon Works', 'mattytap-sermons' ), 'Series Engine' ) );
 							?>
 						</p>
 						<p class="import-note">
-							<?php esc_html_e( 'Note: Some restrictions apply.', 'sermon-works' ); ?>
+							<?php esc_html_e( 'Note: Some restrictions apply.', 'mattytap-sermons' ); ?>
 						</p>
 					</div>
 				</div>
@@ -176,6 +176,6 @@ defined( 'ABSPATH' ) or die;
 		</div>
 	</div>
 	<p class="description">
-		<?php esc_html_e( 'Note: We recommend you create a backup of your current database just in case.', 'sermon-works' ); ?>
+		<?php esc_html_e( 'Note: We recommend you create a backup of your current database just in case.', 'mattytap-sermons' ); ?>
 	</p>
 </div>

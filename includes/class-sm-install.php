@@ -242,7 +242,7 @@ class SM_Install {
 	public static function cron_schedules( $schedules ) {
 		$schedules['monthly'] = array(
 			'interval' => 2635200,
-			'display'  => __( 'Monthly', 'sermon-works' ),
+			'display'  => __( 'Monthly', 'mattytap-sermons' ),
 		);
 
 		return $schedules;
@@ -257,7 +257,7 @@ class SM_Install {
 	 */
 	public static function plugin_action_links( $links ) {
 		$action_links = array(
-			'settings' => '<a href="' . admin_url( 'edit.php?post_type=wpfc_sermon&page=sm-settings' ) . '" aria-label="' . esc_attr__( 'View Sermon Works settings', 'sermon-works' ) . '">' . esc_html__( 'Settings', 'sermon-works' ) . '</a>',
+			'settings' => '<a href="' . admin_url( 'edit.php?post_type=wpfc_sermon&page=sm-settings' ) . '" aria-label="' . esc_attr__( 'View Sermon Works settings', 'mattytap-sermons' ) . '">' . esc_html__( 'Settings', 'mattytap-sermons' ) . '</a>',
 		);
 
 		return array_merge( $action_links, $links );

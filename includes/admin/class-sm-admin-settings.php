@@ -72,8 +72,8 @@ class SM_Admin_Settings {
 		wp_register_script( 'sm_settings_verse', SM_URL . 'assets/js/admin/settings/verse' . ( ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) ? '' : '.min' ) . '.js', 'sm_settings', SM_VERSION, true );
 
 		wp_localize_script( 'sm_settings', 'sm_settings_params', array(
-			'i18n_nav_warning'        => __( 'The changes you made will be lost if you navigate away from this page.', 'sermon-works' ),
-			'i18n_bible_spanish_note' => __( 'Note: WordPress is not set to any Spanish variant. Reverted to ESV.', 'sermon-works' ),
+			'i18n_nav_warning'        => __( 'The changes you made will be lost if you navigate away from this page.', 'mattytap-sermons' ),
+			'i18n_bible_spanish_note' => __( 'Note: WordPress is not set to any Spanish variant. Reverted to ESV.', 'mattytap-sermons' ),
 			'is_wp_spanish'           => strpos( get_locale(), 'es_' ) !== false,
 		) );
 
@@ -134,7 +134,7 @@ class SM_Admin_Settings {
 		global $current_tab, $wpdb;
 
 		if ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'sm-settings' ) ) {
-			die( esc_html__( 'Action failed. Please refresh the page and retry.', 'sermon-works' ) );
+			die( esc_html__( 'Action failed. Please refresh the page and retry.', 'mattytap-sermons' ) );
 		}
 
 		/**
@@ -149,7 +149,7 @@ class SM_Admin_Settings {
 		do_action( 'sn_update_options_' . $current_tab );
 		do_action( 'sm_update_options' );
 
-		self::add_message( __( 'Your settings have been saved.', 'sermon-works' ) );
+		self::add_message( __( 'Your settings have been saved.', 'mattytap-sermons' ) );
 
 		// Clear any unwanted data and flush rules.
 		wp_schedule_single_event( time(), 'sm_flush_rewrite_rules' );
@@ -713,7 +713,7 @@ class SM_Admin_Settings {
 			}
 		} else {
 			$options = array(
-				0 => __( 'Error in populating field options.', 'sermon-works' ),
+				0 => __( 'Error in populating field options.', 'mattytap-sermons' ),
 			);
 		}
 

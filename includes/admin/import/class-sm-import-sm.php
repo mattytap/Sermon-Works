@@ -422,7 +422,7 @@ class SM_Import_SM {
 		if ( ! preg_match( '/^\d+\.\d+$/', $this->wxr_version ) ) {
 			$this->log( 'This does not appear to be a WXR file, missing/invalid WXR version number.', 0 );
 
-			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'sermon-works' ) );
+			return new WP_Error( 'WXR_parse_error', __( 'This does not appear to be a WXR file, missing/invalid WXR version number', 'mattytap-sermons' ) );
 		}
 
 		$this->log( 'Setting content parameters.', 0 );
@@ -943,7 +943,7 @@ class SM_Import_SM {
 	 */
 	function process_attachment( $post, $url ) {
 		if ( ! $this->fetch_attachments ) {
-			return new WP_Error( 'attachment_processing_error', __( 'Fetching attachments is not enabled', 'sermon-works' ) );
+			return new WP_Error( 'attachment_processing_error', __( 'Fetching attachments is not enabled', 'mattytap-sermons' ) );
 		}
 
 		// if the URL is absolute, but does not contain address, then upload it assuming base_site_url.
@@ -960,7 +960,7 @@ class SM_Import_SM {
 		if ( $info ) {
 			$post['post_mime_type'] = $info['type'];
 		} else {
-			return new WP_Error( 'attachment_processing_error', __( 'Invalid file type', 'sermon-works' ) );
+			return new WP_Error( 'attachment_processing_error', __( 'Invalid file type', 'mattytap-sermons' ) );
 		}
 
 		$post['guid'] = $upload['url'];
@@ -996,7 +996,7 @@ class SM_Import_SM {
 		$valid = sm_validate_public_url( $url );
 		if ( is_wp_error( $valid ) ) {
 			/* translators: %s: error message returned by the URL validator. */
-			return new WP_Error( 'import_file_error', sprintf( __( 'Remote URL rejected: %s', 'sermon-works' ), $valid->get_error_message() ) );
+			return new WP_Error( 'import_file_error', sprintf( __( 'Remote URL rejected: %s', 'mattytap-sermons' ), $valid->get_error_message() ) );
 		}
 
 		// extract the file name and extension from the url.
@@ -1030,14 +1030,14 @@ class SM_Import_SM {
 			wp_delete_file( $upload['file'] );
 
 			/* translators: 1: HTTP response code, 2: HTTP response status message. */
-			return new WP_Error( 'import_file_error', sprintf( __( 'Remote server returned error response %1$d %2$s', 'sermon-works' ), (int) $response_code, get_status_header_desc( $response_code ) ) );
+			return new WP_Error( 'import_file_error', sprintf( __( 'Remote server returned error response %1$d %2$s', 'mattytap-sermons' ), (int) $response_code, get_status_header_desc( $response_code ) ) );
 		}
 
 		$body = wp_remote_retrieve_body( $response );
 		if ( false === file_put_contents( $upload['file'], $body ) ) {
 			wp_delete_file( $upload['file'] );
 
-			return new WP_Error( 'import_file_error', __( 'Could not write to upload file', 'sermon-works' ) );
+			return new WP_Error( 'import_file_error', __( 'Could not write to upload file', 'mattytap-sermons' ) );
 		}
 
 		// Build a $headers array that the rest of this function expects in
@@ -1059,13 +1059,13 @@ class SM_Import_SM {
 		if ( isset( $headers['content-length'] ) && $filesize != $headers['content-length'] ) {
 			wp_delete_file( $upload['file'] );
 
-			return new WP_Error( 'import_file_error', __( 'Remote file is incorrect size', 'sermon-works' ) );
+			return new WP_Error( 'import_file_error', __( 'Remote file is incorrect size', 'mattytap-sermons' ) );
 		}
 
 		if ( 0 == $filesize ) {
 			wp_delete_file( $upload['file'] );
 
-			return new WP_Error( 'import_file_error', __( 'Zero size file downloaded', 'sermon-works' ) );
+			return new WP_Error( 'import_file_error', __( 'Zero size file downloaded', 'mattytap-sermons' ) );
 		}
 
 		$max_size = (int) $this->max_attachment_size();
@@ -1073,7 +1073,7 @@ class SM_Import_SM {
 			wp_delete_file( $upload['file'] );
 
 			/* translators: %s: size limit, e.g. "8 MB". */
-			return new WP_Error( 'import_file_error', sprintf( __( 'Remote file is too large, limit is %s', 'sermon-works' ), size_format( $max_size ) ) );
+			return new WP_Error( 'import_file_error', sprintf( __( 'Remote file is too large, limit is %s', 'mattytap-sermons' ), size_format( $max_size ) ) );
 		}
 
 		// keep track of the old and new urls so we can substitute them later.

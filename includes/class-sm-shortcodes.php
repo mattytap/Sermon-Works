@@ -196,7 +196,7 @@ class SM_Shortcodes {
 		if ( $this->convert_taxonomy_name( $args['display'], true ) ) {
 			$args['display'] = $this->convert_taxonomy_name( $args['display'], false );
 		} elseif ( ! $this->convert_taxonomy_name( $args['display'], false ) ) {
-			return '<strong>' . esc_html__( 'Error: Invalid "list" parameter.', 'sermon-works' ) . '</strong><br>' . esc_html__( 'Possible values are: "series", "preachers", "topics" and "books".', 'sermon-works' );
+			return '<strong>' . esc_html__( 'Error: Invalid "list" parameter.', 'mattytap-sermons' ) . '</strong><br>' . esc_html__( 'Possible values are: "series", "preachers", "topics" and "books".', 'mattytap-sermons' );
 		}
 
 		$query_args = array(
@@ -456,7 +456,7 @@ class SM_Shortcodes {
 		if ( $this->convert_taxonomy_name( $args['display'], true ) ) {
 			$args['display'] = $this->convert_taxonomy_name( $args['display'], false );
 		} elseif ( ! $this->convert_taxonomy_name( $args['display'], false ) ) {
-			return '<strong>' . esc_html__( 'Error: Invalid "list" parameter.', 'sermon-works' ) . '</strong><br>' . esc_html__( 'Possible values are: "series", "preachers", "topics" and "books".', 'sermon-works' );
+			return '<strong>' . esc_html__( 'Error: Invalid "list" parameter.', 'mattytap-sermons' ) . '</strong><br>' . esc_html__( 'Possible values are: "series", "preachers", "topics" and "books".', 'mattytap-sermons' );
 		}
 
 		// Format args.

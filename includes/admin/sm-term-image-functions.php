@@ -67,8 +67,8 @@ function sm_term_image_enqueue_scripts( $hook ) {
 		'sm-term-image-picker',
 		'smTermImagePicker',
 		array(
-			'modalTitle'  => __( 'Select or upload image', 'sermon-works' ),
-			'modalButton' => __( 'Use this image', 'sermon-works' ),
+			'modalTitle'  => __( 'Select or upload image', 'mattytap-sermons' ),
+			'modalButton' => __( 'Use this image', 'mattytap-sermons' ),
 		)
 	);
 }
@@ -88,15 +88,15 @@ function sm_term_image_render_edit_field( $term, $taxonomy ) {
 	$image_url = $image_id ? wp_get_attachment_image_url( $image_id, 'thumbnail' ) : '';
 	?>
 	<tr class="form-field sm-term-image-field">
-		<th scope="row"><label for="sm_term_image_id"><?php esc_html_e( 'Image', 'sermon-works' ); ?></label></th>
+		<th scope="row"><label for="sm_term_image_id"><?php esc_html_e( 'Image', 'mattytap-sermons' ); ?></label></th>
 		<td>
 			<?php wp_nonce_field( 'sm_term_image_save', 'sm_term_image_nonce' ); ?>
 			<div class="sm-term-image-preview"<?php echo $image_url ? '' : ' style="display:none"'; ?>>
 				<img src="<?php echo esc_url( $image_url ); ?>" alt="" style="max-width:150px;height:auto;display:block;margin-bottom:6px;" />
 			</div>
 			<input type="hidden" name="sm_term_image_id" id="sm_term_image_id" value="<?php echo esc_attr( $image_id ); ?>" />
-			<button type="button" class="button sm-term-image-add"><?php esc_html_e( 'Add Image', 'sermon-works' ); ?></button>
-			<button type="button" class="button sm-term-image-remove"<?php echo $image_id ? '' : ' style="display:none"'; ?>><?php esc_html_e( 'Remove Image', 'sermon-works' ); ?></button>
+			<button type="button" class="button sm-term-image-add"><?php esc_html_e( 'Add Image', 'mattytap-sermons' ); ?></button>
+			<button type="button" class="button sm-term-image-remove"<?php echo $image_id ? '' : ' style="display:none"'; ?>><?php esc_html_e( 'Remove Image', 'mattytap-sermons' ); ?></button>
 		</td>
 	</tr>
 	<?php
@@ -113,14 +113,14 @@ function sm_term_image_render_edit_field( $term, $taxonomy ) {
 function sm_term_image_render_add_field( $taxonomy ) {
 	?>
 	<div class="form-field sm-term-image-field">
-		<label for="sm_term_image_id"><?php esc_html_e( 'Image', 'sermon-works' ); ?></label>
+		<label for="sm_term_image_id"><?php esc_html_e( 'Image', 'mattytap-sermons' ); ?></label>
 		<?php wp_nonce_field( 'sm_term_image_save', 'sm_term_image_nonce' ); ?>
 		<div class="sm-term-image-preview" style="display:none">
 			<img src="" alt="" style="max-width:150px;height:auto;display:block;margin-bottom:6px;" />
 		</div>
 		<input type="hidden" name="sm_term_image_id" id="sm_term_image_id" value="" />
-		<button type="button" class="button sm-term-image-add"><?php esc_html_e( 'Add Image', 'sermon-works' ); ?></button>
-		<button type="button" class="button sm-term-image-remove" style="display:none"><?php esc_html_e( 'Remove Image', 'sermon-works' ); ?></button>
+		<button type="button" class="button sm-term-image-add"><?php esc_html_e( 'Add Image', 'mattytap-sermons' ); ?></button>
+		<button type="button" class="button sm-term-image-remove" style="display:none"><?php esc_html_e( 'Remove Image', 'mattytap-sermons' ); ?></button>
 	</div>
 	<?php
 }

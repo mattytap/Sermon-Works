@@ -79,7 +79,7 @@ function render_wpfc_sermon_archive() {
 
 	global $post;
 	// translators: Sermon Title.
-	$title = printf( esc_attr__( 'Permalink to %s', 'sermon-works' ), the_title_attribute( 'echo=0' ) );
+	$title = printf( esc_attr__( 'Permalink to %s', 'mattytap-sermons' ), the_title_attribute( 'echo=0' ) );
 	?>
 	<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 		<h2 class="sermon-title"><a href="<?php the_permalink(); ?>"
@@ -97,9 +97,9 @@ function render_wpfc_sermon_archive() {
 			</p>
 			<p>
 				<?php
-				wpfc_sermon_meta( 'bible_passage', '<span class="bible_passage">' . __( 'Bible Text: ', 'sermon-works' ), '</span> | ' );
+				wpfc_sermon_meta( 'bible_passage', '<span class="bible_passage">' . __( 'Bible Text: ', 'mattytap-sermons' ), '</span> | ' );
 				the_terms( $post->ID, 'wpfc_preacher', '<span class="preacher_name">', ' ', '</span>' );
-				the_terms( $post->ID, 'wpfc_sermon_series', '<p><span class="sermon_series">' . __( 'Series: ', 'sermon-works' ), ' ', '</span></p>' );
+				the_terms( $post->ID, 'wpfc_sermon_series', '<p><span class="sermon_series">' . __( 'Series: ', 'mattytap-sermons' ), ' ', '</span></p>' );
 				?>
 			</p>
 		</div>
@@ -137,12 +137,12 @@ function wpfc_sermon_excerpt( $return = false ) {
 				</p>
 				<p>
 					<?php
-					wpfc_sermon_meta( 'bible_passage', '<span class="bible_passage">' . __( 'Bible Text: ', 'sermon-works' ), '</span> | ' );
+					wpfc_sermon_meta( 'bible_passage', '<span class="bible_passage">' . __( 'Bible Text: ', 'mattytap-sermons' ), '</span> | ' );
 					the_terms( $post->ID, 'wpfc_preacher', '<span class="preacher_name">', ', ', '</span>' );
 					?>
 				</p>
 				<p>
-					<?php the_terms( $post->ID, 'wpfc_sermon_series', '<span class="sermon_series">' . __( 'Series: ', 'sermon-works' ), ' ', '</span>' ); ?>
+					<?php the_terms( $post->ID, 'wpfc_sermon_series', '<span class="sermon_series">' . __( 'Series: ', 'mattytap-sermons' ), ' ', '</span>' ); ?>
 				</p>
 			</div>
 			<?php if ( \SermonManager::getOption( 'archive_player' ) || \SermonManager::getOption( 'archive_meta' ) ) : ?>
@@ -213,9 +213,9 @@ function wpfc_sermon_single( $return = false, $post = null ) {
 				</p>
 				<p>
 					<?php
-					wpfc_sermon_meta( 'bible_passage', '<span class="bible_passage">' . __( 'Bible Text: ', 'sermon-works' ), '</span> | ' );
+					wpfc_sermon_meta( 'bible_passage', '<span class="bible_passage">' . __( 'Bible Text: ', 'mattytap-sermons' ), '</span> | ' );
 					the_terms( $post->ID, 'wpfc_preacher', '<span class="preacher_name">', ', ', '</span>' );
-					the_terms( $post->ID, 'wpfc_sermon_series', '<p><span class="sermon_series">' . __( 'Series: ', 'sermon-works' ), ' ', '</span></p>' );
+					the_terms( $post->ID, 'wpfc_sermon_series', '<p><span class="sermon_series">' . __( 'Series: ', 'mattytap-sermons' ), ' ', '</span></p>' );
 					?>
 				</p>
 			</div>
@@ -228,7 +228,7 @@ function wpfc_sermon_single( $return = false, $post = null ) {
 
 			<?php echo wp_kses_post( wpfc_sermon_attachments() ); ?>
 
-			<?php the_terms( $post->ID, 'wpfc_sermon_topics', '<p class="sermon_topics">' . __( 'Sermon Topics: ', 'sermon-works' ), ',', '</p>' ); ?>
+			<?php the_terms( $post->ID, 'wpfc_sermon_topics', '<p class="sermon_topics">' . __( 'Sermon Topics: ', 'mattytap-sermons' ), ',', '</p>' ); ?>
 
 		</div>
 		<?php

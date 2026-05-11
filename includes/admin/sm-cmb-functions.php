@@ -37,16 +37,16 @@ function wpfc_sermon_metaboxes() {
 
 	$sermon_details_meta = new_cmb2_box( array(
 		'id'           => 'wpfc_sermon_details',
-		'title'        => esc_html__( 'Sermon Details', 'sermon-works' ),
+		'title'        => esc_html__( 'Sermon Details', 'mattytap-sermons' ),
 		'object_types' => array( 'wpfc_sermon' ), // Post type.
 		'context'      => 'normal',
 		'priority'     => 'high',
 		'show_names'   => true, // Show field names on the left.
 	) );
 	$sermon_details_meta->add_field( array(
-		'name'         => esc_html__( 'Date Preached', 'sermon-works' ),
+		'name'         => esc_html__( 'Date Preached', 'mattytap-sermons' ),
 		// translators: %s date format, effectively <code>d/m/Y</code> or the like.
-		'desc'         => esc_html__( '(optional)', 'sermon-works' ) . '<br>' . wp_sprintf( esc_html__( 'format: %s', 'sermon-works' ), $date_format_label ),
+		'desc'         => esc_html__( '(optional)', 'mattytap-sermons' ) . '<br>' . wp_sprintf( esc_html__( 'format: %s', 'mattytap-sermons' ), $date_format_label ),
 		'id'           => 'sermon_date',
 		'type'         => 'text_date_timestamp',
 		'date_format'  => $date_format,
@@ -57,23 +57,23 @@ function wpfc_sermon_metaboxes() {
 		// translators: %1$s The singular label. Default Service Type.
 		// translators: %2$s The plural label. Default Service Types.
 		// translators: %3$s <a href="edit-tags.php?taxonomy=wpfc_service_type&post_type=wpfc_sermon" target="_blank">here</a>.
-		'desc'             => wp_sprintf( esc_html__( 'Select the %1$s. Modify the %2$s %3$s.', 'sermon-works' ), strtolower( sm_get_taxonomy_field( 'wpfc_service_type', 'singular_name' ) ), strtolower( sm_get_taxonomy_field( 'wpfc_service_type', 'label' ) ), '<a href="' . admin_url( 'edit-tags.php?taxonomy=wpfc_service_type&post_type=wpfc_sermon' ) . '" target="_blank">here</a>' ),
+		'desc'             => wp_sprintf( esc_html__( 'Select the %1$s. Modify the %2$s %3$s.', 'mattytap-sermons' ), strtolower( sm_get_taxonomy_field( 'wpfc_service_type', 'singular_name' ) ), strtolower( sm_get_taxonomy_field( 'wpfc_service_type', 'label' ) ), '<a href="' . admin_url( 'edit-tags.php?taxonomy=wpfc_service_type&post_type=wpfc_sermon' ) . '" target="_blank">here</a>' ),
 		'id'               => 'wpfc_service_type',
 		'type'             => 'select',
 		'show_option_none' => true,
 		'options'          => cmb2_get_term_options( 'wpfc_service_type' ),
 	) );
 	$sermon_details_meta->add_field( array(
-		'name' => esc_html__( 'Main Bible Passage', 'sermon-works' ),
+		'name' => esc_html__( 'Main Bible Passage', 'mattytap-sermons' ),
 		// translators: %1$s see msgid "John 3:16-18", effectively <code>John 3:16-18</code><br>.
 		// translators: %2$s see msgid "John 3:16-18, John 2:11-12", effectively <code>John 3:16-18, Luke 2:1-3</code>.
-		'desc' => wp_sprintf( esc_html__( 'Enter the Bible passage with the full book names, e.g. %1$s Or multiple books like %2$s', 'sermon-works' ), '<code>' . esc_html__( 'John 3:16-18', 'sermon-works' ) . '</code><br>', '<code>' . esc_html__( 'John 3:16-18, Luke 2:1-3', 'sermon-works' ) . '</code>' ),
+		'desc' => wp_sprintf( esc_html__( 'Enter the Bible passage with the full book names, e.g. %1$s Or multiple books like %2$s', 'mattytap-sermons' ), '<code>' . esc_html__( 'John 3:16-18', 'mattytap-sermons' ) . '</code><br>', '<code>' . esc_html__( 'John 3:16-18, Luke 2:1-3', 'mattytap-sermons' ) . '</code>' ),
 		'id'   => 'bible_passage',
 		'type' => 'text',
 	) );
 	$sermon_details_meta->add_field( array(
-		'name'    => esc_html__( 'Description', 'sermon-works' ),
-		'desc'    => esc_html__( 'Type a brief description about this sermon, an outline, or a full manuscript', 'sermon-works' ),
+		'name'    => esc_html__( 'Description', 'mattytap-sermons' ),
+		'desc'    => esc_html__( 'Type a brief description about this sermon, an outline, or a full manuscript', 'mattytap-sermons' ),
 		'id'      => 'sermon_description',
 		'type'    => 'wysiwyg',
 		'options' => array(
@@ -84,15 +84,15 @@ function wpfc_sermon_metaboxes() {
 
 	$sermon_files_meta = new_cmb2_box( array(
 		'id'           => 'wpfc_sermon_files',
-		'title'        => esc_html__( 'Sermon Files', 'sermon-works' ),
+		'title'        => esc_html__( 'Sermon Files', 'mattytap-sermons' ),
 		'object_types' => array( 'wpfc_sermon' ),
 		'context'      => 'normal',
 		'priority'     => 'high',
 		'show_names'   => true,
 	) );
 	$sermon_files_meta->add_field( array(
-		'name' => esc_html__( 'Location of MP3', 'sermon-works' ),
-		'desc' => esc_html__( 'Upload an audio file or enter an URL.', 'sermon-works' ),
+		'name' => esc_html__( 'Location of MP3', 'mattytap-sermons' ),
+		'desc' => esc_html__( 'Upload an audio file or enter an URL.', 'mattytap-sermons' ),
 		'id'   => 'sermon_audio',
 		'type' => 'file',
 		'text' => array(
@@ -100,60 +100,60 @@ function wpfc_sermon_metaboxes() {
 		),
 	) );
 	$sermon_files_meta->add_field( array(
-		'name' => esc_html__( 'MP3 Duration', 'sermon-works' ),
+		'name' => esc_html__( 'MP3 Duration', 'mattytap-sermons' ),
 		// translators: %s see msgid "hh:mm:ss", effectively <code>hh:mm:ss</code>.
-		'desc' => wp_sprintf( esc_html__( 'Length in %s format (fill out only for remote files, local files will get data calculated by default)', 'sermon-works' ), '<code>' . esc_html__( 'hh:mm:ss', 'sermon-works' ) . '</code>' ),
+		'desc' => wp_sprintf( esc_html__( 'Length in %s format (fill out only for remote files, local files will get data calculated by default)', 'mattytap-sermons' ), '<code>' . esc_html__( 'hh:mm:ss', 'mattytap-sermons' ) . '</code>' ),
 		'id'   => '_wpfc_sermon_duration',
 		'type' => 'text',
 	) );
 	$sermon_files_meta->add_field( array(
-		'name' => esc_html__( 'Video Embed Code', 'sermon-works' ),
-		'desc' => esc_html__( 'Paste your embed code for Vimeo, Youtube, Facebook, or direct video file here', 'sermon-works' ),
+		'name' => esc_html__( 'Video Embed Code', 'mattytap-sermons' ),
+		'desc' => esc_html__( 'Paste your embed code for Vimeo, Youtube, Facebook, or direct video file here', 'mattytap-sermons' ),
 		'id'   => 'sermon_video',
 		'type' => 'textarea_code',
 	) );
 	$sermon_files_meta->add_field( apply_filters( 'sm_cmb2_field_sermon_video_link', array(
-		'name' => esc_html__( 'Video Link', 'sermon-works' ),
-		'desc' => esc_html__( 'Paste your link for Vimeo, Youtube, Facebook, or direct video file here', 'sermon-works' ),
+		'name' => esc_html__( 'Video Link', 'mattytap-sermons' ),
+		'desc' => esc_html__( 'Paste your link for Vimeo, Youtube, Facebook, or direct video file here', 'mattytap-sermons' ),
 		'id'   => 'sermon_video_link',
 		'type' => 'text_url',
 	) ) );
 	$sermon_files_meta->add_field( array(
-		'name' => esc_html__( 'Sermon Notes', 'sermon-works' ),
-		'desc' => esc_html__( 'Upload a pdf file or enter an URL.', 'sermon-works' ),
+		'name' => esc_html__( 'Sermon Notes', 'mattytap-sermons' ),
+		'desc' => esc_html__( 'Upload a pdf file or enter an URL.', 'mattytap-sermons' ),
 		'id'   => 'sermon_notes',
 		'type' => 'file',
 		'text' => array(
-			'add_upload_file_text' => esc_html__( 'Add File', 'sermon-works' ),
+			'add_upload_file_text' => esc_html__( 'Add File', 'mattytap-sermons' ),
 			// Change upload button text. Default: "Add or Upload File".
 		),
 	) );
 	$sermon_files_meta->add_field( array(
-		'name' => esc_html__( 'Sermon Notes (multiple)', 'sermon-works' ),
-		'desc' => esc_html__( 'Upload one or more PDF files. Use this when a sermon has more than one notes attachment.', 'sermon-works' ),
+		'name' => esc_html__( 'Sermon Notes (multiple)', 'mattytap-sermons' ),
+		'desc' => esc_html__( 'Upload one or more PDF files. Use this when a sermon has more than one notes attachment.', 'mattytap-sermons' ),
 		'id'   => 'sermon_notes_multiple',
 		'type' => 'file_list',
 		'text' => array(
-			'add_upload_files_text' => esc_html__( 'Add Files', 'sermon-works' ),
+			'add_upload_files_text' => esc_html__( 'Add Files', 'mattytap-sermons' ),
 		),
 	) );
 	$sermon_files_meta->add_field( array(
-		'name' => esc_html__( 'Bulletin', 'sermon-works' ),
-		'desc' => esc_html__( 'Upload a pdf file or enter an URL.', 'sermon-works' ),
+		'name' => esc_html__( 'Bulletin', 'mattytap-sermons' ),
+		'desc' => esc_html__( 'Upload a pdf file or enter an URL.', 'mattytap-sermons' ),
 		'id'   => 'sermon_bulletin',
 		'type' => 'file',
 		'text' => array(
-			'add_upload_file_text' => esc_html__( 'Add File', 'sermon-works' ),
+			'add_upload_file_text' => esc_html__( 'Add File', 'mattytap-sermons' ),
 			// Change upload button text. Default: "Add or Upload File".
 		),
 	) );
 	$sermon_files_meta->add_field( array(
-		'name' => esc_html__( 'Bulletin (multiple)', 'sermon-works' ),
-		'desc' => esc_html__( 'Upload one or more PDF files. Use this when a sermon has more than one bulletin attachment.', 'sermon-works' ),
+		'name' => esc_html__( 'Bulletin (multiple)', 'mattytap-sermons' ),
+		'desc' => esc_html__( 'Upload one or more PDF files. Use this when a sermon has more than one bulletin attachment.', 'mattytap-sermons' ),
 		'id'   => 'sermon_bulletin_multiple',
 		'type' => 'file_list',
 		'text' => array(
-			'add_upload_files_text' => esc_html__( 'Add Files', 'sermon-works' ),
+			'add_upload_files_text' => esc_html__( 'Add Files', 'mattytap-sermons' ),
 		),
 	) );
 

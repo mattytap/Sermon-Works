@@ -111,12 +111,12 @@ function sm_get_permalink_structure() {
 	) );
 
 	// Ensure rewrite slugs are set.
-	$permalinks['wpfc_preacher']      = untrailingslashit( empty( $permalinks['wpfc_preacher'] ) ? _x( 'preacher', 'slug', 'sermon-works' ) : $permalinks['wpfc_preacher'] );
-	$permalinks['wpfc_sermon_series'] = untrailingslashit( empty( $permalinks['wpfc_sermon_series'] ) ? _x( 'series', 'slug', 'sermon-works' ) : $permalinks['wpfc_sermon_series'] );
-	$permalinks['wpfc_sermon_topics'] = untrailingslashit( empty( $permalinks['wpfc_sermon_topics'] ) ? _x( 'topics', 'slug', 'sermon-works' ) : $permalinks['wpfc_sermon_topics'] );
-	$permalinks['wpfc_bible_book']    = untrailingslashit( empty( $permalinks['wpfc_bible_book'] ) ? _x( 'book', 'slug', 'sermon-works' ) : $permalinks['wpfc_bible_book'] );
-	$permalinks['wpfc_service_type']  = untrailingslashit( empty( $permalinks['wpfc_service_type'] ) ? _x( 'service-type', 'slug', 'sermon-works' ) : $permalinks['wpfc_service_type'] );
-	$permalinks['wpfc_sermon']        = untrailingslashit( empty( $permalinks['wpfc_sermon'] ) ? _x( 'sermons', 'slug', 'sermon-works' ) : $permalinks['wpfc_sermon'] );
+	$permalinks['wpfc_preacher']      = untrailingslashit( empty( $permalinks['wpfc_preacher'] ) ? _x( 'preacher', 'slug', 'mattytap-sermons' ) : $permalinks['wpfc_preacher'] );
+	$permalinks['wpfc_sermon_series'] = untrailingslashit( empty( $permalinks['wpfc_sermon_series'] ) ? _x( 'series', 'slug', 'mattytap-sermons' ) : $permalinks['wpfc_sermon_series'] );
+	$permalinks['wpfc_sermon_topics'] = untrailingslashit( empty( $permalinks['wpfc_sermon_topics'] ) ? _x( 'topics', 'slug', 'mattytap-sermons' ) : $permalinks['wpfc_sermon_topics'] );
+	$permalinks['wpfc_bible_book']    = untrailingslashit( empty( $permalinks['wpfc_bible_book'] ) ? _x( 'book', 'slug', 'mattytap-sermons' ) : $permalinks['wpfc_bible_book'] );
+	$permalinks['wpfc_service_type']  = untrailingslashit( empty( $permalinks['wpfc_service_type'] ) ? _x( 'service-type', 'slug', 'mattytap-sermons' ) : $permalinks['wpfc_service_type'] );
+	$permalinks['wpfc_sermon']        = untrailingslashit( empty( $permalinks['wpfc_sermon'] ) ? _x( 'sermons', 'slug', 'mattytap-sermons' ) : $permalinks['wpfc_sermon'] );
 
 	if ( \SermonManager::getOption( 'common_base_slug' ) ) {
 		foreach ( $permalinks as $name => &$permalink ) {
@@ -903,16 +903,16 @@ function sm_is_legitimate_save( $post_ID ) {
  */
 function sm_validate_public_url( $url ) {
 	if ( ! is_string( $url ) || '' === trim( $url ) ) {
-		return new WP_Error( 'sm_invalid_url', __( 'URL is empty or not a string.', 'sermon-works' ) );
+		return new WP_Error( 'sm_invalid_url', __( 'URL is empty or not a string.', 'mattytap-sermons' ) );
 	}
 
 	$parts = wp_parse_url( $url );
 	if ( ! $parts || empty( $parts['scheme'] ) || empty( $parts['host'] ) ) {
-		return new WP_Error( 'sm_invalid_url', __( 'URL is malformed.', 'sermon-works' ) );
+		return new WP_Error( 'sm_invalid_url', __( 'URL is malformed.', 'mattytap-sermons' ) );
 	}
 
 	if ( ! in_array( strtolower( $parts['scheme'] ), array( 'http', 'https' ), true ) ) {
-		return new WP_Error( 'sm_invalid_scheme', __( 'Only http and https URLs are allowed.', 'sermon-works' ) );
+		return new WP_Error( 'sm_invalid_scheme', __( 'Only http and https URLs are allowed.', 'mattytap-sermons' ) );
 	}
 
 	$host = strtolower( $parts['host'] );
@@ -923,7 +923,7 @@ function sm_validate_public_url( $url ) {
 		'metadata.aws.amazon.com',
 	);
 	if ( in_array( $host, $blocked_hosts, true ) ) {
-		return new WP_Error( 'sm_blocked_host', __( 'Cloud metadata hostnames are blocked.', 'sermon-works' ) );
+		return new WP_Error( 'sm_blocked_host', __( 'Cloud metadata hostnames are blocked.', 'mattytap-sermons' ) );
 	}
 
 	$ips = array();
@@ -932,7 +932,7 @@ function sm_validate_public_url( $url ) {
 	} else {
 		$records = @dns_get_record( $host, DNS_A | DNS_AAAA );
 		if ( ! $records ) {
-			return new WP_Error( 'sm_dns_failed', __( 'Could not resolve host.', 'sermon-works' ) );
+			return new WP_Error( 'sm_dns_failed', __( 'Could not resolve host.', 'mattytap-sermons' ) );
 		}
 		foreach ( $records as $record ) {
 			if ( ! empty( $record['ip'] ) ) {
@@ -950,7 +950,7 @@ function sm_validate_public_url( $url ) {
 			FILTER_VALIDATE_IP,
 			FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE
 		) ) {
-			return new WP_Error( 'sm_blocked_ip', __( 'Address resolves to a private or reserved IP range.', 'sermon-works' ) );
+			return new WP_Error( 'sm_blocked_ip', __( 'Address resolves to a private or reserved IP range.', 'mattytap-sermons' ) );
 		}
 	}
 

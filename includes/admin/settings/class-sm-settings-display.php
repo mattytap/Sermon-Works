@@ -16,7 +16,7 @@ class SM_Settings_Display extends SM_Settings_Page {
 	 */
 	public function __construct() {
 		$this->id    = 'display';
-		$this->label = __( 'Display', 'sermon-works' );
+		$this->label = __( 'Display', 'mattytap-sermons' );
 
 		parent::__construct();
 	}
@@ -30,33 +30,33 @@ class SM_Settings_Display extends SM_Settings_Page {
 		$settings = apply_filters( 'sm_display_settings', array(
 
 			array(
-				'title' => __( 'Display Settings', 'sermon-works' ),
+				'title' => __( 'Display Settings', 'mattytap-sermons' ),
 				'type'  => 'title',
 				'desc'  => '',
 				'id'    => 'display_settings',
 			),
 			array(
-				'title'   => __( 'Default Image', 'sermon-works' ),
+				'title'   => __( 'Default Image', 'mattytap-sermons' ),
 				'type'    => 'image',
-				'desc'    => __( 'Sets the default sermon image that would show up if there is no sermon or series (if applicable) image is set.', 'sermon-works' ),
+				'desc'    => __( 'Sets the default sermon image that would show up if there is no sermon or series (if applicable) image is set.', 'mattytap-sermons' ),
 				'id'      => 'default_image',
 				'default' => '',
 			),
 			array(
-				'title'    => __( 'Sermon Works Styles', 'sermon-works' ),
+				'title'    => __( 'Sermon Works Styles', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
-				'desc'     => __( 'Disable Sermon Works CSS.', 'sermon-works' ),
+				'desc'     => __( 'Disable Sermon Works CSS.', 'mattytap-sermons' ),
 				// translators: %s effectively <code>sermons.css</code>.
-				'desc_tip' => wp_sprintf( __( 'This will disable Sermon Works default CSS, so sermon styling will rely only on your CSS. It might be easier to check this option, instead of overriding our rules. Default unchecked.', 'sermon-works' ), '<code>/assets/css/sermon.min.css</code>' ),
+				'desc_tip' => wp_sprintf( __( 'This will disable Sermon Works default CSS, so sermon styling will rely only on your CSS. It might be easier to check this option, instead of overriding our rules. Default unchecked.', 'mattytap-sermons' ), '<code>/assets/css/sermon.min.css</code>' ),
 				'id'       => 'css',
 				'default'  => 'no',
 			),
 			array(
-				'title' => __( 'Archive', 'sermon-works' ),
+				'title' => __( 'Archive', 'mattytap-sermons' ),
 				'type'  => 'separator_title',
 			),
 			array(
-				'title'   => __( 'Order sermons by', 'sermon-works' ),
+				'title'   => __( 'Order sermons by', 'mattytap-sermons' ),
 				'type'    => 'select',
 				'options' => array(
 					'date_preached' => 'Date Preached',
@@ -65,84 +65,84 @@ class SM_Settings_Display extends SM_Settings_Page {
 					'ID'            => 'ID',
 					'random'        => 'Random',
 				),
-				'desc'    => __( 'Changes the way sermons are ordered by default. Affects the RSS feed and shown date as well. Default "Date Preached".', 'sermon-works' ),
+				'desc'    => __( 'Changes the way sermons are ordered by default. Affects the RSS feed and shown date as well. Default "Date Preached".', 'mattytap-sermons' ),
 				'default' => 'date_preached',
 				'id'      => 'archive_orderby',
 			),
 			array(
-				'title'   => __( 'Order direction', 'sermon-works' ),
+				'title'   => __( 'Order direction', 'mattytap-sermons' ),
 				'type'    => 'select',
 				'options' => array(
 					'desc' => 'Descending',
 					'asc'  => 'Ascending',
 				),
-				'desc'    => __( 'Related to the setting above. Default descending.', 'sermon-works' ),
+				'desc'    => __( 'Related to the setting above. Default descending.', 'mattytap-sermons' ),
 				'default' => 'desc',
 				'id'      => 'archive_order',
 			),
 			array(
-				'title'    => __( 'Display Audio Player', 'sermon-works' ),
+				'title'    => __( 'Display Audio Player', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
-				'desc_tip' => __( 'Displays audio player on archive pages. Default unchecked.', 'sermon-works' ),
+				'desc_tip' => __( 'Displays audio player on archive pages. Default unchecked.', 'mattytap-sermons' ),
 				'id'       => 'archive_player',
 				'default'  => 'no',
 			),
 			array(
-				'title'    => __( 'Display Attachments', 'sermon-works' ),
+				'title'    => __( 'Display Attachments', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
-				'desc_tip' => __( 'Displays attachments links on archive pages. Default unchecked.', 'sermon-works' ),
+				'desc_tip' => __( 'Displays attachments links on archive pages. Default unchecked.', 'mattytap-sermons' ),
 				'id'       => 'archive_meta',
 				'default'  => 'no',
 			),
 			array(
-				'title'    => __( 'Disable Sermon Image', 'sermon-works' ),
+				'title'    => __( 'Disable Sermon Image', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
-				'desc_tip' => __( 'Disable image output on archive views. Default unchecked.', 'sermon-works' ),
+				'desc_tip' => __( 'Disable image output on archive views. Default unchecked.', 'mattytap-sermons' ),
 				'id'       => 'disable_image_archive',
 				'default'  => 'no',
 			),
 			array(
-				'title'    => __( 'Read More', 'sermon-works' ),
+				'title'    => __( 'Read More', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
-				'desc'     => __( 'Do not show read more when all the text is visible.', 'sermon-works' ),
-				'desc_tip' => __( 'By default, "Read more..." text shows up regardless if sermon has or does not have description. By checking this option, it will show only if there is more text to read.', 'sermon-works' ),
+				'desc'     => __( 'Do not show read more when all the text is visible.', 'mattytap-sermons' ),
+				'desc_tip' => __( 'By default, "Read more..." text shows up regardless if sermon has or does not have description. By checking this option, it will show only if there is more text to read.', 'mattytap-sermons' ),
 				'id'       => 'hide_read_more_when_not_needed',
 				'default'  => 'no',
 			),
 			array(
-				'title'    => __( 'Hide Filtering', 'sermon-works' ),
+				'title'    => __( 'Hide Filtering', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
-				'desc'     => __( 'Hide filters on archive pages.', 'sermon-works' ),
-				'desc_tip' => __( 'Currently, the filter dropdowns are shown by default on all archive pages. By checking this option, you can hide them. Default unchecked.', 'sermon-works' ),
+				'desc'     => __( 'Hide filters on archive pages.', 'mattytap-sermons' ),
+				'desc_tip' => __( 'Currently, the filter dropdowns are shown by default on all archive pages. By checking this option, you can hide them. Default unchecked.', 'mattytap-sermons' ),
 				'id'       => 'hide_filters',
 				'default'  => 'no',
 			),
 			array(
 				// translators: %s the taxonomy label. Default: Service Type.
-				'title'    => wp_sprintf( __( 'Display %s Filtering', 'sermon-works' ), sm_get_taxonomy_field( 'wpfc_service_type', 'singular_name' ) ),
+				'title'    => wp_sprintf( __( 'Display %s Filtering', 'mattytap-sermons' ), sm_get_taxonomy_field( 'wpfc_service_type', 'singular_name' ) ),
 				'type'     => 'checkbox',
 				// translators: %s the taxonomy label. Default: service type.
-				'desc_tip' => wp_sprintf( __( 'Displays %s filtering on archive pages. Default unchecked.', 'sermon-works' ), strtolower( sm_get_taxonomy_field( 'wpfc_service_type', 'singular_name' ) ) ),
+				'desc_tip' => wp_sprintf( __( 'Displays %s filtering on archive pages. Default unchecked.', 'mattytap-sermons' ), strtolower( sm_get_taxonomy_field( 'wpfc_service_type', 'singular_name' ) ) ),
 				'id'       => 'service_type_filtering',
 				'default'  => 'no',
 				'disabled' => method_exists( '\SermonManagerPro\Templating\Templating_Manager', 'is_active' ) ? \SermonManagerPro\Templating\Templating_Manager::is_active() : false,
 			),
 			array(
-				'title'    => __( 'Use Previous/Next Pagination', 'sermon-works' ),
+				'title'    => __( 'Use Previous/Next Pagination', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
-				'desc'     => __( 'Instead of paginated pagination (1,2,3), use previous/next links.', 'sermon-works' ),
-				'desc_tip' => __( 'Some themes do not have styling for paginated pagination, so it\'s easier for you to use previous/next pagination for them, instead of writing custom CSS. Default unchecked.', 'sermon-works' ),
+				'desc'     => __( 'Instead of paginated pagination (1,2,3), use previous/next links.', 'mattytap-sermons' ),
+				'desc_tip' => __( 'Some themes do not have styling for paginated pagination, so it\'s easier for you to use previous/next pagination for them, instead of writing custom CSS. Default unchecked.', 'mattytap-sermons' ),
 				'id'       => 'use_prev_next_pagination',
 				'default'  => 'no',
 			),
 			array(
-				'title' => __( 'Single', 'sermon-works' ),
+				'title' => __( 'Single', 'mattytap-sermons' ),
 				'type'  => 'separator_title',
 			),
 			array(
-				'title'    => __( 'Disable Sermon Image', 'sermon-works' ),
+				'title'    => __( 'Disable Sermon Image', 'mattytap-sermons' ),
 				'type'     => 'checkbox',
-				'desc_tip' => __( 'Disable image output on single sermon view. Default unchecked.', 'sermon-works' ),
+				'desc_tip' => __( 'Disable image output on single sermon view. Default unchecked.', 'mattytap-sermons' ),
 				'id'       => 'disable_image_single',
 				'default'  => 'no',
 			),
