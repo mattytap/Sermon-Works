@@ -6,9 +6,9 @@ A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Ser
 
 ## Install
 
-The current release is **3.0.2**.
+The current release is **3.1-rc1**, the first release-candidate of the renamed line.
 
-1. Open the [Releases page](https://github.com/mattytap/Mattytap-Sermons/releases) and download `sermon-works-3.0.2.zip` from the latest release.
+1. Open the [Releases page](https://github.com/mattytap/Mattytap-Sermons/releases) and download `mattytap-sermons-3.1-rc1.zip` from the latest release.
 2. In WordPress admin, go to **Plugins, Add New, Upload Plugin**.
 3. Choose the ZIP, click **Install Now**, then **Activate**.
 
@@ -18,12 +18,12 @@ Requires PHP 8.1+ and WordPress 6.0+.
 
 ## Status
 
-Latest tag: `3.0.2`. WordPress.org resubmission as `mattytap-sermons` is in flight following a 2026-05-11 trademark rejection of the `sermon-works` slug.
+Latest tag: `3.1-rc1`. WordPress.org resubmission as `mattytap-sermons` is queued following a 2026-05-11 trademark rejection of the `sermon-works` slug.
 
 - **Security audit complete.** 25 issues filed on the [tracker](https://github.com/mattytap/Mattytap-Sermons/issues), including three publicly-disclosed CVEs (CVE-2025-12368, CVE-2025-63000, CVE-2025-63002). All filed findings have shipping patches; operational verification at formal UAT closes each issue.
 - **Modernisation complete.** Codebase brought up to current PHP and WordPress APIs. PHP 8.1+ floor, WordPress 6.0+ floor.
 - **Drop-in compatibility against 2.30.0.** The `wpfc_sermon` post type, `wpfc_*` taxonomies, core option keys, six shortcodes, and view-template surface match the WP.org-shipped 2.30.0 line. Multi-attachments for notes and bulletin, post-body editor support, and the Twenty Twenty-Four theme wrapper are cherry-picked from upstream 2.30.0; a small set of upstream changes are documented as gaps with rationale. See [`.restoration/DROP-IN-AUDIT.md`](.restoration/DROP-IN-AUDIT.md) for the full classification.
-- **Renamed for WordPress.org submission.** The `sermon-works` slug was bounced in pre-review on 2026-05-11 on trademark grounds. The plugin has been renamed to Mattytap Sermons (slug `mattytap-sermons`). The same pre-review surfaced a list of technical findings being worked through for the renamed RC, planned as `3.1-rc1`.
+- **Renamed for WordPress.org submission.** The `sermon-works` slug was bounced in pre-review on 2026-05-11 on trademark grounds. The plugin has been renamed to Mattytap Sermons (slug `mattytap-sermons`). The same pre-review surfaced ten technical findings (text-domain loading, prefix annotations, output escaping in views, callback escaping, enqueue-path refactors, vendor refresh) which are now closed in `3.1-rc1`.
 
 ## Who is Mattytap Sermons for?
 

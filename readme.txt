@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.1
-Stable tag: 3.0.2
+Stable tag: 3.1-rc1
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,25 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.1-rc1 =
+
+First release-candidate of the renamed line. Sermon Works has been renamed to Mattytap Sermons under the WordPress.org slug `mattytap-sermons` following plugin-team trademark guidance against the prior name. Strapline updated to "Faithful to the source." Same caretaker, same codebase, same migration path; existing 3.0.x installs upgrade in place.
+
+This release also closes the ten technical items the WordPress.org reviewer's automated pre-review flagged against the 3.0.2 submission:
+
+* Removed the `load_plugin_textdomain` call (WordPress.org auto-loads translations since WP 4.6).
+* Replaced PHP 8.2-deprecated `utf8_encode` with `mb_convert_encoding` in the WXR exporter's UTF-8 fallback branch.
+* Added `sanitize_text_field( wp_unslash() )` on the defence-in-depth `$_REQUEST['_wpnonce']` read in the settings save-handler.
+* Added `esc_url_raw( wp_unslash() )` on the `$_SERVER['REQUEST_URI']` read in the import form action.
+* Removed the unpaired `ob_start()` at `admin_init` priority 1. The other twelve `ob_start()` sites in the codebase are properly paired with `ob_end_flush()` and continue to work as before.
+* Annotated 45 reviewer-flagged sites carrying legacy upstream `wpfc_*` / `wp_sm_*` / `sm_*` prefixes with `phpcs:ignore` plus rationale comments. The prefixes themselves are preserved deliberately for drop-in compatibility with Sermon Manager.
+* Applied `wp_kses()` and friends at 40 sites across 11 view templates in `views/`. A small helper `sm_template_allowed_html()` extends `wp_kses_allowed_html('post')` for Plyr `data-*` attributes and audio/video element attributes the default kses table strips. Five genuinely-unfixable sites (CDATA-wrapped strings and attribute-fragment echoes) are left annotated with rationale.
+* Wrapped editor-pane content in `wp_kses_post()` in the `the_content` filter callback. The `[list_podcasts]` shortcode is now internationalised via `__()` / `sprintf()` and its return value wrapped in `wp_kses_post()` so static scanners see an explicit escaper at the function boundary.
+* Consolidated the Plyr enqueue path in `sermons.php`: replaced two `wp_localize_script` calls with `wp_add_inline_script`; dropped `maybe_print_cloudflare_plyr` and its manual `<script data-cfasync="false">` echo in favour of a `script_loader_tag` filter that injects the attribute on the two Plyr handles. Hoisted the dashboard "At a Glance" widget's inline `<style>` block to `wp_add_inline_style` against the dashicons handle. The two `UNCODE.initHeader()` inline-script sites in the Uncode theme branch remain inline with `phpcs:ignore` plus rationale: those calls fire at a mid-body DOM position the Uncode theme's header initialisation depends on.
+* Refreshed bundled vendor libraries: Plyr 3.4.7 → 3.7.8 (verbatim swap from the upstream npm tarball; no JS-API breaking changes; the 3.7.x line includes preview-thumbnail, focus-visible, and border-radius CSS updates which are absorbed automatically because we ship the precompiled CSS from the same release). wp-color-picker-alpha 2.1.3 → 3.0.4 (verbatim swap from upstream `main`; the 3.0.x line is a full rewrite that drops the WordPress 5.5-removed `wpColorPickerL10n` global dependency. No runtime delta in this plugin because the script is dead code: no CMB2 colorpicker field in the codebase sets `'alpha' => true`).
+
+Drop-in compatibility ethic preserved: the `wpfc_sermon` custom post type, the `wpfc_preacher` and `wpfc_sermon_series` taxonomies, and all `wpfc_*` option keys are unchanged. Existing Sermon Manager (or 3.0.x Sermon Works) installs continue to migrate without data loss.
 
 = 3.0.2 =
 
@@ -178,6 +197,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.1-rc1 =
+
+Plugin renamed from Sermon Works to Mattytap Sermons under the WordPress.org slug `mattytap-sermons`. Database, content, post type, taxonomies, and front-end render unchanged. Migrate by activating Mattytap Sermons and deactivating Sermon Works. Also closes ten technical items raised by the WordPress.org plugin reviewer's automated pre-review of 3.0.2.
 
 = 3.0.2 =
 
