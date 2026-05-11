@@ -133,7 +133,7 @@ class SM_Admin_Settings {
 	public static function save() {
 		global $current_tab, $wpdb;
 
-		if ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'sm-settings' ) ) {
+		if ( empty( $_REQUEST['_wpnonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_REQUEST['_wpnonce'] ) ), 'sm-settings' ) ) {
 			die( esc_html__( 'Action failed. Please refresh the page and retry.', 'mattytap-sermons' ) );
 		}
 
