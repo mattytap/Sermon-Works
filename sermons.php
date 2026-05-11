@@ -1,8 +1,8 @@
 <?php // phpcs:ignore
 /**
- * Plugin Name: Sermon Works
- * Plugin URI: https://github.com/mattytap/Sermon-Works
- * Description: Sola fide. Fully featured. A maintained restoration of WP-for-Church's Sermon Manager — add audio and video sermons, manage preachers, series, and more.
+ * Plugin Name: Mattytap Sermons
+ * Plugin URI: https://github.com/mattytap/Mattytap-Sermons
+ * Description: Faithful to the source. A maintained restoration of WP-for-Church's Sermon Manager — add audio and video sermons, manage preachers, series, and more.
  * Version: 3.0.2
  * Author: Matt Fawcett (restoration); WP for Church (original)
  * Author URI: https://github.com/mattytap
@@ -12,7 +12,7 @@
  * License: GPLv2
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  *
- * Text Domain: sermon-works
+ * Text Domain: mattytap-sermons
  * Domain Path: /languages/
  *
  * @package SM/Core
