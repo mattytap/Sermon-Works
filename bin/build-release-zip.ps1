@@ -1,12 +1,16 @@
 <#
 .SYNOPSIS
-    Build a WordPress-installable ZIP of the Sermon Works plugin.
+    Build a WordPress-installable ZIP of the plugin.
 
 .DESCRIPTION
     Reads the Version: header from sermons.php and uses `git archive`
-    to produce dist/sermon-works-<version>.zip with a `sermon-works/`
-    top-level folder, suitable for upload via WP admin (Plugins, Add
-    New, Upload Plugin) or attachment to a GitHub release.
+    to produce dist/<slug>-<version>.zip with a `<slug>/` top-level
+    folder, suitable for upload via WP admin (Plugins, Add New,
+    Upload Plugin) or attachment to a GitHub release.
+
+    -Slug defaults to "mattytap-sermons" (the current WordPress.org
+    slug). Override via -Slug if a different in-ZIP folder name is
+    wanted.
 
     The path allow-list is the same set of files and directories
     bundled at runtime: sermons.php, readme.txt, changelog.txt,
@@ -26,12 +30,16 @@
     SHA as a ZIP comment for provenance.
 
 .EXAMPLE
-    pwsh ./bin/build-release-zip.ps1
+    pwsh ./bin/build-release-zip.ps1 -Ref v3.1-rc1
+
+.EXAMPLE
+    pwsh ./bin/build-release-zip.ps1 -Slug sermon-works -Ref v3.0.2
 #>
 
 [CmdletBinding()]
 param(
-    [string]$Ref = 'HEAD'
+    [string]$Ref = 'HEAD',
+    [string]$Slug = 'mattytap-sermons'
 )
 
 Set-StrictMode -Version Latest
@@ -57,16 +65,17 @@ if (-not (Test-Path $DistDir)) {
     New-Item -ItemType Directory -Path $DistDir -Force | Out-Null
 }
 
-$ZipPath = Join-Path $DistDir "sermon-works-$Version.zip"
+$ZipPath = Join-Path $DistDir "$Slug-$Version.zip"
 if (Test-Path $ZipPath) {
     Remove-Item $ZipPath -Force
 }
 
-Write-Host "Sermon Works build" -ForegroundColor Cyan
+Write-Host "Plugin release build" -ForegroundColor Cyan
+Write-Host "  slug    : $Slug"
 Write-Host "  version : $Version"
 Write-Host "  ref     : $Ref"
 Write-Host "  repo    : $RepoRoot"
-Write-Host "  output  : dist/sermon-works-$Version.zip"
+Write-Host "  output  : dist/$Slug-$Version.zip"
 Write-Host ''
 
 $Pathspec = @(
@@ -82,7 +91,7 @@ $Pathspec = @(
 
 Push-Location $RepoRoot
 try {
-    & git archive --format=zip --prefix=sermon-works/ -o $ZipPath $Ref @Pathspec
+    & git archive --format=zip --prefix="$Slug/" -o $ZipPath $Ref @Pathspec
     if ($LASTEXITCODE -ne 0) {
         throw "git archive failed with exit code $LASTEXITCODE"
     }
