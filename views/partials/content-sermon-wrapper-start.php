@@ -283,6 +283,7 @@ switch ( $template ) {
 					echo '</div>';
 				}
 			}
+			// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- Theme-init call must fire at this mid-body DOM position immediately after the page-header div is emitted; UNCODE.initHeader() depends on that DOM state. Hoisting to wp_add_inline_script would defer the call to the footer queue and change initialisation timing.
 			echo '<script type="text/javascript">UNCODE.initHeader();</script>';
 
 			/** Build breadcrumb **/
@@ -505,6 +506,7 @@ switch ( $template ) {
 					$media = $page_header->poster_id;
 				}
 			}
+			// phpcs:ignore WordPress.WP.EnqueuedResources.NonEnqueuedScript -- Theme-init call must fire at this mid-body DOM position immediately after the page-header div is emitted; UNCODE.initHeader() depends on that DOM state. Hoisting to wp_add_inline_script would defer the call to the footer queue and change initialisation timing.
 			echo '<script type="text/javascript">UNCODE.initHeader();</script>';
 			/** Build breadcrumb **/
 
