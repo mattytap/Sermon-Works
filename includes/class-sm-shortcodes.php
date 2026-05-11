@@ -1090,6 +1090,7 @@ class SM_Shortcodes {
 			return $args['image_size'];
 		} );
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream constant prefix; drop-in compat with Sermon Manager.
 		define( 'WPFC_SM_SHORTCODE', true );
 
 		if ( $query->have_posts() ) {

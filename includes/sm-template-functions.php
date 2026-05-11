@@ -302,6 +302,7 @@ function wpfc_render_video( $url = '', $seek = true ) {
 	}
 
 	if ( strpos( $url, 'facebook.' ) !== false ) {
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script handle; drop-in compat with Sermon Manager.
 		wp_enqueue_script( 'wpfc-sm-fb-player' );
 
 		parse_str( wp_parse_url( $url, PHP_URL_QUERY ), $query );

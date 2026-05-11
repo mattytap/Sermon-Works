@@ -53,6 +53,7 @@ class SM_Post_Types {
 			'wpfc_service_type' => SermonManager::getOption( 'service_type_label' ) ? strtolower( SermonManager::getOption( 'service_type_label' ) ) : __( 'Service Type', 'mattytap-sermons' ),
 		);
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream prefix; drop-in compat with Sermon Manager.
 		register_taxonomy(
 			'wpfc_preacher',
 			apply_filters( 'sm_taxonomy_objects_wpfc_preacher', array( 'wpfc_sermon' ) ),
@@ -96,6 +97,7 @@ class SM_Post_Types {
 			)
 		);
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream prefix; drop-in compat with Sermon Manager.
 		register_taxonomy(
 			'wpfc_sermon_series',
 			apply_filters( 'sm_taxonomy_objects_wpfc_sermon_series', array( 'wpfc_sermon' ) ),
@@ -132,6 +134,7 @@ class SM_Post_Types {
 			)
 		);
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream prefix; drop-in compat with Sermon Manager.
 		register_taxonomy(
 			'wpfc_sermon_topics',
 			apply_filters( 'sm_taxonomy_objects_wpfc_sermon_topics', array( 'wpfc_sermon' ) ),
@@ -168,6 +171,7 @@ class SM_Post_Types {
 			)
 		);
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream prefix; drop-in compat with Sermon Manager.
 		register_taxonomy(
 			'wpfc_bible_book',
 			apply_filters( 'sm_taxonomy_objects_wpfc_bible_book', array( 'wpfc_sermon' ) ),
@@ -204,6 +208,7 @@ class SM_Post_Types {
 			)
 		);
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream prefix; drop-in compat with Sermon Manager.
 		register_taxonomy(
 			'wpfc_service_type',
 			apply_filters( 'sm_taxonomy_objects_wpfc_service_type', array( 'wpfc_sermon' ) ),
@@ -262,6 +267,7 @@ class SM_Post_Types {
 
 		$permalinks = sm_get_permalink_structure();
 
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream prefix; drop-in compat with Sermon Manager.
 		register_post_type(
 			'wpfc_sermon',
 			apply_filters(

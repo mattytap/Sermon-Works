@@ -300,10 +300,12 @@ class SermonManager { // phpcs:ignore
 		}
 
 		if ( ! SermonManager::getOption( 'css' ) ) {
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 			wp_enqueue_style( 'wpfc-sm-styles' );
 			wp_enqueue_style( 'dashicons' );
 
 			// Load theme-specific styling, if there's any.
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 			wp_enqueue_style( 'wpfc-sm-style-' . get_option( 'template' ) );
 
 			do_action( 'sm_enqueue_css' );
@@ -311,6 +313,7 @@ class SermonManager { // phpcs:ignore
 		}
 
 		// Load top theme-specific styling, if there's any.
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 		wp_enqueue_style( 'wpfc-sm-style-theme' );
 
 		switch ( SermonManager::getOption( 'player' ) ) {
@@ -340,16 +343,20 @@ class SermonManager { // phpcs:ignore
 					add_action( 'wp_print_scripts', array( __CLASS__, 'maybe_print_cloudflare_plyr' ) );
 					add_action( 'wp_print_footer_scripts', array( __CLASS__, 'maybe_print_cloudflare_plyr' ) );
 				} else {
+					// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 					wp_enqueue_script( 'wpfc-sm-plyr' );
+					// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 					wp_enqueue_script( 'wpfc-sm-plyr-loader' );
 				}
 
+				// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 				wp_enqueue_style( 'wpfc-sm-plyr-css' );
 
 				break;
 		}
 
 		if ( ! apply_filters( 'verse_popup_disable', SermonManager::getOption( 'verse_popup' ) ) ) { // phpcs:ignore
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 			wp_enqueue_script( 'wpfc-sm-verse-script' );
 
 			// Get options for JS.
@@ -496,20 +503,28 @@ class SermonManager { // phpcs:ignore
 	 * @since 2.15.7
 	 */
 	public static function register_scripts_styles() {
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 		wp_register_script( 'wpfc-sm-fb-player', SM_URL . 'assets/vendor/js/facebook-video.js', array(), SM_VERSION );
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 		wp_register_script( 'wpfc-sm-plyr', SM_URL . 'assets/vendor/js/plyr.polyfilled' . ( ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) ? '' : '.min' ) . '.js', array(), '3.4.7', SermonManager::getOption( 'player_js_footer' ) );
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 		wp_register_script( 'wpfc-sm-plyr-loader', SM_URL . 'assets/js/plyr' . ( ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) ? '' : '.min' ) . '.js', array( 'wpfc-sm-plyr' ), SM_VERSION );
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 		wp_register_script( 'wpfc-sm-verse-script', SM_URL . 'assets/vendor/js/verse.js', array(), SM_VERSION );
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 		wp_register_style( 'wpfc-sm-styles', SM_URL . 'assets/css/sermon.min.css', array(), SM_VERSION );
+		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 		wp_register_style( 'wpfc-sm-plyr-css', SM_URL . 'assets/vendor/css/plyr.min.css', array(), '3.4.7' );
 
 		// Register theme-specific styling, if there's any.
 		if ( file_exists( SM_PATH . 'assets/css/theme-specific/' . get_option( 'template' ) . '.css' ) ) {
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 			wp_register_style( 'wpfc-sm-style-' . get_option( 'template' ), SM_URL . 'assets/css/theme-specific/' . get_option( 'template' ) . '.css', array( 'wpfc-sm-styles' ), SM_VERSION );
 		}
 
 		// Register top theme-specific styling, if there's any.
 		if ( file_exists( get_stylesheet_directory() . '/sermon.css' ) ) {
+			// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 			wp_register_style( 'wpfc-sm-style-theme', get_stylesheet_directory_uri() . '/sermon.css', array( 'wpfc-sm-styles' ), SM_VERSION );
 		}
 	}

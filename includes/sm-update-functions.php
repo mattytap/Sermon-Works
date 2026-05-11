@@ -31,6 +31,7 @@ function sm_update_28_revert_old_dates() {
 	wp_cache_flush();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -59,6 +60,7 @@ function sm_update_28_convert_dates_to_unix() {
 	wp_cache_flush();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -83,6 +85,7 @@ function sm_update_28_fill_out_empty_dates() {
 	wp_cache_flush();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -95,6 +98,7 @@ function sm_update_28_fill_out_series_dates() {
 	SM_Dates_WP::update_series_date();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -107,6 +111,7 @@ function sm_update_28_save_sermon_render_into_post_content() {
 	sm_update_211_render_content();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -117,6 +122,7 @@ function sm_update_284_resave_sermons() {
 	sm_update_28_save_sermon_render_into_post_content();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -127,6 +133,7 @@ function sm_update_29_fill_out_series_dates() {
 	sm_update_28_fill_out_series_dates();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -141,6 +148,7 @@ function sm_update_29_convert_settings() {
 	}
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -151,6 +159,7 @@ function sm_update_293_fix_import_dates() {
 	sm_update_28_fill_out_empty_dates();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -172,6 +181,7 @@ function sm_update_210_update_options() {
 	}
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -194,6 +204,7 @@ function sm_update_211_render_content() {
 	wp_cache_flush();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -237,6 +248,7 @@ function sm_update_211_update_date_time() {
 	wp_cache_flush();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -247,6 +259,7 @@ function sm_update_2123_fix_preacher_permalink() {
 	flush_rewrite_rules();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -259,6 +272,7 @@ function sm_update_2130_fill_out_sermon_term_dates() {
 	SM_Dates_WP::update_term_dates();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -284,6 +298,7 @@ function sm_update_2130_remove_excerpts() {
 	}
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -357,6 +372,7 @@ function sm_update_2140_convert_bible_verse() {
 	}
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -388,6 +404,7 @@ function sm_update_2150_audio_file_ids() {
 	}
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -421,6 +438,7 @@ function sm_update_2150_audio_duration_and_size() {
 	}
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -434,6 +452,7 @@ function sm_update_2152_remove_default_image() {
 	}
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -459,6 +478,7 @@ function sm_update_21511_update_term_dates() {
 	SM_Dates_WP::update_term_dates();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -471,6 +491,7 @@ function sm_update_21516_update_term_dates() {
 	sm_update_21511_update_term_dates();
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
 
@@ -507,5 +528,6 @@ function sm_update_2160_migrate_term_images() {
 	update_option( 'sm_term_image_migrated_to_meta', 1 );
 
 	// Mark it as done, backup way.
+	// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream option-key prefix; drop-in compat with Sermon Manager.
 	update_option( 'wp_sm_updater_' . __FUNCTION__ . '_done', 1 );
 }
