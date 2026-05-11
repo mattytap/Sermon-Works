@@ -493,7 +493,7 @@ class SermonManager { // phpcs:ignore
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 		wp_register_script( 'wpfc-sm-fb-player', SM_URL . 'assets/vendor/js/facebook-video.js', array(), SM_VERSION );
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
-		wp_register_script( 'wpfc-sm-plyr', SM_URL . 'assets/vendor/js/plyr.polyfilled' . ( ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) ? '' : '.min' ) . '.js', array(), '3.4.7', SermonManager::getOption( 'player_js_footer' ) );
+		wp_register_script( 'wpfc-sm-plyr', SM_URL . 'assets/vendor/js/plyr.polyfilled' . ( ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) ? '' : '.min' ) . '.js', array(), '3.7.8', SermonManager::getOption( 'player_js_footer' ) );
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 		wp_register_script( 'wpfc-sm-plyr-loader', SM_URL . 'assets/js/plyr' . ( ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) ? '' : '.min' ) . '.js', array( 'wpfc-sm-plyr' ), SM_VERSION );
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
@@ -501,7 +501,7 @@ class SermonManager { // phpcs:ignore
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
 		wp_register_style( 'wpfc-sm-styles', SM_URL . 'assets/css/sermon.min.css', array(), SM_VERSION );
 		// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals -- Legacy upstream script/style handle; drop-in compat with Sermon Manager.
-		wp_register_style( 'wpfc-sm-plyr-css', SM_URL . 'assets/vendor/css/plyr.min.css', array(), '3.4.7' );
+		wp_register_style( 'wpfc-sm-plyr-css', SM_URL . 'assets/vendor/css/plyr.min.css', array(), '3.7.8' );
 
 		// Register theme-specific styling, if there's any.
 		if ( file_exists( SM_PATH . 'assets/css/theme-specific/' . get_option( 'template' ) . '.css' ) ) {
