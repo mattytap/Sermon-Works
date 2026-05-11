@@ -105,15 +105,30 @@ function wpfc_dashboard() {
 	}
 
 	$count .= '</li>';
-	$count .= "<style>.sermon-count a:before { content: '\\f330' !important;}</style>";
 	echo wp_kses( $count, array(
-		'li'    => array( 'class' => array() ),
-		'a'     => array( 'href' => array() ),
-		'style' => array(),
+		'li' => array( 'class' => array() ),
+		'a'  => array( 'href' => array() ),
 	) );
 }
 
 add_action( 'dashboard_glance_items', 'wpfc_dashboard' );
+
+/**
+ * Enqueue the dashboard "At a Glance" sermon-count icon rule.
+ *
+ * Hooked at admin_enqueue_scripts and gated on the dashboard screen so the
+ * dashicons :before content rule is attached to the already-enqueued dashicons
+ * stylesheet rather than echoed as an inline <style> from wpfc_dashboard().
+ */
+function wpfc_dashboard_glance_styles() {
+	$screen = function_exists( 'get_current_screen' ) ? get_current_screen() : null;
+	if ( ! $screen || 'dashboard' !== $screen->id ) {
+		return;
+	}
+	wp_add_inline_style( 'dashicons', '.sermon-count a:before { content: "\f330" !important; }' );
+}
+
+add_action( 'admin_enqueue_scripts', 'wpfc_dashboard_glance_styles' );
 
 /**
  * Register required actions.
