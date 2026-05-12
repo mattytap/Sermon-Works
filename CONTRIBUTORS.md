@@ -4,7 +4,7 @@ Sermon Works is a caretaker restoration of the dormant [Sermon Manager](https://
 
 ## Principle
 
-Every code contribution from an upstream Pull Request is preserved in the git commit history with the original author's identity intact. This file is a human-readable companion to that record, not a replacement for it — the ledger is the repository itself.
+Every code contribution from an upstream Pull Request is preserved in the git commit history with the original author's identity intact. This file is a human-readable companion to that record, not a replacement for it. The ledger is the repository itself.
 
 ## Original authors and maintainers (pre-fork)
 
@@ -26,7 +26,7 @@ Each entry below represents an upstream issue report that surfaced a bug or requ
 
 | Upstream issue | Reporter | Fixed in Sermon Works | Description |
 |---|---|---|---|
-| *(none yet — entries added as issues are resolved)* | | | |
+| *(none yet, entries added as issues are resolved)* | | | |
 
 ## Acknowledgements
 

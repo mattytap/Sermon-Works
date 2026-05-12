@@ -2,7 +2,7 @@
 
 > Faithful to the source.
 
-A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) — a WordPress plugin that helps churches publish sermons online. Originally by WP-for-Church alongside a paid Pro tier; public development on GitHub stopped in early 2019, but free-version releases continued privately to WordPress.org for another five years, ending at 2.30.0 in September 2024. The upstream maintainer's web presence is no longer reachable, and three publicly-disclosed CVEs against the WordPress.org-shipped version remain unpatched. Mattytap Sermons is the maintained successor line.
+A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager), a WordPress plugin that helps churches publish sermons online. Originally by WP-for-Church alongside a paid Pro tier; public development on GitHub stopped in early 2019, but free-version releases continued privately to WordPress.org for another five years, ending at 2.30.0 in September 2024. The upstream maintainer's web presence is no longer reachable, and three publicly-disclosed CVEs against the WordPress.org-shipped version remain unpatched. Mattytap Sermons is the maintained successor line.
 
 ## Install
 
@@ -37,9 +37,9 @@ Three audiences are particularly in scope.
 
 ## Why "Mattytap Sermons"?
 
-The name pairs the maintainer's GitHub handle, `mattytap`, with the plain category noun. It's a deliberately unflashy choice, settled on after the original name was bounced in WordPress.org pre-review on trademark grounds. The signalling intent is **caretaker restoration** rather than new brand: existing Sermon Manager users encountering Mattytap Sermons should recognise it as the same line of work, modernised — not a competitor or a replacement they have to evaluate from scratch.
+The name pairs the maintainer's GitHub handle, `mattytap`, with the plain category noun. It's a deliberately unflashy choice, settled on after the original name was bounced in WordPress.org pre-review on trademark grounds. The signalling intent is **caretaker restoration** rather than new brand: existing Sermon Manager users encountering Mattytap Sermons should recognise it as the same line of work, modernised, not a competitor or a replacement they have to evaluate from scratch.
 
-What we're restoring isn't quite the "abandoned 2019 plugin" story it might initially look like. WP-for-Church kept the free version on WordPress.org through eleven releases between 2019 and 2024, alongside a paid Pro tier. Bundled vendor libraries weren't kept current and the security backlog wasn't worked; three CVEs disclosed in late 2025 against the WordPress.org-shipped version remain unpatched. So Mattytap Sermons is more accurately a caretaker for the 2024 plugin than the 2019 one — for the churches and volunteers who relied on the free version.
+What we're restoring isn't quite the "abandoned 2019 plugin" story it might initially look like. WP-for-Church kept the free version on WordPress.org through eleven releases between 2019 and 2024, alongside a paid Pro tier. Bundled vendor libraries weren't kept current and the security backlog wasn't worked; three CVEs disclosed in late 2025 against the WordPress.org-shipped version remain unpatched. So Mattytap Sermons is more accurately a caretaker for the 2024 plugin than the 2019 one, for the churches and volunteers who relied on the free version.
 
 ## Principles
 
@@ -52,12 +52,12 @@ These shape what gets accepted and what gets shipped.
 
 ## Documentation
 
-- [ROADMAP.md](ROADMAP.md) — features under consideration; deliberately not commitments.
-- [CONTRIBUTORS.md](CONTRIBUTORS.md) — credits for the original Sermon Manager team and contributors to this restoration.
-- [SECURITY.md](SECURITY.md) — how to report a vulnerability privately.
-- [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md) — how to contribute code.
-- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) — community standards (Contributor Covenant).
-- `readme.txt` — the WordPress.org-format readme.
+- [ROADMAP.md](ROADMAP.md): features under consideration; deliberately not commitments.
+- [CONTRIBUTORS.md](CONTRIBUTORS.md): credits for the original Sermon Manager team and contributors to this restoration.
+- [SECURITY.md](SECURITY.md): how to report a vulnerability privately.
+- [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md): how to contribute code.
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md): community standards (Contributor Covenant).
+- `readme.txt`: the WordPress.org-format readme.
 
 ## Credit
 

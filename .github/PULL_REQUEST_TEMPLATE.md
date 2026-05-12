@@ -5,7 +5,7 @@
 ## Related issue(s)
 
 <!-- Fixes #N, Refs #N, or "n/a" for trivial PRs (typo, comment, etc.).
-     For non-trivial changes, an issue should already exist — see CONTRIBUTING.md. -->
+     For non-trivial changes, an issue should already exist. See CONTRIBUTING.md. -->
 
 
 

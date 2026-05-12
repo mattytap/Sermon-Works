@@ -131,7 +131,7 @@ function sm_term_image_render_add_field( $taxonomy ) {
  * Hooked to edited_{taxonomy} and created_{taxonomy}. WP core's nonce
  * check on the edit-tag / add-tag form has already passed by the time
  * either action fires (see wp-admin/edit-tags.php), so the
- * sm_term_image_nonce check below is defence-in-depth — it fails closed
+ * sm_term_image_nonce check below is defence-in-depth: it fails closed
  * if some other code path triggers wp_update_term() / wp_insert_term()
  * with an attacker-controlled $_POST['sm_term_image_id'].
  *

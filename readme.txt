@@ -8,19 +8,19 @@ Stable tag: 3.1-rc2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Faithful to the source. A maintained restoration of Sermon Manager — publish, organise, and podcast sermons on a WordPress site.
+Faithful to the source. A maintained restoration of Sermon Manager: publish, organise, and podcast sermons on a WordPress site.
 
 == Description ==
 
-Mattytap Sermons lets a church publish sermons online with the structure they actually need: speakers, series, topics, books of the Bible, and service types — all as proper WordPress taxonomies, all searchable, all filterable. Add audio and video, attach handouts (PDF, DOC, PPT, anything), embed video from YouTube or Vimeo, and ship a fully-featured iTunes-compatible podcast feed for the whole library or for any individual series, speaker, topic, or book.
+Mattytap Sermons lets a church publish sermons online with the structure they actually need: speakers, series, topics, books of the Bible, and service types, all as proper WordPress taxonomies, all searchable, all filterable. Add audio and video, attach handouts (PDF, DOC, PPT, anything), embed video from YouTube or Vimeo, and ship a fully-featured iTunes-compatible podcast feed for the whole library or for any individual series, speaker, topic, or book.
 
 Mattytap Sermons is a maintained restoration of [Sermon Manager](https://wordpress.org/plugins/sermon-manager-for-wordpress/) by WP for Church. The original plugin was last published to WordPress.org in September 2024 (version 2.30.0); the upstream maintainer's web presence is no longer reachable, and several publicly-disclosed CVEs remain unpatched in 2.30.0 and earlier. Mattytap Sermons is the successor line. Existing Sermon Manager installs (including 2.30.0) can switch to Mattytap Sermons as a drop-in replacement: the database schema, custom post type (`wpfc_sermon`), taxonomies (`wpfc_preacher`, `wpfc_sermon_series`, etc.), all `wpfc_*` option keys, six core shortcodes, and view templates are preserved. Multi-attachments for notes and bulletin, post-body editor support, and Twenty Twenty-Four theme wrapper are cherry-picked from upstream 2.30.0.
 
 = What Mattytap Sermons preserves =
 
 * Same shortcodes (`[sermons]`, `[sermon_images]`, `[list_podcasts]`, `[list_sermons]`, `[latest_series]`, `[sermon_sort_fields]`)
-* Same custom post type and taxonomies — existing sermon data carries over without import
-* Same template files in `views/` — existing theme overrides continue to work
+* Same custom post type and taxonomies: existing sermon data carries over without import
+* Same template files in `views/`: existing theme overrides continue to work
 * Same Bib.ly Bible-reference integration
 * Same iTunes-compatible podcast feeds
 
@@ -33,13 +33,13 @@ Mattytap Sermons is a maintained restoration of [Sermon Manager](https://wordpre
 
 = Popular shortcodes =
 
-* `[sermons]` — list the 10 most recent sermons
-* `[sermons per_page="20"]` — list the 20 most recent sermons
-* `[sermon_images]` — list all sermon series with associated image in a grid
-* `[list_podcasts]` — list available podcast services with large buttons
-* `[list_sermons]` — list all series or speakers in a simple unordered list
-* `[latest_series]` — display information about the latest sermon series, including the image, title, and description
-* `[sermon_sort_fields]` — dropdown selections to navigate to sermons by series or speaker
+* `[sermons]`: list the 10 most recent sermons
+* `[sermons per_page="20"]`: list the 20 most recent sermons
+* `[sermon_images]`: list all sermon series with associated image in a grid
+* `[list_podcasts]`: list available podcast services with large buttons
+* `[list_sermons]`: list all series or speakers in a simple unordered list
+* `[latest_series]`: display information about the latest sermon series, including the image, title, and description
+* `[sermon_sort_fields]`: dropdown selections to navigate to sermons by series or speaker
 
 == Installation ==
 
@@ -50,7 +50,7 @@ Mattytap Sermons is a maintained restoration of [Sermon Manager](https://wordpre
 
 = Migrating from Sermon Manager =
 
-If you have an existing Sermon Manager install, install and activate Mattytap Sermons, then deactivate Sermon Manager. All your sermons, speakers, series, topics, and settings carry over without further action — the two plugins use the same database schema. Don't run both at once; the schema overlap will cause conflicts.
+If you have an existing Sermon Manager install, install and activate Mattytap Sermons, then deactivate Sermon Manager. All your sermons, speakers, series, topics, and settings carry over without further action. The two plugins use the same database schema. Don't run both at once; the schema overlap will cause conflicts.
 
 = Migrating from Sermon Browser or Series Engine =
 
@@ -68,7 +68,7 @@ Go to Appearance → Menus. In "Custom Links" add `https://yourdomain.example/?p
 
 = I'm coming from Sermon Manager. Will my sermons survive? =
 
-Yes. Mattytap Sermons uses the same database schema, custom post type, taxonomies, and option keys as Sermon Manager. Activate Mattytap Sermons, deactivate Sermon Manager, and existing sermons keep working. Don't run both at once — the overlapping schema will conflict.
+Yes. Mattytap Sermons uses the same database schema, custom post type, taxonomies, and option keys as Sermon Manager. Activate Mattytap Sermons, deactivate Sermon Manager, and existing sermons keep working. Don't run both at once. The overlapping schema will conflict.
 
 = How do I report a bug or request a feature? =
 
@@ -141,7 +141,7 @@ Framing correction in README and readme.txt: the original Sermon Manager line wa
 
 = 3.0 =
 
-3.0 stable cut. No runtime changes against rc6 — this entry promotes the release-candidate cycle to stable, capping the restoration arc that began in rc1.
+3.0 stable cut. No runtime changes against rc6. This entry promotes the release-candidate cycle to stable, capping the restoration arc that began in rc1.
 
 = 3.0-rc6 =
 
@@ -191,14 +191,14 @@ Salvaged bug-fix PRs from the upstream open-PR backlog, ingested with original a
 * Defensive guard around the import-message cleanup loop in `sermons.php` (upstream PR [#292](https://github.com/WP-for-Church/Sermon-Manager/pull/292) by [@tstephen](https://github.com/tstephen)). Prevents a PHP 8.x fatal when `_sm_import_se_messages` / `_sm_import_sb_messages` options are non-array.
 * Add French Bible versions (Louis Segond 1910, Segond 21) to the verse-popup settings dropdown (upstream PR [#264](https://github.com/WP-for-Church/Sermon-Manager/pull/264) by [@rjorel](https://github.com/rjorel)).
 
-= 3.0-rc1 — Sermon Works restoration =
+= 3.0-rc1: Sermon Works restoration =
 
 This release renames the plugin from Sermon Manager to Sermon Works (text domain `sermon-works`) and ships the in-place restoration completed across early 2026:
 
-* Security: 25 issues resolved from a focused audit, including three CVEs filed against the upstream Sermon Manager codebase — CVE-2025-12368 (stored XSS in `[sermon-views]`), CVE-2025-63002 (unauthenticated missing authorisation), and CVE-2025-63000 (stored XSS in `[list_sermons]` / `[sermon_images]`). All three sinks have been removed or hardened in Sermon Works.
+* Security: 25 issues resolved from a focused audit, including three CVEs filed against the upstream Sermon Manager codebase: CVE-2025-12368 (stored XSS in `[sermon-views]`), CVE-2025-63002 (unauthenticated missing authorisation), and CVE-2025-63000 (stored XSS in `[list_sermons]` / `[sermon_images]`). All three sinks have been removed or hardened in Sermon Works.
 * Modernised: PHP 8.1+ and WordPress 6.0+ floor; deprecated WordPress function calls replaced with current equivalents; dead PHP 5.3 compatibility paths and stale upstream marketing links removed.
 * Bundled vendor cleanup: CMB2 upgraded v2.2.3.1 → v2.11.0; wp-background-processing upgraded 1.0.1 → 1.4.0; bundled `entry-views.php` polyfill removed (replaced with a small WordPress-native counter); `taxonomy-images` library removed (migrated to core term_meta + a dedicated metabox).
-* Database, shortcodes, post types, taxonomies, and template files unchanged — existing Sermon Manager installs migrate as a drop-in replacement.
+* Database, shortcodes, post types, taxonomies, and template files unchanged. Existing Sermon Manager installs migrate as a drop-in replacement.
 
 = Older releases =
 

@@ -26,7 +26,7 @@ class SM_Background_Updater extends SM_WP_Background_Process {
 	/**
 	 * Restrict object instantiation when unserialising queue batches.
 	 * Upstream default is `true` (any class) for BC; we set false because
-	 * the queue only ever carries string callable names — no legitimate
+	 * the queue only ever carries string callable names, no legitimate
 	 * object payloads exist, so disallowing them closes the deserialise-to-
 	 * arbitrary-callable path entirely.
 	 *
@@ -71,7 +71,7 @@ class SM_Background_Updater extends SM_WP_Background_Process {
 
 		// Only invoke string callables that match the sm_update_* prefix.
 		// Defence-in-depth on top of the unserialize allowed_classes=>false
-		// guard in vendor/wp-background-process.php — closes the
+		// guard in vendor/wp-background-process.php: closes the
 		// "deserialised array maps to a Closure / arbitrary callable"
 		// path even if a future regression weakens that guard.
 		if ( is_string( $callback )

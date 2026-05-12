@@ -1,13 +1,13 @@
 # Contributing to Mattytap Sermons
 
-Thanks for considering a contribution. Mattytap Sermons is a caretaker restoration of WP-for-Church's [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) plugin, currently in 3.0 release-candidate cycle. Contributions are welcome — and shaped by the project's stance: **fix not change** for code that already works, with security and correctness prioritised over feature additions.
+Thanks for considering a contribution. Mattytap Sermons is a caretaker restoration of WP-for-Church's [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager) plugin, currently in 3.0 release-candidate cycle. Contributions are welcome, and shaped by the project's stance: **fix not change** for code that already works, with security and correctness prioritised over feature additions.
 
 By participating, you agree to abide by the [Code of Conduct](../CODE_OF_CONDUCT.md).
 
 ## Before you start
 
 1. **Check the [issue tracker](https://github.com/mattytap/Mattytap-Sermons/issues) first.** Many bugs are already filed and many feature ideas are already on the [ROADMAP](../ROADMAP.md) as no-commitment backlog items.
-2. **Open an issue before opening a PR for non-trivial changes.** A short description of what you are proposing — and why — is faster than writing code that may not fit. Trivial fixes (typos, comment corrections, obvious one-line bug fixes) are fine to PR directly.
+2. **Open an issue before opening a PR for non-trivial changes.** A short description of what you are proposing (and why) is faster than writing code that may not fit. Trivial fixes (typos, comment corrections, obvious one-line bug fixes) are fine to PR directly.
 3. **Security findings go through [SECURITY.md](../SECURITY.md), not the public issue tracker.** Mattytap Sermons is tracking security work openly, but new findings need private disclosure first so existing Sermon Manager installations aren't exposed.
 
 ## Branching and commits
@@ -17,7 +17,7 @@ There is one long-lived branch: `main`. Feature work happens on local feature br
 Commit style:
 
 - **Conventional Commits** (`type(scope): subject`), kept succinct. Recent commits in `git log` are the best style guide.
-- **One conceptual change per commit.** Granular commits are preferred over batched ones — easier to review, easier to revert.
+- **One conceptual change per commit.** Granular commits are preferred over batched ones: easier to review, easier to revert.
 - **`Refs #N` rather than `Closes #N`** until an issue's stated validation step has been run. Many security issues have a smoke-test in their scope checklist; commits that ship the code refer to the issue without auto-closing it.
 
 ## Attribution for ingested upstream work

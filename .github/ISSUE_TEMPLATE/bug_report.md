@@ -9,7 +9,7 @@ assignees: ''
 <!--
 Before opening a bug report, please:
   - Check existing issues: https://github.com/mattytap/Sermon-Works/issues
-  - For security findings, do NOT use this template — see SECURITY.md for
+  - For security findings, do NOT use this template. See SECURITY.md for
     private disclosure: https://github.com/mattytap/Sermon-Works/security
 -->
 
@@ -37,4 +37,4 @@ Before opening a bug report, please:
 
 ### Additional context
 
-<!-- Logs, screenshots, error messages — anything that helps reproduce or diagnose. -->
+<!-- Logs, screenshots, error messages: anything that helps reproduce or diagnose. -->

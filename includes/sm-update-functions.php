@@ -523,7 +523,7 @@ function sm_update_2160_migrate_term_images() {
 		}
 	}
 
-	// Sentinel for "this site has been migrated" — separate from the framework
+	// Sentinel for "this site has been migrated", separate from the framework
 	// per-function done-flag so a future re-runner can use a different name.
 	update_option( 'sm_term_image_migrated_to_meta', 1 );
 

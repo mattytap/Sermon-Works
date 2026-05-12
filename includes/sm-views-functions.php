@@ -10,9 +10,9 @@
  * reads the same meta.
  *
  * Closes two CVEs filed against the previous bundled vendor:
- *   - CVE-2025-12368 — stored XSS in the shortcode `before` / `after`
+ *   - CVE-2025-12368: stored XSS in the shortcode `before` / `after`
  *     attributes, fixed here by esc_html() on both attrs.
- *   - CVE-2025-63002 — unauthenticated state-change via the
+ *   - CVE-2025-63002: unauthenticated state-change via the
  *     wp_ajax_nopriv_wpfc_entry_views handler, closed here by removing
  *     the AJAX surface entirely (counting moves server-side).
  *
