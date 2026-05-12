@@ -49,6 +49,14 @@ function sm_template_allowed_html() {
 	$allowed['video']['poster']         = true;
 	$allowed['video']['data-plyr_seek'] = true;
 
+	if ( ! isset( $allowed['source'] ) || ! is_array( $allowed['source'] ) ) {
+		$allowed['source'] = array();
+	}
+	$allowed['source']['src']    = true;
+	$allowed['source']['type']   = true;
+	$allowed['source']['media']  = true;
+	$allowed['source']['srcset'] = true;
+
 	return $allowed;
 }
 
