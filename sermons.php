@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Mattytap Sermons
  * Plugin URI: https://github.com/mattytap/Mattytap-Sermons
- * Description: Faithful to the source. A maintained restoration of WP-for-Church's Sermon Manager: add audio and video sermons, manage preachers, series, and more.
+ * Description: A maintained restoration of WP-for-Church's Sermon Manager: add audio and video sermons, manage preachers, series, and more.
  * Version: 3.1-rc2
  * Author: Matt Fawcett (restoration); WP for Church (original)
  * Author URI: https://github.com/mattytap

@@ -8,7 +8,7 @@ Stable tag: 3.1-rc2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Faithful to the source. A maintained restoration of Sermon Manager: publish, organise, and podcast sermons on a WordPress site.
+A maintained restoration of Sermon Manager: publish, organise, and podcast sermons on a WordPress site.
 
 == Description ==
 

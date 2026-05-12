@@ -1,6 +1,6 @@
 # Mattytap Sermons
 
-> Faithful to the source.
+> A maintained restoration of Sermon Manager for WordPress.
 
 A caretaker restoration of [Sermon Manager](https://github.com/WP-for-Church/Sermon-Manager), a WordPress plugin that helps churches publish sermons online. Originally by WP-for-Church alongside a paid Pro tier; public development on GitHub stopped in early 2019, but free-version releases continued privately to WordPress.org for another five years, ending at 2.30.0 in September 2024. The upstream maintainer's web presence is no longer reachable, and three publicly-disclosed CVEs against the WordPress.org-shipped version remain unpatched. Mattytap Sermons is the maintained successor line.
 
