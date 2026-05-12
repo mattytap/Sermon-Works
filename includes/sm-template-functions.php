@@ -22,7 +22,36 @@ function sm_template_allowed_html() {
 	if ( ! isset( $allowed['select'] ) || ! is_array( $allowed['select'] ) ) {
 		$allowed['select'] = array();
 	}
-	$allowed['select']['onchange'] = true;
+	$allowed['select']['onchange']     = true;
+	$allowed['select']['name']         = true;
+	$allowed['select']['id']           = true;
+	$allowed['select']['title']        = true;
+	$allowed['select']['autocomplete'] = true;
+	$allowed['select']['disabled']     = true;
+
+	$allowed['option'] = array(
+		'value'    => true,
+		'selected' => true,
+		'disabled' => true,
+		'label'    => true,
+	);
+
+	$allowed['form'] = array(
+		'action' => true,
+		'method' => true,
+		'id'     => true,
+		'class'  => true,
+	);
+
+	$allowed['input'] = array(
+		'type'  => true,
+		'name'  => true,
+		'value' => true,
+		'id'    => true,
+		'class' => true,
+	);
+
+	$allowed['noscript'] = array();
 
 	if ( ! isset( $allowed['div'] ) || ! is_array( $allowed['div'] ) ) {
 		$allowed['div'] = array();
