@@ -19,7 +19,7 @@ jobs:
 
       - name: Stage runtime tree (mirrors release ZIP allow-list)
         run: |
-          mkdir -p build/sermon-works
+          mkdir -p build/mattytap-sermons
           cp -R \
             sermons.php \
             readme.txt \
@@ -29,12 +29,12 @@ jobs:
             includes \
             languages \
             views \
-            build/sermon-works/
+            build/mattytap-sermons/
 
       - name: Run Plugin Check
         uses: WordPress/plugin-check-action@v1
         with:
-          build-dir: ./build/sermon-works
+          build-dir: ./build/mattytap-sermons
           # Exclude the WXR exporter port from Plugin Check.
           # includes/admin/export/class-sm-export-sm.php is a near-verbatim
           # derivative of WordPress core's wp-admin/includes/export.php and
