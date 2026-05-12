@@ -4,7 +4,7 @@ Tags: church, sermon, podcast, preaching, audio
 Requires at least: 6.0
 Tested up to: 6.9
 Requires PHP: 8.1
-Stable tag: 3.1-rc1
+Stable tag: 3.1-rc2
 License: GPLv2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,6 +88,14 @@ No. Mattytap Sermons is GPLv2 free software with no paid tier, no premium add-on
 Mattytap Sermons is a restoration of [Sermon Manager for WordPress](https://wordpress.org/plugins/sermon-manager-for-wordpress/), originally by WP for Church (Jason Westbrook and contributors). The full upstream contributor list is recorded in [CONTRIBUTORS.md](https://github.com/mattytap/Mattytap-Sermons/blob/main/CONTRIBUTORS.md). Translations were originally contributed by GITNE (German, Polish), Gilles Pilloud (French), and the Dutch translation behind v2.15.13.
 
 == Changelog ==
+
+= 3.1-rc2 =
+
+Three regressions surfaced during 3.1-rc1 LocalWP canary verification.
+
+* Plyr 3.5+ removed `embed.setCurrentTime()` from the YouTube embed surface; the seek-on-load handler in `assets/js/plyr.js` was still calling it directly after setting `instance.currentTime` via Plyr's high-level API. Dropped the redundant embed-direct call: the high-level setter handles seek normalisation across HTML5, YouTube, and Vimeo in 3.7.x.
+* The F-escape sweep's `sm_template_allowed_html()` helper didn't whitelist `<source>` as an allowed child of `<audio>` and `<video>`, so every `<source>` child was stripped silently when the audio/video render passed through `wp_kses()`. Audio and video elements rendered as empty shells with no playable source. Added `<source>` with `src`, `type`, `media`, `srcset`.
+* The same helper covered `<select>` for the `onchange` attribute only and didn't whitelist `<option>`, `<form>`, or the rest of `<select>`'s attribute set. The sermon archive sort widget and the five taxonomy templates rendered as bare `<select onchange="...">` shells with no `<option>` tags. Added the form-element family.
 
 = 3.1-rc1 =
 
@@ -197,6 +205,10 @@ This release renames the plugin from Sermon Manager to Sermon Works (text domain
 For Sermon Manager release history (2.13 through 2.15.16, dating from 2015–2018), see [`changelog.txt`](https://github.com/mattytap/Mattytap-Sermons/blob/main/changelog.txt) in the plugin directory.
 
 == Upgrade Notice ==
+
+= 3.1-rc2 =
+
+Three rc1 playback and widget regressions fixed: YouTube embed seek-on-load no longer throws after the Plyr 3.7 upgrade; `<audio>` / `<video>` elements again include their `<source>` children; the sermon archive sort widget renders its `<option>` tags. No data migration.
 
 = 3.1-rc1 =
 
